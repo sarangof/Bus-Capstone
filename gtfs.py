@@ -66,3 +66,25 @@ def load_stop_times(dpath):
     stop_times.set_index(['trip_id','stop_id'],drop=True,inplace=True,
                           verify_integrity=True)    
     return stop_times
+
+def load_trip_shapes(dpath,clean=True):
+    # dpath argument is the path to the directory containing zips for each 
+    # agency or borough
+    # clean=True eliminates duplicates that occur due to shapes being shared by
+    # multiple trips across GTFS files.  Method will return an error if this is set
+    # to false but duplicates exist
+    trip_shapes = pd.DataFrame()
+    for fname in os.listdir(dpath):    
+        try:
+            with ZipFile(dpath+fname) as zf:
+                raw_text = zf.read('shapes.txt')    
+            csvdata=StringIO(raw_text)
+            trip_shapes = trip_shapes.append(pd.read_csv(csvdata))
+        except:
+            print 'Error reading from ' + fname
+    if clean==True:
+        trip_shapes.drop_duplicates(subset='shape_id',inplace=True)
+    else:
+        pass
+    trip_shapes.set_index('shape_id',drop=True,inplace=True,verify_integrity=True)
+    return trip_shapes
