@@ -53,3 +53,16 @@ print stop_times.loc[(trip_id,400811)]['arrival_time']
 print 'Results of query for nearby AVL records...'
 print arrivals.nearby_pings(400811,trip_id,stop_times,stops,bustime_short)
 
+avl_near = pd.DataFrame([])
+fail =  0
+stop_list = list(stop_times.loc['MV_B6-Weekday-SDon-102900_M5_250'].index)
+for stop_id in stop_list:
+    try:
+        avl_near.append(pd.DataFrame(arrivals.nearby_pings(stop_id,trip_id,stop_times,stops,bustime_short)))
+        #print(arrivals.nearby_pings(stop_id,trip_id,stop_times,stops,bustime_short).iloc[0])
+    except:
+        fail += 1
+        print(fail)
+        continue
+
+
