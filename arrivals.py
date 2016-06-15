@@ -10,6 +10,7 @@ multiple techniques to make a certain estimation.
 """
 
 from scipy import spatial
+import numpy as np
 
 def nearby_pings(stop_id,trip_id,stop_times,stops,avl_data,radius=0.001):
 	# returns the AVL pings near a certain stop corresponding to a certain trip
@@ -31,7 +32,7 @@ def nearby_pings(stop_id,trip_id,stop_times,stops,avl_data,radius=0.001):
 	# return the AVL records
 	return avl_subset.iloc[nearby_points]
 
-def time_at_location(lat,lon,trip_id,avl_data,stop_times,stops):
+def time_at_location(lat,lon,trip_id,avl_data,stop_times,radius=0.001):
 	trip_stop_times = stop_times.loc[trip_id] 
 	lookup = 'MTA NYCT_' + trip_id # lookup string used to query AVL data
 	avl_subset = avl_data.query('Trip == @lookup')
@@ -39,5 +40,10 @@ def time_at_location(lat,lon,trip_id,avl_data,stop_times,stops):
 	tree = spatial.KDTree(points) # implement KDTree class
 	lookup_point = [lon,lat]
 	nearby_points = tree.query_ball_point(lookup_point, radius)
-	return avl_subset.iloc[nearby_points]
-	
+	locations = avl_subset.iloc[nearby_points][['Latitude','Longitude']]
+	times = avl_subset.iloc[nearby_points]['RecordedAtTime']
+	df = pd.dataFrame(avl_subset.iloc[nearby_points][['RecordedAtTime','Latitude','Longitude']])
+	df = df.set_index(['RecordedAtTime'])
+	resampled = df.resample('S').interpolate()
+	return resampled
+
