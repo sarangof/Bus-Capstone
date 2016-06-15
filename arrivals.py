@@ -11,6 +11,7 @@ multiple techniques to make a certain estimation.
 
 from scipy import spatial
 import numpy as np
+import pandas as pd
 
 def nearby_pings(stop_id,trip_id,stop_times,stops,avl_data,radius=0.001):
 	# returns the AVL pings near a certain stop corresponding to a certain trip
@@ -42,7 +43,7 @@ def time_at_location(lat,lon,trip_id,avl_data,stop_times,radius=0.001):
 	nearby_points = tree.query_ball_point(lookup_point, radius)
 	locations = avl_subset.iloc[nearby_points][['Latitude','Longitude']]
 	times = avl_subset.iloc[nearby_points]['RecordedAtTime']
-	df = pd.dataFrame(avl_subset.iloc[nearby_points][['RecordedAtTime','Latitude','Longitude']])
+	df = pd.DataFrame(avl_subset.iloc[nearby_points][['RecordedAtTime','Latitude','Longitude']])
 	df = df.set_index(['RecordedAtTime'])
 	resampled = df.resample('S').interpolate()
 	return resampled
