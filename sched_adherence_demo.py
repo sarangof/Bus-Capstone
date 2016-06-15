@@ -35,7 +35,8 @@ print 'Finished loading BusTime data and and slicing M5 line.'
 # matches one in the schedule data
 num_recs = {}
 for index, row in bustime_short.iterrows():
-    lookup = row.Trip.replace('MTA NYCT_','') # schedule data doesn't use the prefix
+    lookup = row.Trip.replace('MTA NYCT_','') 
+    # schedule data doesn't use the prefix
     try:
         a = trips.loc[lookup]
         del a
@@ -55,17 +56,39 @@ print stop_times.loc[(trip_id,400811)]['arrival_time']
 print 'Results of query for nearby AVL records...'
 print arrivals.nearby_pings(400811,trip_id,stop_times,stops,bustime_short)
 
-avl_near = pd.DataFrame([])
 fail =  0
 stop_list = list(stop_times.loc['MV_B6-Weekday-SDon-102900_M5_250'].index)
+# collect AVL data around each stop into a dict
+stop_pings = {}
 for stop_id in stop_list:
     try:
-        d = arrivals.nearby_pings(stop_id,trip_id,stop_times,stops,bustime_short)
-        d['stop_id'] = stop_id
-        avl_near = avl_near.append(d)
+        stop_pings[stop_id] = arrivals.nearby_pings(stop_id,trip_id,stop_times,
+                                                    stops,bustime_short)
     except:
         fail += 1
         print(fail)
         continue
 
+# defining a convenience function to compare a row of AVL data to some stop
+def dist_from_stop(row,stop_id):
+    stop_data = stops.loc[stop_id]
+    a = [stop_data.stop_lon,stop_data.stop_lat]
+    b = [row.Longitude,row.Latitude]
+    d = arrivals.spatial.distance.euclidean(a,b)
+    return d
 
+# make a summary table about the AVL data near each stop on a trip
+summary_columns = ['count','min_stamp','max_stamp','timespan','mean_dist']
+summary_df = pd.DataFrame(columns=summary_columns,index=stop_pings.keys())
+for k, v in stop_pings.iteritems():
+    # also want to know how many AVL pings were returned    
+    newrow = {'count':len(v)}
+    min_stamp = v['ResponseTimeStamp'].min()
+    max_stamp = v['ResponseTimeStamp'].max()
+    newrow['min_stamp'] = min_stamp
+    newrow['max_stamp'] = max_stamp
+    newrow['timespan'] = max_stamp - min_stamp
+    # interested in the mean distance (measure of dispersion)
+    mean_dist = v.apply(dist_from_stop,axis=1,args=[k]).mean()
+    newrow['mean_dist'] = mean_dist
+    summary_df.loc[k] = newrow
