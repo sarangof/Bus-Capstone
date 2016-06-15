@@ -1,11 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 Created on Wed Jun  8 18:18:01 2016
-
 This module is meant for methods used for estimating actual vehicle arrival
 times, whether it be at a certain stop or intersection etc. There may be
 multiple techniques to make a certain estimation.
-
 @author: mu529
 """
 
@@ -47,4 +45,3 @@ def time_at_location(lat,lon,trip_id,avl_data,stop_times,radius=0.001):
 	df = df.set_index(['RecordedAtTime'])
 	resampled = df.resample('S').interpolate()
 	return resampled
-
