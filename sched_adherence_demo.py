@@ -27,7 +27,8 @@ print 'Finished loading GTFS data.'
 dt_columns = ['RecordedAtTime','MonitoringTimeStamp','ResponseTimeStamp']
 bustime = pd.read_csv('bustime_parsed.csv',parse_dates=dt_columns)
 # for now, use a truncated data set.  just get data for one line (M5).
-bustime_short = bustime.query('Line == "MTA NYCT_M5"')
+qstr = 'Line == "MTA NYCT_M5" & ResponseTimeStamp < "2016-06-07"'
+bustime_short = bustime.query(qstr)
 del bustime # to free up memory
 print 'Finished loading BusTime data and and slicing M5 line.'
 
@@ -56,19 +57,6 @@ print stop_times.loc[(trip_id,400811)]['arrival_time']
 print 'Results of query for nearby AVL records...'
 print arrivals.nearby_pings(400811,trip_id,stop_times,stops,bustime_short)
 
-fail =  0
-stop_list = list(stop_times.loc['MV_B6-Weekday-SDon-102900_M5_250'].index)
-# collect AVL data around each stop into a dict
-stop_pings = {}
-for stop_id in stop_list:
-    try:
-        stop_pings[stop_id] = arrivals.nearby_pings(stop_id,trip_id,stop_times,
-                                                    stops,bustime_short)
-    except:
-        fail += 1
-        print(fail)
-        continue
-
 # defining a convenience function to compare a row of AVL data to some stop
 def dist_from_stop(row,stop_id):
     stop_data = stops.loc[stop_id]
@@ -77,18 +65,50 @@ def dist_from_stop(row,stop_id):
     d = arrivals.spatial.distance.euclidean(a,b)
     return d
 
-# make a summary table about the AVL data near each stop on a trip
-summary_columns = ['count','min_stamp','max_stamp','timespan','mean_dist']
-summary_df = pd.DataFrame(columns=summary_columns,index=stop_pings.keys())
-for k, v in stop_pings.iteritems():
-    # also want to know how many AVL pings were returned    
-    newrow = {'count':len(v)}
-    min_stamp = v['ResponseTimeStamp'].min()
-    max_stamp = v['ResponseTimeStamp'].max()
-    newrow['min_stamp'] = min_stamp
-    newrow['max_stamp'] = max_stamp
-    newrow['timespan'] = max_stamp - min_stamp
-    # interested in the mean distance (measure of dispersion)
-    mean_dist = v.apply(dist_from_stop,axis=1,args=[k]).mean()
-    newrow['mean_dist'] = mean_dist
-    summary_df.loc[k] = newrow
+def trip_summary(trip_id,avl_subset):    
+    fail =  0
+    stop_list = list(stop_times.loc[trip_id].index)
+    # collect AVL data around each stop into a dict
+    stop_pings = {}
+    for stop_id in stop_list:
+        try:
+            # for now, hardcoding in a slicer to only measure one trip
+            stop_pings[stop_id] = arrivals.nearby_pings(stop_id,trip_id,stop_times,
+                                                        stops,avl_subset)
+        except:
+            fail += 1
+            # print(fail)
+            continue    
+    # make a summary table about the AVL data near each stop on a trip
+    summary_columns = ['N','min_stamp','max_stamp','timespan','mean_dist']
+    summary_df = pd.DataFrame(columns=summary_columns,index=stop_pings.keys())
+    for k, v in stop_pings.iteritems():
+        # also want to know how many AVL pings were returned    
+        newrow = {'N':len(v)}
+        min_stamp = v['ResponseTimeStamp'].min()
+        max_stamp = v['ResponseTimeStamp'].max()
+        newrow['min_stamp'] = min_stamp
+        newrow['max_stamp'] = max_stamp
+        newrow['timespan'] = max_stamp - min_stamp
+        # interested in the mean distance (measure of dispersion)
+        mean_dist = v.apply(dist_from_stop,axis=1,args=[k]).mean()
+        newrow['mean_dist'] = mean_dist
+        summary_df.loc[k] = newrow
+    return summary_df
+
+day_summary = pd.DataFrame()
+for t in bustime_short.Trip.unique():
+    try:
+        summary_df = trip_summary(t[9:],bustime_short)
+        summary_df['trip_id'] = t[9:]
+        summary_df.reset_index(inplace=True)
+        summary_df.rename(columns={'index':'stop_id'},inplace=True)
+        day_summary = day_summary.append(summary_df)
+    except:
+        print t
+day_summary.set_index(['trip_id','stop_id'],inplace=True)
+day_summary = day_summary.join(stop_times['arrival_time'])
+# day_summary['aaa'] = day_summary['min_stamp'].dt.time
+# day_summary['arrival_time'].apply(datetime.datetime.strptime,args=('%H:%M:%S')
+day_summary.to_pickle('WIP.pkl')
+day_summary.to_csv('day_summary.csv')
