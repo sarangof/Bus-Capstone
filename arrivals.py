@@ -25,6 +25,8 @@ def nearby_pings(stop_id,trip_id,stop_times,stops,avl_data,radius=0.001):
     # get the lon and lat of the user-specified stop_id
     lookup_point = [trip_stop_times.loc[stop_id].stop_lon,trip_stop_times.loc[stop_id].stop_lat]
     # and get index of AVL records that are nearby to the desired point
-    nearby_points = tree.query_ball_point(lookup_point, radius)
+    #nearby_points = tree.query_ball_point(lookup_point, radius)
+    nearest_point = tree.query(lookup_point,1)
+    print nearest_point
     # return the AVL records
-    return avl_subset.iloc[nearby_points]
+    return 1#nearest_point#avl_subset.iloc[nearest_point]
