@@ -24,7 +24,8 @@ stop_times = gtfs.load_stop_times('gtfs/')
 print 'Finished loading GTFS data.'
 
 # get the sample of parsed AVL data
-bustime = pd.read_csv('bustime_parsed.csv')
+dt_columns = ['RecordedAtTime','MonitoringTimeStamp','ResponseTimeStamp']
+bustime = pd.read_csv('bustime_parsed.csv',parse_dates=dt_columns)
 # for now, use a truncated data set.  just get data for one line (M5).
 bustime_short = bustime.query('Line == "MTA NYCT_M5"')
 del bustime # to free up memory
@@ -47,7 +48,8 @@ print 'Percent of AVL records with matched trip id: ' + str(int(100*p)) + '%'
 # use this trip_id to demonstrate the procedure
 trip_id = 'MV_B6-Weekday-SDon-102900_M5_250'
 # report the scheduled time for stop # 400811
-print 'On trip_id ' + trip_id + ', scheduled arrival time at stop_id ' + str(400811) + ' is '
+print ('On trip_id ' + trip_id + ', scheduled arrival time at stop_id ' + 
+    str(400811) + ' is ')
 print stop_times.loc[(trip_id,400811)]['arrival_time']
 # then use the arrivals module to get AVL data near that stop
 print 'Results of query for nearby AVL records...'
@@ -58,7 +60,10 @@ fail =  0
 stop_list = list(stop_times.loc['MV_B6-Weekday-SDon-102900_M5_250'].index)
 for stop_id in stop_list:
     try:
-        avl_near.append(pd.DataFrame(arrivals.nearby_pings(stop_id,trip_id,stop_times,stops,bustime_short)))
+        d = arrivals.nearby_pings(stop_id,trip_id,stop_times,
+                                  stops,bustime_short)
+        d['stop_id'] = stop_id
+        avl_near = avl_near.append(d)
         #print(arrivals.nearby_pings(stop_id,trip_id,stop_times,stops,bustime_short).iloc[0])
     except:
         fail += 1
