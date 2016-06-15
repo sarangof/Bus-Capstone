@@ -4,7 +4,7 @@ Created on Wed Jun  8 18:18:01 2016
 
 The script demonstrates a comparison of vehicle times from AVL data to the
 scheduled arrival time at one stop for one example trip.
-
+q
 @author: mu529
 """
 
@@ -58,7 +58,7 @@ fail =  0
 stop_list = list(stop_times.loc['MV_B6-Weekday-SDon-102900_M5_250'].index)
 for stop_id in stop_list:
     try:
-        avl_near.append(pd.DataFrame(arrivals.nearby_pings(stop_id,trip_id,stop_times,stops,bustime_short)))
+        avl_near = avl_near.append(pd.DataFrame(arrivals.nearby_pings(stop_id,trip_id,stop_times,stops,bustime_short)))
         #print(arrivals.nearby_pings(stop_id,trip_id,stop_times,stops,bustime_short).iloc[0])
     except:
         fail += 1
