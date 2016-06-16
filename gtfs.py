@@ -54,6 +54,7 @@ def load_stops(dpath,clean=True):
 def load_stop_times(dpath):
     # dpath argument is the path to the directory containing zips for each 
     # agency or borough
+    # NOTE: returns times as string dtype (HH:MM:SS)
     stop_times = pd.DataFrame()
     for fname in os.listdir(dpath):    
         try:
