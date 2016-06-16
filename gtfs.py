@@ -39,9 +39,9 @@ def load_stops(dpath,clean=True):
     for fname in os.listdir(dpath):    
         try:
             with ZipFile(dpath+fname) as zf:
-                raw_text = zf.read('stops.txt')    
-            csvdata=StringIO(raw_text)
-            stops = stops.append(pd.read_csv(csvdata))
+                raw_text = zf.read('stops.txt')  
+            times_df = pd.read_csv(StringIO(raw_text))
+            stops = stops.append(times_df)
         except:
             print 'Error reading from ' + fname
     if clean==True:
@@ -56,17 +56,24 @@ def load_stop_times(dpath):
     # agency or borough
     # NOTE: returns times as string dtype (HH:MM:SS)
     stop_times = pd.DataFrame()
+    agency_df = pd.DataFrame()
     for fname in os.listdir(dpath):    
         try:
             with ZipFile(dpath+fname) as zf:
-                raw_text = zf.read('stop_times.txt')    
-            csvdata=StringIO(raw_text)
-            stop_times = stop_times.append(pd.read_csv(csvdata))
+                raw_text = zf.read('stop_times.txt')   
+                agency = zf.read('agency.txt')
+            stop_times = stop_times.append(pd.read_csv(StringIO(raw_text)))
+            agency_df = agency_df.append(pd.read_csv(StringIO(agency)))
         except:
             print 'Error reading from ' + fname
     stop_times.set_index(['trip_id','stop_id'],drop=True,inplace=True,
                           verify_integrity=True)    
-    return stop_times
+    tz_string = agency_df['agency_timezone'].unique()
+    if len(tz_string)==1:
+        tz_string = tz_string[0]
+    else:
+        tz_string = 'error: zero or multiple zones'
+    return stop_times, tz_string
 
 def load_trip_shapes(dpath,clean=True):
     # dpath argument is the path to the directory containing zips for each 
