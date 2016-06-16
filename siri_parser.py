@@ -62,9 +62,9 @@ def extract(inpath,outfile):
             with open(inpath + '/' + f,'rb') as infile:
                 data = json.load(infile)
             results = json_to_df(data)
-            results['RecordedAtTime'] = pd.to_datetime(results['RecordedAtTime'])
-            results['MonitoringTimeStamp'] = pd.to_datetime(results['MonitoringTimeStamp'])
-            results['ResponseTimeStamp'] = pd.to_datetime(results['ResponseTimeStamp'])
+#            results['RecordedAtTime'] = pd.to_datetime(results['RecordedAtTime'])
+#            results['MonitoringTimeStamp'] = pd.to_datetime(results['MonitoringTimeStamp'])
+#            results['ResponseTimeStamp'] = pd.to_datetime(results['ResponseTimeStamp'])
             results.to_csv(outfile,mode='a',header=False)
         except:
             print 'Error processing file ' + f    
