@@ -24,37 +24,37 @@ def json_to_df(a):
     Longitudelist = []
     vehicleIDlist = []
     Triplist = []
+    TripDatelist = []
     vdata = a['Siri']['ServiceDelivery']['VehicleMonitoringDelivery'][0]['VehicleActivity']
     l = len(vdata)
     for i in range(0,l):
-        Line = vdata[i]['MonitoredVehicleJourney']['LineRef']
         vehicleID = vdata[i]['MonitoredVehicleJourney']['VehicleRef']
+        Line = vdata[i]['MonitoredVehicleJourney']['LineRef']
         RecordTime = vdata[i]['RecordedAtTime']
         Latitude = vdata[i]['MonitoredVehicleJourney']['VehicleLocation']['Latitude']
         Longitude = vdata[i]['MonitoredVehicleJourney']['VehicleLocation']['Longitude']
         Trip = vdata[i]['MonitoredVehicleJourney']['FramedVehicleJourneyRef']['DatedVehicleJourneyRef']
+        TripDate = vdata[i]['MonitoredVehicleJourney']['FramedVehicleJourneyRef']['DataFrameRef']
+        vehicleIDlist.append(vehicleID)        
         Linelist.append(Line)
         RecordTimelist.append(RecordTime)
         Latitudelist.append(Latitude)
-        Longitudelist.append(Longitude)
-        vehicleIDlist.append(vehicleID)
+        Longitudelist.append(Longitude)        
         Triplist.append(Trip)
-    df = pd.DataFrame(Linelist)
-    df['vehicleID']=vehicleIDlist
+        TripDatelist.append(TripDate)
+    df = pd.DataFrame(data=Linelist,index=vehicleIDlist,columns=['Line'])
+    df['RecordedAtTime']=RecordTimelist
     df['Latitude']=Latitudelist
     df['Longitude']=Longitudelist
     df['Trip']=Triplist
-    df['RecordedAtTime']=RecordTimelist
-    df['MonitoringTimeStamp'] = a['Siri']['ServiceDelivery']['VehicleMonitoringDelivery'][0]['ResponseTimestamp']
+    df['TripDate']=TripDatelist
     df['ResponseTimeStamp'] = a['Siri']['ServiceDelivery']['ResponseTimestamp']
-    df = df.rename(columns = {0:'Line'})
     return df
 
 def extract(inpath,outfile):
     # first create empty dataframe
-    results = pd.DataFrame(columns=[u'Line', u'vehicleID', u'Latitude',u'Longitude',
-                                    u'Trip',u'RecordedAtTime',u'MonitoringTimeStamp', 
-                                    u'ResponseTimeStamp'])
+    results = pd.DataFrame(columns=[u'Line', u'RecordedAtTime', u'Latitude', u'Longitude', u'Trip',u'TripDate', u'ResponseTimeStamp'])
+    results.index.rename('vehicleID',inplace=True)    
     # write initial output file with headers but no data
     results.to_csv(outfile)
     for f in os.listdir(inpath + '/'):    
@@ -62,9 +62,6 @@ def extract(inpath,outfile):
             with open(inpath + '/' + f,'rb') as infile:
                 data = json.load(infile)
             results = json_to_df(data)
-#            results['RecordedAtTime'] = pd.to_datetime(results['RecordedAtTime'])
-#            results['MonitoringTimeStamp'] = pd.to_datetime(results['MonitoringTimeStamp'])
-#            results['ResponseTimeStamp'] = pd.to_datetime(results['ResponseTimeStamp'])
             results.to_csv(outfile,mode='a',header=False)
         except:
             print 'Error processing file ' + f    
