@@ -21,20 +21,24 @@ print 'Finished loading GTFS data.'
 # get the sample of parsed AVL data.  Beware, takes a few minutes.
 # dt_columns = ['RecordedAtTime','ResponseTimeStamp']
 bustime = pd.read_csv('newdata_parsed.csv')#,parse_dates=dt_columns)
+bustime.drop_duplicates(['vehicleID','RecordedAtTime'],inplace=True)
+bustime.set_index(['Line','Trip','TripDate','vehicleID','RecordedAtTime'],inplace=True,drop=True,verify_integrity=True)
+
 # for now, use a truncated data set.  just get data for one line (M5).
 tripDateLookup = "2016-06-13"
-qstr = 'Line == "MTA NYCT_M5" & TripDate == @tripDateLookup'
-bustime_short = bustime.query(qstr)
+lineLookup = "MTA NYCT_M5"
+# qstr = 'Line == "MTA NYCT_M5" & TripDate == @tripDateLookup'
+bustime_short = bustime.xs((lineLookup,tripDateLookup),level=(0,2))
 del bustime # to free up memory
 print 'Finished loading BusTime data and and slicing M5 line.'
 
 # This function returns some elements of interest for each trip and stop
-def trip_summary(avl_subset):    
+def trip_summary(avl_subset,t):    
     fail =  0
-    trips = avl_subset.Trip.unique()
-    if len(trips) != 1:
-        raise ValueError('Need exactly one unique trip_id in input data.')
-    trip_id = trips[0][9:]
+#    trips = avl_subset.index.levels[0]
+#    if len(trips) != 1:
+#        raise ValueError('Need exactly one unique trip_id in input data.')
+    trip_id = t[9:]
     stop_list = list(stop_times.loc[trip_id].index)
     # collect AVL data around each stop into a dict
     stop_pings = {}
@@ -63,10 +67,10 @@ def trip_summary(avl_subset):
 
 # now collect a dataframe with the summary data about all trips in the subset
 day_summary = pd.DataFrame()
-for t in bustime_short.Trip.unique():
+for t in bustime_short.index.levels[0]:
     try:
-        avl_subset = bustime_short.query('Trip == @t')
-        summary_df = trip_summary(avl_subset)
+        avl_subset = bustime_short.loc[t]
+        summary_df = trip_summary(avl_subset,t)
         summary_df['trip_id'] = t[9:]
         summary_df['TripDate'] = tripDateLookup
         summary_df.reset_index(inplace=True)
