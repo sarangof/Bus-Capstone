@@ -76,3 +76,5 @@ day_summary.set_index(['trip_id','stop_id'],inplace=True)
 day_summary = day_summary.join(stop_times['arrival_time'])
 
 print day_summary.shape
+
+day_summary.to_csv('day_summary.csv')
