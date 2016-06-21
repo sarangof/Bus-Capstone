@@ -27,7 +27,6 @@ bustime.set_index(['Line','Trip','TripDate','vehicleID','RecordedAtTime'],inplac
 # for now, use a truncated data set.  just get data for one line (M5).
 tripDateLookup = "2016-06-13"
 lineLookup = "MTA NYCT_M5"
-# qstr = 'Line == "MTA NYCT_M5" & TripDate == @tripDateLookup'
 bustime_short = bustime.xs((lineLookup,tripDateLookup),level=(0,2))
 del bustime # to free up memory
 print 'Finished loading BusTime data and and slicing M5 line.'
@@ -35,33 +34,25 @@ print 'Finished loading BusTime data and and slicing M5 line.'
 # This function returns some elements of interest for each trip and stop
 def trip_summary(avl_subset,t):    
     fail =  0
-#    trips = avl_subset.index.levels[0]
-#    if len(trips) != 1:
-#        raise ValueError('Need exactly one unique trip_id in input data.')
     trip_id = t[9:]
     stop_list = list(stop_times.loc[trip_id].index)
     # collect AVL data around each stop into a dict
     stop_pings = {}
     for stop_id in stop_list:
         try:
-            # for now, hardcoding in a slicer to only measure one trip
             stop_pings[stop_id] = arrivals.nearby_pings(stop_id,trip_id,stop_times,
                                                         stops,avl_subset)
         except:
             fail += 1
             continue    
     # make a summary table about the AVL data near each stop on a trip
-    summary_columns = ['N','arrival_actual_estimated']#,'timespan']#,'mean_dist']
+    summary_columns = ['N','arrival_actual_estimated']
     summary_df = pd.DataFrame(columns=summary_columns,index=stop_pings.keys())
     for k, v in stop_pings.iteritems():
         # we want to know how many AVL pings were returned  nearby   
         newrow = {'N':len(v)}
-        # we also want to know the span of time it was nearby
-        # for now we can pretend that's dwell time
         min_stamp = v['ResponseTimeStamp'].min()
-        # max_stamp = v['ResponseTimeStamp'].max()
         newrow['arrival_actual_estimated'] = min_stamp
-        # newrow['timespan'] = max_stamp - min_stamp
         summary_df.loc[k] = newrow
     return summary_df
 
