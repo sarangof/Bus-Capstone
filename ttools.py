@@ -1,9 +1,15 @@
 # -*- coding: utf-8 -*-
 """
 Created on Mon Jun 20 18:52:10 2016
-### NOT COMPLETE ###
 This code will custom functions used for parsing the date and time info from
 both schedule (GTFS) and actual (siri) data.
+
+parseTime() is meant for schedule times from GTFS, since there is no need to
+interpret the date.
+
+parseActualTime() is meant for actual arrival times from Siri, and requires
+an additional argument tdate so it knows the trip reference date, since some
+trips occur after midnight.
 
 Based on use of regex in:
 http://stackoverflow.com/a/4628148
@@ -12,11 +18,10 @@ http://stackoverflow.com/a/4628148
 """
 
 import re
-import pytz
 import datetime
 import pandas as pd
 
-def parseTimeDelta(s):
+def parseTime(s):
     """Create timedelta object representing time delta
        expressed in a string
    
@@ -26,20 +31,39 @@ def parseTimeDelta(s):
    
     Acceptable formats are: "X days, HH:MM:SS" or "HH:MM:SS".
     """
-    if s is None:
+    if pd.isnull(s):
         return None
     d = re.match(
             r'((?P<days>\d+) days, )?(?P<hours>\d+):'
             r'(?P<minutes>\d+):(?P<seconds>\d+)',
-            str(s)).groupdict(0)
+            s).groupdict(0)
     return datetime.timedelta(**dict(( (key, int(value))
                               for key, value in d.items() )))
 
-tds = pd.to_datetime('2016-06-13') + day_summary['arrival_time'].apply(parseTimeDelta)
-utcoffset = pytz.timezone(tz_sched).localize(datetime.datetime(2016,6,13)).strftime('%z')
-utcoffset = datetime.timedelta(hours=int(utcoffset[:3]), minutes=int(utcoffset[4:]))
-day_summary['arrival_scheduled'] = tds - utcoffset
-del day_summary['arrival_time']
+def parseActualTime(tstring,tdate):
+    """Takes in an ISO8601 format string and returns a timedelta
+    Also requires the trip reference date as a string YYYY-MM-DD
+    Returns elapsed time since reference date as timedelta"""
+    if pd.isnull(tstring):
+        return None
+    if tdate==tstring[:10]:
+        doffset=0
+    else:
+        doffset=1
+    s = str(doffset) + ' days, ' + tstring[11:19] # no millisecs
+    return parseTime(s)
 
-day_summary.to_pickle('WIP.pkl')
-day_summary.to_csv('day_summary.csv')
+if __name__=='__main__':
+    import os
+    os.chdir('/gpfs2/projects/project-bus_capstone_2016/workspace/share')
+    m5 = pd.read_csv('day_summary.csv')
+    print 'Here is an example of parsing actual arrival times:'
+    print ''
+    actual_parsed = m5.arrival_actual_estimated.apply(parseActualTime,
+                                                      tdate='2016-06-13')
+    print actual_parsed.head()
+    print ''
+    print 'Here is an example of parsing schedule arrival times:'
+    print ''
+    schedule_parsed = m5.arrival_time.apply(parseTime)
+    print schedule_parsed.head()
