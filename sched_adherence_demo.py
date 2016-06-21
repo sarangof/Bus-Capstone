@@ -10,6 +10,7 @@ import pandas as pd
 # these two modules are homemade
 import gtfs
 import arrivals
+import time
 os.chdir('/gpfs2/projects/project-bus_capstone_2016/workspace/share')
 
 # get all the schedule data. (subset can be created later)
@@ -45,6 +46,7 @@ def trip_summary(avl_subset,t):
         except:
             fail += 1
             continue    
+    print str(time.time()) + ' - finished stop pings dict.'
     # make a summary table about the AVL data near each stop on a trip
     summary_columns = ['N','arrival_actual_estimated']
     summary_df = pd.DataFrame(columns=summary_columns,index=stop_pings.keys())
@@ -54,11 +56,12 @@ def trip_summary(avl_subset,t):
         min_stamp = v['ResponseTimeStamp'].min()
         newrow['arrival_actual_estimated'] = min_stamp
         summary_df.loc[k] = newrow
+    print str(time.time()) + ' - finished ' + t[9:]
     return summary_df
 
 # now collect a dataframe with the summary data about all trips in the subset
 day_summary = pd.DataFrame()
-for t in bustime_short.index.levels[0]:
+for t in bustime_short.index.get_level_values(0).unique():
     try:
         avl_subset = bustime_short.loc[t]
         summary_df = trip_summary(avl_subset,t)
