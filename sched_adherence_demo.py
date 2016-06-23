@@ -78,3 +78,10 @@ day_summary = day_summary.join(stop_times['arrival_time'])
 print day_summary.shape
 
 day_summary.to_csv('day_summary.csv')
+
+# testing another way to get a trip summary.
+
+trip_group = stop_times.loc['MV_B6-Weekday-SDon-038500_M5_203']
+avl_data = bustime_short.loc['MTA NYCT_MV_B6-Weekday-SDon-038500_M5_203']
+trip_group = trip_group.join(stops[['stop_lon','stop_lat']])
+testing = arrivals.earliest_nearby(trip_group,'2016-06-13',avl_data)
