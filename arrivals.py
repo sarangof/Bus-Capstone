@@ -43,17 +43,22 @@ def time_at_location(lat,lon,trip_id,avl_data,stop_times,radius=0.001):
 	resampled = df.resample('S').interpolate()
 	return resampled
 
-"""this is similar to nearby_pings but takes the trip-stop and returns one value
+"""
+Below is a work in progress.
+
+    this is similar to nearby_pings but takes the trip-stop and returns one value
     designed to be used in groupby.apply.
     First need to join with stop lon and lat
     The lowest level in trip_group should be trip_id
-    ? stop_id should be first column?"""
+    ? stop_id should be first column?
+    Need to join trip data with lats and lons first"""
 def pick_earliest(nearby_index,avl_subset):
     return avl_subset.iloc[nearby_index]['ResponseTimeStamp'].min()
 
 def earliest_nearby(trip_group,trip_date,avl_data,radius=0.001):  
     # make a KDTree with all the avl_subset points
-    avl_subset = avl_data # need to slice using trip_date and trip_id
+    trip_id = 'MTA NYCT_' + trip_group.index.get_level_values(0).unique()
+    avl_subset = avl_data.loc[trip_id] # need to slice using trip_date and trip_id
     points = zip(avl_subset.Longitude, avl_subset.Latitude)
     tree = spatial.KDTree(points)
     # make a (N,2) array of lon-lat points for each stop
