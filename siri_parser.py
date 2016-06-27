@@ -25,6 +25,12 @@ def json_to_df(a):
     vehicleIDlist = []
     Triplist = []
     TripDatelist = []
+    Patternlist = []
+    CallReflist = []
+    EstArrivallist = []
+    DistFromCalllist = []
+    CallDistRoutelist = []
+    PresentableDistlist = []
     vdata = a['Siri']['ServiceDelivery']['VehicleMonitoringDelivery'][0]['VehicleActivity']
     l = len(vdata)
     for i in range(0,l):
@@ -42,18 +48,44 @@ def json_to_df(a):
         Longitudelist.append(Longitude)        
         Triplist.append(Trip)
         TripDatelist.append(TripDate)
+        # these five fields are only present in the "long" json response format        
+        try:        
+            TripPattern = vdata[i]['MonitoredVehicleJourney']['JourneyPatternRef']        
+            MonitoredCallRef = vdata[i]['MonitoredVehicleJourney']['MonitoredCall']['StopPointRef']
+            EstCallArrival = vdata[i]['MonitoredVehicleJourney']['MonitoredCall']['ExpectedArrivalTime']
+            DistFromCall = vdata[i]['MonitoredVehicleJourney']['MonitoredCall']['Extensions']['Distances']['DistanceFromCall']
+            CallDistAlongRoute = vdata[i]['MonitoredVehicleJourney']['MonitoredCall']['Extensions']['Distances']['CallDistanceAlongRoute']
+            PresentableDistance = vdata[i]['MonitoredVehicleJourney']['MonitoredCall']['Extensions']['Distances']['PresentableDistance']
+        except:
+            MonitoredCallRef = ''
+            EstCallArrival = ''
+            DistFromCall = ''
+            CallDistAlongRoute = ''
+            PresentableDistance = ''
+        Patternlist.append(TripPattern)
+        CallReflist.append(MonitoredCallRef)
+        EstArrivallist.append(EstCallArrival)
+        DistFromCalllist.append(DistFromCall)
+        CallDistRoutelist.append(CallDistAlongRoute)
+        PresentableDistlist.append(PresentableDistance)    
     df = pd.DataFrame(data=Linelist,index=vehicleIDlist,columns=['Line'])
     df['RecordedAtTime']=RecordTimelist
     df['Latitude']=Latitudelist
     df['Longitude']=Longitudelist
     df['Trip']=Triplist
     df['TripDate']=TripDatelist
+    df['TripPattern']=Patternlist
+    df['MonitoredCallRef']=CallReflist
+    df['EstCallArrival']=EstArrivallist
+    df['DistFromCall']=DistFromCalllist
+    df['CallDistAlongRoute']=CallDistRoutelist
+    df['PresentableDistance']=PresentableDistlist
     df['ResponseTimeStamp'] = a['Siri']['ServiceDelivery']['ResponseTimestamp']
     return df
 
 def extract(inpath,outfile):
     # first create empty dataframe
-    results = pd.DataFrame(columns=[u'Line', u'RecordedAtTime', u'Latitude', u'Longitude', u'Trip',u'TripDate', u'ResponseTimeStamp'])
+    results = pd.DataFrame(columns=[u'Line', u'RecordedAtTime', u'Latitude', u'Longitude', u'Trip',u'TripDate',u'TripPattern',u'MonitoredCallRef',u'EstCallArrival',u'DistFromCall',u'CallDistAlongRoute',u'PresentableDistance',u'ResponseTimeStamp'])
     results.index.rename('vehicleID',inplace=True)    
     # write initial output file with headers but no data
     results.to_csv(outfile)
