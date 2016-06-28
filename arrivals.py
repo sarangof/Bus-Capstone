@@ -37,11 +37,12 @@ def time_at_location(lat,lon,trip_id,avl_data,stop_times,radius=0.001):
 	lookup_point = [lon,lat]
 	nearby_points = tree.query_ball_point(lookup_point, radius)
 	locations = avl_subset.iloc[nearby_points][['Latitude','Longitude']]
-	times = avl_subset.iloc[nearby_points]['RecordedAtTime']
-	df = pd.DataFrame(avl_subset.iloc[nearby_points][['RecordedAtTime','Latitude','Longitude']])
+	times = avl_subset.iloc[nearby_points].index.get_level_values('RecordedAtTime')
+	df = pd.DataFrame(avl_subset.iloc[nearby_points][['Latitude','Longitude']])
+	df['RecordedAtTime'] = times
 	df = df.set_index(['RecordedAtTime'])
-	resampled = df.resample('S').interpolate()
-	return resampled
+	#resampled = df.resample('S').interpolate()
+	return df#resampled
 
 """
 Below is a work in progress.
