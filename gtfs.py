@@ -109,10 +109,28 @@ class TransitCalendar:
                 print 'Error reading from ' + fname
         service_dates.set_index('service_id',drop=True,inplace=True,verify_integrity=True)
         self.service_dates = service_dates
+        service_exc = pd.DataFrame()
+        for fname in os.listdir(dpath):    
+            try:
+                with ZipFile(dpath+fname) as zf:
+                    raw_text = zf.read('calendar_dates.txt')    
+                csvdata=StringIO(raw_text)
+                service_exc = service_exc.append(pd.read_csv(csvdata,dtype={0:str,1:str,2:int}))
+            except:
+                print 'Error reading from ' + fname
+        # service_exc.set_index('date',drop=True,inplace=True)
+        self.service_exc = service_exc
     def get_service_ids(self,d):
         import calendar
         trip_dow = calendar.weekday(int(d[:4]),int(d[5:7]),int(d[8:10]))
         trip_date = int(d.replace('-',''))    
         bools = (self.service_dates.start_date <= trip_date) & (trip_date <= self.service_dates.end_date)       
         subset = self.service_dates.loc[bools]
-        return list(subset[subset.iloc[:,trip_dow]==1].index)
+        service_list = list(subset[subset.iloc[:,trip_dow]==1].index)
+        qstr = 'date == "' + d.replace('-','') + '"'     
+        exceptions = self.service_exc.query(qstr)
+        service_list += list(exceptions.query('exception_type==1')['service_id'])
+        for exc in list(exceptions.query('exception_type==2')['service_id']):
+            if exc in service_list:
+                service_list.remove(exc)
+        return service_list
