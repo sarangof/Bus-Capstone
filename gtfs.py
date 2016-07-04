@@ -66,8 +66,7 @@ def load_stop_times(dpath):
             agency_df = agency_df.append(pd.read_csv(StringIO(agency)))
         except:
             print 'Error reading from ' + fname
-    stop_times.set_index(['trip_id','stop_id'],drop=True,inplace=True,
-                          verify_integrity=True)    
+    stop_times.set_index(['trip_id','stop_id'],drop=True,inplace=True)    
     tz_string = agency_df['agency_timezone'].unique()
     if len(tz_string)==1:
         tz_string = tz_string[0]
