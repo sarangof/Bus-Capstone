@@ -1,4 +1,3 @@
-arrivals.pyc
-gtfs.pyc
+*.pyc
 .ipynb_checkpoints/
 nohup.out
