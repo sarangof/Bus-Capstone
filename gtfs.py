@@ -38,7 +38,7 @@ def build_metadata(dpath=defaultpath):
                 print 'Error reading from ' + fname
         mdata.to_csv(root+'/metadata.txt',index=False)
 
-def effective_files(trip_date,end_date=None,dpath=defaultpath):
+def effective_files(trip_date,dpath=defaultpath):
     file_list = []    
     for root, dirs, files in os.walk(dpath):  
         if 'metadata.txt' in files:
@@ -136,7 +136,7 @@ def load_trip_shapes(trip_date,dpath,clean=True):
 
 
 class TransitCalendar:
-    def __init__(self, trip_date, dpath):
+    def __init__(self, trip_date, dpath=defaultpath):
         service_dates = pd.DataFrame()
         for fi in effective_files(trip_date,dpath=dpath):    
             try:
@@ -145,18 +145,18 @@ class TransitCalendar:
                 csvdata=StringIO(raw_text)
                 service_dates = service_dates.append(pd.read_csv(csvdata))
             except:
-                print 'Error reading from ' + fi
+                print 'Error reading calendar from ' + fi
         service_dates.set_index('service_id',drop=True,inplace=True,verify_integrity=True)
         self.service_dates = service_dates
         service_exc = pd.DataFrame(columns=['service_id','date','exception_type'])
-        for fname in os.listdir(dpath):    
+        for fi in effective_files(trip_date,dpath=dpath):
             try:
-                with ZipFile(dpath+fname) as zf:
+                with ZipFile(fi) as zf:
                     raw_text = zf.read('calendar_dates.txt')    
                 csvdata=StringIO(raw_text)
                 service_exc = service_exc.append(pd.read_csv(csvdata,dtype={0:str,1:str,2:int}))
             except:
-                print 'Error reading from ' + fname
+                print 'Error reading calendar_dates from ' + fi
         # service_exc.set_index('date',drop=True,inplace=True)
         self.service_exc = service_exc
     def get_service_ids(self,d):
