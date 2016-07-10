@@ -148,7 +148,7 @@ class TransitCalendar:
                 print 'Error reading from ' + fi
         service_dates.set_index('service_id',drop=True,inplace=True,verify_integrity=True)
         self.service_dates = service_dates
-        service_exc = pd.DataFrame()
+        service_exc = pd.DataFrame(columns=['service_id','date','exception_type'])
         for fname in os.listdir(dpath):    
             try:
                 with ZipFile(dpath+fname) as zf:
