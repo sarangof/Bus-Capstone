@@ -31,6 +31,8 @@ def json_to_df(a):
     DistFromCalllist = []
     CallDistRoutelist = []
     PresentableDistlist = []
+    DestinationReflist = []
+    DestinationNamelist = []
     vdata = a['Siri']['ServiceDelivery']['VehicleMonitoringDelivery'][0]['VehicleActivity']
     l = len(vdata)
     for i in range(0,l):
@@ -48,6 +50,8 @@ def json_to_df(a):
         Longitudelist.append(Longitude)        
         Triplist.append(Trip)
         TripDatelist.append(TripDate)
+        DestinationReflist.append(vdata[i]['MonitoredVehicleJourney']['DestinationRef'])
+        DestinationNamelist.append(vdata[i]['MonitoredVehicleJourney']['DestinationName'])
         # these five fields are only present in the "long" json response format        
         try:        
             TripPattern = vdata[i]['MonitoredVehicleJourney']['JourneyPatternRef']        
@@ -74,6 +78,8 @@ def json_to_df(a):
     df['Longitude']=Longitudelist
     df['Trip']=Triplist
     df['TripDate']=TripDatelist
+    df['DestinationRef']=DestinationReflist
+    df['DestinationName']=DestinationNamelist
     df['TripPattern']=Patternlist
     df['MonitoredCallRef']=CallReflist
     df['EstCallArrival']=EstArrivallist
