@@ -13,6 +13,10 @@ romCall,p.CallDistAlongRoute,p.PresentableDistance)
     else:
         return []
 
+def filterrow(x):
+    if x[0] == line:
+        return x
+
 if __name__=='__main__':
     sc = pyspark.SparkContext()
     sqlContext = HiveContext(sc)
@@ -21,6 +25,7 @@ if __name__=='__main__':
     bus.registerTempTable("bus") # register into table in order to use sql
     with open(sys.argv[-2]) as fr: #read sql
         query = fr.read()
-    output = sqlContext.sql(query) # apply sql
-    output.flatMap(parse_list).map(lambda x: ",".join(map(str, x))).saveAsTextFile(sys.argv[-1]) #flatmap&save to csv
+    output = sqlContext.sql(query).flatMap(parse_list)
+    for line in lines:
+        output.filter(filterrow).map(lambda x: ",".join(map(str, x))).saveAsTextFile('%s/%s.csv' %(sys.argv[-1],line) # apply sql
 
