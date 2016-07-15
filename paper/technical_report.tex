@@ -482,10 +482,12 @@ pdfauthor={Michael D. Shell},%<!CHANGE!
 pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
              template}}%<^!CHANGE!
 %\ifCLASSINFOpdf
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
 %\usepackage[\MYhyperrefoptions,pdftex]{hyperref}
 %\else
 %\usepackage[\MYhyperrefoptions,breaklinks=true,dvips]{hyperref}
-%\usepackage{breakurl}
+%\usepackage[•]{•}{breakurl}
 %\fi
 % One significant drawback of using hyperref under DVI output is that the
 % LaTeX compiler cannot break URLs across lines or pages as can be done
@@ -641,7 +643,7 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 % in the abstract or keywords.
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-With the growing demand for public transportation, bus reliability becomes an important issue. New York University’s Center for Urban Science and Progress (CUSP) collaborates with the New York City Department of Transportation (DOT) to provide user focused reliability metrics relevant to the agency’s capabilities to improve user experience. This paper summarizes and analyses common bus reliability metrics. Based on the public Bus Time Advanced Vehicle Location (AVL) data from the public Metropolitan Transportation Authority (MTA) and the schedule data (GTFS), this paper discusses data extraction and parsing, data quality, big data techniques, and inference of time at stops to aim at measuring bus reliability. Several extraction, parsing and interpolation exercises are critically discussed. By comparing with Bus Service Measurement Standards (NYCT), this paper presents a method using the AVL system to improve bus operations. Finally, it aims at aiding the DOT with some bus operation, traffic, and some other potential elements that affect bus reliability to help the agency control and improve bus performance on the planning level. 
+With the growing demand for public transportation, bus  becomes an important issue. New York University’s Center for Urban Science and Progress (CUSP) collaborates with the New York City Department of Transportation (DOT) to provide user focused reliability metrics relevant to the agency’s capabilities to improve user experience. This paper summarizes and analyses common bus reliability metrics. Based on the public Bus Time Advanced Vehicle Location (AVL) data from the public Metropolitan Transportation Authority (MTA) and the schedule data (GTFS), this paper discusses data extraction and parsing, data quality, big data techniques, and inference of time at stops to aim at measuring bus reliability. Several extraction, parsing and interpolation exercises are critically discussed. By comparing with Bus Service Measurement Standards (NYCT), this paper presents a method using the AVL system to improve bus operations. Finally, it aims at aiding the DOT with some bus operation, traffic, and some other potential elements that affect bus reliability to help the agency control and improve bus performance on the planning level. 
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -941,7 +943,11 @@ The Performance Indicator (PI) program was established in 1994 in response to th
 
 1.     Percentage of completed trips (PI)
 The percent of total scheduled bus trips completed (by lines/dates)
-$$\% of Completed Trips = Completed bus trips/total bus trips * 100\%$$
+
+\begin{equation}
+\% \text{Completed Trips} = \frac{ \text{Completed bus trips}}{\text{total bus trips}} * 100\%
+\end{equation}
+
 2.     Bus "on-time performance" (PI)
 The percentage reflects the number of buses that arrive within a certain time before or after the published schedule.
 (During low-frequency period, the on-time percentage is more important while during the high frequency period, the headways matter more.)
