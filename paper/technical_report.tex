@@ -167,19 +167,19 @@
 % *** GRAPHICS RELATED PACKAGES ***
 %
 \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
+  \usepackage[pdftex]{graphicx}
   % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
+  \graphicspath{{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots}}
   % and their extensions so you won't have to specify these with
   % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+  \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
 \else
   % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
   % will default to the driver specified in the system graphics.cfg if no
   % driver is specified.
-  % \usepackage[dvips]{graphicx}
+  \usepackage[dvips]{graphicx}
   % declare the path(s) where your graphic files are
-  % \graphicspath{{../eps/}}
+  \graphicspath{{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots}}
   % and their extensions so you won't have to specify these with
   % every instance of \includegraphics
   % \DeclareGraphicsExtensions{.eps}
@@ -943,15 +943,7 @@ The Performance Indicator (PI) program was established in 1994 in response to th
 
 1.     Percentage of completed trips (PI)
 The percent of total scheduled bus trips completed (by lines/dates)
-<<<<<<< HEAD
-
-\begin{equation}
-\% \text{Completed Trips} = \frac{ \text{Completed bus trips}}{\text{total bus trips}} * 100\%
-\end{equation}
-
-=======
 $$PCT_i = \frac{CT_i}{T_i} * 100\%$$
->>>>>>> 708f87b77af3734cea860628789c451502f43cc9
 2.     Bus "on-time performance" (PI)
 The percentage reflects the number of buses that arrive within a certain time before or after the published schedule.
 (During low-frequency period, the on-time percentage is more important while during the high frequency period, the headways matter more.)
@@ -975,6 +967,8 @@ Defined as percent of headways between trains not exceeding 125$\%$ of scheduled
 6.     Interruption data rate (count or sum duration, normalized for trip distance or time)
 $$WT_i = \frac{WT_i}{T_i} * 100\%$$
 $$WT_i = card \left( \left\lbrace  bus:bus \in route_i ,  t_{bus0} - t_{bus} < T \right\rbrace \right)$$
+
+
 \section{Results and implications}
 
 Projection of location onto shape lines.
@@ -1000,7 +994,7 @@ Time at location
 
 Some time at location exercises (without accounting for time at stops) were performed in one day for all the trips in one route. The following images represent some of the partial results, as there is no validation data to measure accuracy.
 
-
+%%\includegraphics[scale=1.0]{cuteplot.png}
 
 
 
