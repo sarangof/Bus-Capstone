@@ -569,18 +569,16 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 % journal papers have the author affiliations above the "Manuscript
 % received ..."  text while in non-compsoc journals this is reversed. Sigh.
 
-\author{Jiaxu~Zhou,~\IEEEmembership{Member,~IEEE,}
-        Yuqiao~Cen,~\IEEEmembership{Fellow,~OSA,}
-        Matthew~Urbanek,~\IEEEmembership{Fellow,~OSA,}
-        and~Sara~Arango~Franco,~\IEEEmembership{Life~Fellow,~IEEE}}% <-this % stops a space
-\IEEEcompsocitemizethanks{\IEEEcompsocthanksitem M. Shell is with the Department
-of Electrical and Computer Engineering, Georgia Institute of Technology, Atlanta,
-GA, 30332.\protect\\
+\author{Jiaxu~Zhou,
+        Yuqiao~Cen,
+        Matthew~Urbanek,
+        Bonan~Yuan,
+        and~Sara~Arango-Franco}% <-this % stops a space
+\IEEEcompsocitemizethanks{\IEEEcompsocthanksitem Center for Urban Science and Progress, New York University.\protect\\
 % note need leading \protect in front of \\ to get a newline within \thanks as
 % \\ is fragile and will error, could use \hfil\break instead.
-E-mail: see http://www.michaelshell.org/contact.html
-\IEEEcompsocthanksitem J. Doe and J. Doe are with Anonymous University.}% <-this % stops a space
-\thanks{Manuscript received April 19, 2005; revised December 27, 2012.}}
+}% <-this % stops a space
+%\thanks{Manuscript received April 19, 2005; revised December 27, 2012.}
 
 % note the % following the last \IEEEmembership and also \thanks - 
 % these prevent an unwanted space from occurring between the last author name
@@ -643,12 +641,12 @@ E-mail: see http://www.michaelshell.org/contact.html
 % in the abstract or keywords.
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-The abstract goes here.
+With the growing demand for public transportation, bus reliability becomes an important issue. New York University’s Center for Urban Science and Progress (CUSP) collaborates with the New York City Department of Transportation (DOT) to provide user focused reliability metrics relevant to the agency’s capabilities to improve user experience. This paper summarizes and analyses common bus reliability metrics. Based on the public Bus Time Advanced Vehicle Location (AVL) data from the public Metropolitan Transportation Authority (MTA) and the schedule data (GTFS), this paper discusses data extraction and parsing, data quality, big data techniques, and inference of time at stops to aim at measuring bus reliability. Several extraction, parsing and interpolation exercises are critically discussed. By comparing with Bus Service Measurement Standards (NYCT), this paper presents a method using the AVL system to improve bus operations. Finally, it aims at aiding the DOT with some bus operation, traffic, and some other potential elements that affect bus reliability to help the agency control and improve bus performance on the planning level. 
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
 \begin{IEEEkeywords}
-Computer Society, IEEEtran, journal, \LaTeX, paper, template.
+reliability; MTA Bus Time data; Big Data; AVL systems; bus performance. 
 \end{IEEEkeywords}}
 
 
@@ -717,9 +715,14 @@ Computer Society, IEEEtran, journal, \LaTeX, paper, template.
 % 
 % Here we have the typical use of a "T" for an initial drop letter
 % and "HIS" in caps to complete the first word.
-\IEEEPARstart{T}{his} demo file is intended to serve as a ``starter file''
-for IEEE Computer Society journal papers produced under \LaTeX\ using
-IEEEtran.cls version 1.8 and later.
+\IEEEPARstart{D}{espite} a growing demand for public transportation in New York City, bus ridership levels are declining. This can be explained by drops in vehicle speeds and customers’ perceptions of dependability. The New York City Department of Transportation wishes to engage CUSP to explore the use of public data from the MTA open vehicle location system Bus Time to generate operational information relevant to NYC DOT planning decisions. This information will be provided in the form of reliability metrics for the bus service.
+Based on the MTA Bus Time data, this project uses big data techniques and data analysis methods and algorithms. At the end, it will provide methods for estimating bus travel times, measuring reliability, and potentially identifying the distribution of those measurements as a functions of factors regarded as relevant.
+The MTA is the designated authority for transit operations, and it has internally defined metrics that are used for schedule planning and analysis of the bus network. Despite of this, the MTA pays more attention to the bus level but not to the whole system level, which is more of the interest of the DOT. The Department of Transportation has already collected the Bus Time data, but they lack a formal process for compiling and using it for decisions that are more relevant to them, such as those related with road design and traffic management. 
+Unlike the MTA, the DOT takes more responsibility on traffic planning instead of bus operation management and concerns more about customers’ expectation. To help the DOT improve their planning efficiency, this project aims to figure out the dependent variable metrics related to bus performance and reliability, so in a further analysis the agency can analyse the effect of independent variables that affect service quality. CUSP will collaborate with the DOT to develop methods for estimating bus travel times and measuring reliability, while performing data quality analysis of the Bus Time data and the MTA schedule data (referred to as GTFS in this document for its format, General Transit Feed Specification).
+In the first phase of the project, CUSP will develop algorithms to measure or estimate certain types of events associated with bus vehicles’ trips using publically­ available data, such as departures from terminals, vehicle arrivals at stops and interruptions between stops.  
+In the second phase, CUSP will analyze the resulting data and calculate metrics related to the performance of the buses with respect to their planned schedule.  Finally, in consultation with the DOT, CUSP will develop hypotheses about the significance of contextual factors on those performance metrics.
+The entire process has been and will continue to be documented and flexible in the code, so both data quality assessment and reliability measurements are more clearly evaluated.
+
 % You must have at least 2 lines in the paragraph with the drop letter
 % (should never be an issue)
 I wish you the best of success.
