@@ -1,0 +1,371 @@
+This is pdfTeX, Version 3.14159265-2.6-1.40.17 (TeX Live 2016) (preloaded format=pdflatex 2016.7.15)  15 JUL 2016 16:24
+entering extended mode
+ restricted \write18 enabled.
+ %&-line parsing enabled.
+**technical_report.tex
+(./technical_report.tex
+LaTeX2e <2016/03/31>
+Babel <3.9r> and hyphenation patterns for 83 language(s) loaded.
+(/usr/local/texlive/2016/texmf-dist/tex/latex/IEEEtran/IEEEtran.cls
+Document Class: IEEEtran 2015/08/26 V1.8b by Michael Shell
+-- See the "IEEEtran_HOWTO" manual for usage information.
+-- http://www.michaelshell.org/tex/ieeetran/
+\@IEEEtrantmpdimenA=\dimen102
+\@IEEEtrantmpdimenB=\dimen103
+\@IEEEtrantmpdimenC=\dimen104
+\@IEEEtrantmpcountA=\count79
+\@IEEEtrantmpcountB=\count80
+\@IEEEtrantmpcountC=\count81
+\@IEEEtrantmptoksA=\toks14
+LaTeX Font Info:    Try loading font information for OT1+ppl on input line 503.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ot1ppl.fd
+File: ot1ppl.fd 2001/06/04 font definitions for OT1/ppl.
+)
+-- Using IEEE Computer Society mode.
+-- Using 8.5in x 11in (letter) paper.
+-- Using PDF output.
+\@IEEEnormalsizeunitybaselineskip=\dimen105
+-- This is a 12 point document.
+\CLASSINFOnormalsizebaselineskip=\dimen106
+\CLASSINFOnormalsizeunitybaselineskip=\dimen107
+\IEEEnormaljot=\dimen108
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <6.02249> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <6.02249> not available
+(Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <8.03> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <8.03> not available
+(Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <9.03374> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <9.03374> not available
+(Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <10.03749> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <10.03749> not available
+
+(Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <12.045> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <12.045> not available
+(Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <14.05249> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <14.05249> not available
+
+(Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <20.075> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <20.075> not available
+(Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <22.08249> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <22.08249> not available
+
+(Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
+
+LaTeX Font Info:    Font shape `OT1/ppl/bx/n' in size <24.09> not available
+(Font)              Font shape `OT1/ppl/b/n' tried instead on input line 1090.
+LaTeX Font Info:    Font shape `OT1/ppl/bx/it' in size <24.09> not available
+(Font)              Font shape `OT1/ppl/b/it' tried instead on input line 1090.
+
+\IEEEquantizedlength=\dimen109
+\IEEEquantizedlengthdiff=\dimen110
+\IEEEquantizedtextheightdiff=\dimen111
+\IEEEilabelindentA=\dimen112
+\IEEEilabelindentB=\dimen113
+\IEEEilabelindent=\dimen114
+\IEEEelabelindent=\dimen115
+\IEEEdlabelindent=\dimen116
+\IEEElabelindent=\dimen117
+\IEEEiednormlabelsep=\dimen118
+\IEEEiedmathlabelsep=\dimen119
+\IEEEiedtopsep=\skip41
+\c@section=\count82
+\c@subsection=\count83
+\c@subsubsection=\count84
+\c@paragraph=\count85
+\c@IEEEsubequation=\count86
+\abovecaptionskip=\skip42
+\belowcaptionskip=\skip43
+\c@figure=\count87
+\c@table=\count88
+\@IEEEeqnnumcols=\count89
+\@IEEEeqncolcnt=\count90
+\@IEEEsubeqnnumrollback=\count91
+\@IEEEquantizeheightA=\dimen120
+\@IEEEquantizeheightB=\dimen121
+\@IEEEquantizeheightC=\dimen122
+\@IEEEquantizeprevdepth=\dimen123
+\@IEEEquantizemultiple=\count92
+\@IEEEquantizeboxA=\box26
+\@IEEEtmpitemindent=\dimen124
+\IEEEPARstartletwidth=\dimen125
+\c@IEEEbiography=\count93
+\@IEEEtranrubishbin=\box27
+) (./technical_report.aux)
+\openout1 = `technical_report.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 543.
+LaTeX Font Info:    ... okay on input line 543.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 543.
+LaTeX Font Info:    ... okay on input line 543.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 543.
+LaTeX Font Info:    ... okay on input line 543.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 543.
+LaTeX Font Info:    ... okay on input line 543.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 543.
+LaTeX Font Info:    ... okay on input line 543.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 543.
+LaTeX Font Info:    ... okay on input line 543.
+
+-- Lines per column: 49 (exact).
+LaTeX Font Info:    Calculating math sizes for size <12.045> on input line 580.
+
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12.045> on input line 580.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8.43146> on input line 580.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6.02249> on input line 580.
+LaTeX Font Info:    Try loading font information for OT1+phv on input line 654.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/ot1phv.fd
+File: ot1phv.fd 2001/06/04 scalable font definitions for OT1/phv.
+)
+LaTeX Font Info:    Calculating math sizes for size <8.03> on input line 654.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8.03> on input line 654.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5.62097> on input line 654.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <4.015> on input line 654.
+ [1{/usr/local/texlive/2016/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+
+
+]
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <9.03374> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 654.
+Missing character: There is no ‚ in font phvr7t!
+Missing character: There is no Ä in font phvr7t!
+Missing character: There is no ô in font phvr7t!
+Missing character: There is no ‚ in font phvr7t!
+Missing character: There is no Ä in font phvr7t!
+Missing character: There is no ô in font phvr7t!
+LaTeX Font Info:    Calculating math sizes for size <14.05249> on input line 65
+4.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <14.05249> on input line 654.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9.83669> on input line 654.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7.02625> on input line 654.
+LaTeX Font Info:    Try loading font information for U+pzd on input line 654.
+
+(/usr/local/texlive/2016/texmf-dist/tex/latex/psnfss/upzd.fd
+File: upzd.fd 2001/06/04 font definitions for U/pzd.
+)
+Missing character: There is no ‚ in font phvr7t!
+Missing character: There is no Ä in font phvr7t!
+Missing character: There is no ô in font phvr7t!
+Missing character: There is no ‚ in font phvr7t!
+Missing character: There is no Ä in font phvr7t!
+Missing character: There is no ô in font phvr7t!
+Missing character: There is no ‚ in font phvr7t!
+Missing character: There is no Ä in font phvr7t!
+Missing character: There is no ô in font phvr7t!
+Missing character: There is no ‚ in font phvr7t!
+Missing character: There is no Ä in font phvr7t!
+Missing character: There is no ô in font phvr7t!
+LaTeX Font Info:    Calculating math sizes for size <9.03374> on input line 654
+.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <9.03374> on input line 654.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6.32358> on input line 654.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <4.51686> on input line 654.
+
+Underfull \hbox (badness 10000) in paragraph at lines 654--654
+
+ []
+
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <14.05249> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 681.
+LaTeX Font Info:    Font shape `OT1/phv/bx/sc' in size <14.05249> not available
+
+(Font)              Font shape `OT1/phv/b/sc' tried instead on input line 681.
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+Missing character: There is no ¬ in font pplr7t!
+Missing character: There is no ≠ in font pplr7t!
+
+Underfull \hbox (badness 1436) in paragraph at lines 718--725
+[]\OT1/ppl/m/sc/12.045 espite \OT1/ppl/m/n/12.045 a grow-ing de-mand for pub-li
+c
+ []
+
+[2
+
+]
+LaTeX Font Info:    Font shape `OT1/phv/bx/n' in size <12.045> not available
+(Font)              Font shape `OT1/phv/b/n' tried instead on input line 734.
+LaTeX Font Info:    Font shape `OT1/phv/m/it' in size <12.045> not available
+(Font)              Font shape `OT1/phv/m/sl' tried instead on input line 740.
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+ [3]
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ú in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ù in font pplr7t!
+
+Underfull \hbox (badness 1460) in paragraph at lines 863--864
+[]\OT1/ppl/m/n/12.045 MTA Bus-Time tries to as-sign buses to
+ []
+
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+[4]
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ú in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ù in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ú in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ù in font pplr7t!
+ [5]
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+ [6]
+Overfull \hbox (4.99625pt too wide) detected at line 967
+\OML/cmm/m/it/12 WT[] \OT1/cmr/m/n/12 = \OML/cmm/m/it/12 card []
+ []
+
+Missing character: There is no ¬ in font pplr7t!
+Missing character: There is no ∑ in font pplr7t!
+Missing character: There is no ¬ in font pplr7t!
+Missing character: There is no ∑ in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+Missing character: There is no ¬ in font pplr7t!
+Missing character: There is no ∑ in font pplr7t!
+Missing character: There is no ¬ in font pplr7t!
+Missing character: There is no ∑ in font pplr7t!
+Missing character: There is no ¬ in font pplr7t!
+Missing character: There is no ∑ in font pplr7t!
+Missing character: There is no ¬ in font pplr7t!
+Missing character: There is no ∑ in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ú in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ù in font pplr7t!
+
+Underfull \hbox (badness 1430) in paragraph at lines 1019--1025
+\OT1/ppl/m/n/12.045 seg-ments and in-ter-sec-tions. 30 sec-ond fre-
+ []
+
+
+Underfull \hbox (badness 5954) in paragraph at lines 1027--1027
+ \OT1/phv/b/sc/14.05249 7 Con-clu-sions and fu-ture re-
+ []
+
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+[7]
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ô in font pplr7t!
+Missing character: There is no Ô in font pplr7t!
+Missing character: There is no º in font pplr7t!
+Missing character: There is no ö in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ú in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ù in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ú in font pplr7t!
+Missing character: There is no ‚ in font pplr7t!
+Missing character: There is no Ä in font pplr7t!
+Missing character: There is no ù in font pplr7t!
+ [8] [9
+
+] (./technical_report.aux) ) 
+Here is how much of TeX's memory you used:
+ 1209 strings out of 493014
+ 22040 string characters out of 6133351
+ 81068 words of memory out of 5000000
+ 4788 multiletter control sequences out of 15000+600000
+ 50260 words of font info for 103 fonts, out of 8000000 for 9000
+ 1144 hyphenation exceptions out of 8191
+ 30i,8n,28p,1174b,314s stack positions out of 5000i,500n,10000p,200000b,80000s
+{/usr/local/texlive/2016/texmf-dist/fonts/enc/dvips
+/base/8r.enc}</usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmex10.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/
+cmmi12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mmi8.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+12.pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.
+pfb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.p
+fb></usr/local/texlive/2016/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy9.pfb
+></usr/local/texlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvb8a.pfb></usr/
+local/texlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvr8a.pfb></usr/local/t
+exlive/2016/texmf-dist/fonts/type1/urw/helvetic/uhvro8a.pfb></usr/local/texlive
+/2016/texmf-dist/fonts/type1/urw/palatino/uplb8a.pfb></usr/local/texlive/2016/t
+exmf-dist/fonts/type1/urw/palatino/uplr8a.pfb></usr/local/texlive/2016/texmf-di
+st/fonts/type1/urw/palatino/uplri8a.pfb></usr/local/texlive/2016/texmf-dist/fon
+ts/type1/urw/zapfding/uzdr.pfb>
+Output written on technical_report.pdf (9 pages, 168752 bytes).
+PDF statistics:
+ 91 PDF objects out of 1000 (max. 8388607)
+ 65 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
+
