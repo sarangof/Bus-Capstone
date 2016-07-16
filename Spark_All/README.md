@@ -23,9 +23,10 @@ https://github.com/databricks/spark-csv
 SparkSQL manipulation
 
 ## Data Schema
-`｀｀
-| JSON ELEMENT(schema)                           | Column NAME    | explanation                                                 |                           |                 | 
+```
+|                                                |                |                                                             |                           |                 | 
 |------------------------------------------------|----------------|-------------------------------------------------------------|---------------------------|-----------------| 
+| JSON ELEMENT(schema)                           | Column NAME    | explanation                                                 |                           |                 | 
 | LineRef                                        | ROUTE_ID       | Name of bus line(B42)                                       |                           |                 | 
 | VehicleLocation.Latitude                       | latitude       | latitude of record                                          |                           |                 | 
 | VehicleLocation.Longitude                      | longitude      | longitude of record                                         |                           |                 | 
@@ -40,4 +41,4 @@ SparkSQL manipulation
 | Extensions. Distances.PresentableDistance      | status         | "Report the current status of bus to next stop( approaching |  at stop                  |  <1 stop away)" | 
 | DestinationRef                                 | destination    | Headsign of bus                                             |                           |                 | 
 
-``｀
+```
