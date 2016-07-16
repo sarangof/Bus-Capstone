@@ -37,7 +37,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \setlength\headheight{15pt}
-\fancyhead[R]{NYU CUSP}
+\fancyhead[R]{Center for Urban Science and Progress}
 \fancyfoot[R]{Page \thepage\ of \pageref{LastPage}}
 %-------------------------------------------------------------------------------
 % TITLE PAGE
@@ -245,9 +245,9 @@ Vehicle ID is public and not anonymized.
 While the MTA does not publish archived BusTime data (except for a sample in 2014), we are providing the code for anybody to collect it
 
 
-\section{Conclusions and future work}
+\subsection{Conclusions and future work}
 
-\subsection{Conclusions}
+\subsubsection{Conclusions}
 
 This project studies the bus performance in New York City and its correlation metrics based on the GPS data offered by MTA. The MTA bus GPS database collects the location of each bus every 30 seconds. After estimating the departure and arrival time for each bus at each stop, we use measurement like headways and wait assessment to figure out the bus performance and reliability. Aimed at helping DOT improve the bus performance efficiently, the metrics focus on not only bus operation element, but also on other traffic aspects. Taking one-year data as our object of study, the data is extremely huge so that big data technology like Spark is widely used in this project. In order to make our work easy to share and reproduce, we choose to use SQL API to manipulate the data, which enable DOT to easily make change by editing the SQL script. 
 Conclusion for the model we use. (Introduction, Pros and Cons, Bias)
@@ -268,7 +268,7 @@ Influence：
 The main goal for us is to figure out the other potential influence factor besides operation to help DOT control and improve bus performance on planning level. Similar methodology and concept could be used in other cities and traffic mode. The big data technology applied in not only traffic analysis but also city wide urban issue offers more reliable result compared with traditional sample studies. 
 
 
-\subsection{Future work}
+\subsubsection{Future work}
 
 Feature Selection optimization
 Pre study and investigation for NYC
