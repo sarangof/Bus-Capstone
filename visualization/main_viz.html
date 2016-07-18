@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+
+<head>
+   
+    <title>
+    
+        Bus reliability in NYC (2015)
+        
+    </title>
+    
+    <style>
+    
+        #mapWrapper{
+            margin:2%;
+            padding:10px;
+            border:2px solid #d0d0d0;
+            border-radius: 2px; 
+            text-align: center
+        }
+    
+    </style>
+    
+    
+
+    
+</head>
+
+<body>
+
+    <div id="mapWrapper"> 
+        <g id="USmap" > </g>
+    </div>
+
+</body>
+
+
+<script src="https://d3js.org/d3.v3.min.js"></script>
+<script src="https://d3js.org/topojson.v1.min.js"></script>
+<script src="https://d3js.org/queue.v1.min.js"></script>
+
+<script type="text/javascript">
+    
+    
+    
+    var width = 900,
+        height = 500;
+    
+    var svg = d3.select("#mapWrapper")
+        .append("svg")
+        .attr("width", width)
+        .attr("height", height);
+    
+    
+    var projection = d3.geo.albersUsa()
+        .scale(1000);
+    
+    var path = d3.geo.path()
+        .projection(projection);
+    
+    function plotMap() {
+
+           d3.json("https://raw.githubusercontent.com/NYU-CS6313-SPRING2016/Group-2-INET-Twitter-Verbal-Abuse/master/input_files/us-states.json",function(error, result){
+           us = result;
+           if (error) throw error;   
+
+           var counties = svg.append("path",".graticule")
+                                .style("width", "100%")
+                                .attr("class", "counties")
+                                .datum(topojson.feature(us, us.objects.counties))
+                                .attr("d", path);
+
+           var state_boundary = svg.append("path",".graticule")
+                                    .style("width", "100%")
+                                    .datum(topojson.mesh(us,us.objects.states, function(a,b){return a!==b;}))
+                                    .attr("class","state-boundary")
+                                    .attr("d",path);
+
+           var land = svg.append("path",".graticule")
+                            .style("width", "100%")
+                            .datum(topojson.feature(us,us.objects.land))
+                            .attr("class","land")
+                            .attr("d",path);
+            })
+        };
+    
+    plotMap();
+
+</script>
