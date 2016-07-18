@@ -37,7 +37,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \setlength\headheight{15pt}
-\fancyhead[R]{NYU CUSP}
+\fancyhead[R]{Center for Urban Science and Progress}
 \fancyfoot[R]{Page \thepage\ of \pageref{LastPage}}
 %-------------------------------------------------------------------------------
 % TITLE PAGE
@@ -50,19 +50,29 @@
 		\HRule{0.5pt} \\
 		\LARGE \textbf{\uppercase{Bus Reliability Metrics using Public MTA Bus Time Data}}
 		\HRule{2pt} \\ [0.5cm]
-		\normalsize \today \vspace*{5\baselineskip}}
+		\normalsize \today %\vspace*{5\baselineskip}
+		}
 
 \date{}
 
-\author{
-		Jiaxu Zhou \\
-		Yuqiao Cen \\
-		Matthew Urbanek \\
-		Bonan Yuan \\
-		Sara Arango-Franco \\ 
-		\\
+		\author{
+				Jiaxu Zhou \\
+				Yuqiao Cen \\
+				Matthew Urbanek \\
+				Bonan Yuan \\
+				Sara Arango-Franco \\ 
+				\\
+				Advisors: \\
+				Dr. Kaan Ozbay \\
+				Dr. Huy T. Vo \\
+				\\
+				Sponsor Agency:\\
+				Department of Transportation, City of New York\\
+				\\
 		\textbf{Center for Urban Science and Progress} \\
 		\textbf{New York University}}
+		
+	
 
 \maketitle
 \tableofcontents
@@ -79,11 +89,13 @@
 
 \section*{Brief}
 
-        Despite a growing demand for public transportation in New York City, bus ridership levels are declining. This can be explained by drops in vehicle speeds and customers' perceptions of dependability. The New York City Department of Transportation (NYC DOT) wishes to engage the New York University Center for Urban Science and Progress (CUSP) to explore the use of public vehicle location data from MTA Bus Time to generate operational data relevant to NYC DOT planning decisions. This information will be provided in the form of reliability metrics for bus service.
-        Based on the MTA Bus Time data, this project uses big data techniques and data analysis methods and algorithms. At the end, it will provide methods for estimating bus travel times, measuring reliability, and potentially identifying the distribution of those measurements as a functions of factors regarded as relevant.
+Despite a growing demand for public transportation in New York City, bus ridership levels are declining.  This can be explained by drops in vehicle speeds and customer perceptions of dependability.  The \textit{New York City Department of Transportation} (NYC DOT) wished to engage the \textit{New York University Center for Urban Science and Progress} (CUSP) to explore the use of public vehicle location data from the \textit{Metropolitan Transit Authority} (MTA) Bus Time to generate operational data relevant to the DOT's planning decisions.  This information is provided in the form of reliability metrics for bus service.
+
+Based on the MTA \textit{Advanced Vehicle Location} (AVL) data and its public Bus Time API, the team performed a data assessment analysis for the data generating process and the data collection process. We also deliver methods for estimating bus travel and stop times, measuring reliability with different metrics, and settles the ground for the DOT to identify the distribution of reliability measurements as a function of factors regarded as relevant to their practice.
         
 \section*{Aknowledgements}
-    At the point of processing this Bus Reliability Project, we would like to express our sincere thanks to all those who have lent us hands in the previous time. First of all, we would like to show our sincere gratitude to our sponsor agency, the New York City Department of Transportation, who gave us an opportunity to focus on this important city issue. Especially, we would like to take this opportunity to thank Jeremy, who gave us a lots of advices about how DOT want us to do with this project. Secondly, we would like to express our gratitude to our advisors, Dr. Kaan Ozbay and Dr. Huy T. Vo. They not only gave us some technical supports but also offered us a lot of references and information on time. Last but not the least, we would like to thank Kai, Abdullah, and classmates who gave us assistances and advices during our processing. Without their help, it would be much harder for use to process this project.
+
+We would like to express our sincere thanks to all those who have lent us hands during this time.  First of all, we would like to show our sincere gratitude to our sponsor agency, the New York City Department of Transportation, who gave us an opportunity to focus on this important city issue.  We would specially like to to thank Jeremy, who gave us plenty of insight into the way the DOT wants to treat and understand bus data analytics.  Secondly, we would like to express our gratitude to our advisors, Dr. Kaan Ozbay and Dr. Huy T. Vo., not only for their technical expertise but for their generosity and willingness to lead us through this process.  Last but not least, we would like to thank Kai Zhao, Abdullah Kurkcu, Ender Morgul, and our classmates in CUSP who gave us assistance and advice during this process.  We will always be thankful.
 
 
 %-------------------------------------------------------------------------------
@@ -93,34 +105,51 @@
 
 \section{Overview and background}
 
+%%\includegraphics[scale=0.2]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/cuteplot}
+
 \subsection{	Statement and Description}
-Though demand for public transportation in New York City is growing, bus ridership levels are declining. Many reasons can explain this but drops in vehicle speeds and customers' perceptions of dependability will be the two main factors that affect bus ridership levels this project focuses on.
+Although demand for public transportation in New York City is growing, bus ridership levels are declining.  Many reasons can explain this, including drops in vehicle speeds and customer perceptions of dependability.  This project focuses on identifying these two factors along the city's MTA operated bus routes with reliability metrics that are relevant to the DOT as the municipal traffic authority.
 
-NYC DOT has already collected the bus time data. But DOT lacks a formal process for compiling and applying it. That makes DOT cannot fully use the data to help to make effective planning decisions. 
-Despite MTA who is in the practice of operations has internally defined metrics used for planning and analysis of buses, it pays more attention to bus level but not the whole system level which DOT is concern about. 
+The DOT keeps records of the MTA vehicle location data through collection via its Bus Time API, but the agency lacks a formal process for compiling and analysing it according to their decision making capabilities (such as those related with road design and traffic management), which substantially differ from the MTA's purposes and reach. Despite the MTA (which is the agency in charge of operations) has internally defined metrics used for scheduling, planning and analysis of the bus service, it pays more attention to the bus level but not to the whole system level, which is more of the interest of the DOT.
+ 
+To help the DOT improve their planning efficiency, this project aims to figure out the dependent variable metrics related to bus performance and reliability, so in a further analysis the agency can analyse the effect of independent variables that affect service quality, such as traffic management and road design. CUSP developed methods for estimating bus travel times and measuring reliability, while performing data quality analysis of the Bus Time data and the MTA schedule data (referred to as \textit{GTFS} in this document for its format, \textit{General Transit Feed Specification}). 
 
-In this project, CUSP is going to collaborate with DOT to find out what factors are related to the bus performance and reliability. Since DOT concerns more about customers' satisfaction and is responsible for all the traffic elements in the city, this project will not just limit in bus itself as DOT is able to improve bus performance by controlling other traffic elements, but not only bus operation element. By exploring that, DOT will be able to improve the bus performance and reliability by control certain factors.
+In this project, CUSP collaborated with the DOT to find out what factors are related to bus performance and reliability, by first. Since DOT concerns more about customer satisfaction and is responsible for all the traffic elements in the city, this project will not just limit in bus itself as DOT is able to improve bus performance by controlling other traffic elements, but not only bus operation element. By exploring that, DOT will be able to improve the bus performance and reliability by control certain factors.
 
-\subsection{Goals of the project}
 
-Unlike MTA, DOT takes more responsibility on traffic planning instead of bus operation management and concerns more about customers' expectation. To help DOT improves their planning efficiency, this project aims to figure out the independent variable metrics related to bus performance and reliability. CUSP will collaborate with the DOT to develop methods for estimating bus travel times and measuring reliability, while performing data quality analysis of the Bus Time data and the schedule data (GTFS). 
+\subsection{Goals}
 
-In the first phase of the project, CUSP will develop algorithms to measure or estimate certain types of events associated with bus vehicles' trips using publically­ available data, such as departures from terminals, vehicle arrivals at stops and interruptions between stops.  
+The goals of the project can be summarized as follows:
 
-In the second phase, CUSP will analyze the resulting data and calculate metrics related to the performance of the buses with respect to their planned schedule.  Finally, in consultation with the DOT, CUSP will develop hypotheses about the significance of contextual factors on those performance metrics.
+\begin{enumerate}
+\item Perform a thorough data quality assessment on the MTA Bus Time data, 
 
-The entire process has been and will continue to be documented and flexible in the code, so both data quality assessment and reliability measurements are more clearly evaluated.
+\item Calculate metrics related to the performance of the buses with respect to their planned schedule.
 
-The project has been developed under the following milestones: Bibliography review; Data extraction; Estimation of the departure and arrival times at bus stops and other locations (in other words, interpolation); Measurement of bus performance and reliability metrics, with a flexible implementation; and Potentially hypothesizing about the possible factors that influence bus reliability.
+\item Document the entire process and flexible in the code, so both data quality assessment and reliability measurements are more clearly evaluated by the agency.
+\end{enumerate}
+
+
+The project has been developed following the milestones below:
+
+\begin{itemize}
+\item Bibliography review; 
+\item Data extraction; 
+\item Identification of pitfalls and irregularities in the data generating process;
+\item Estimation of the departure and arrival times at bus stops and other locations (in other words, interpolation); 
+\item Measurement of bus performance and reliability metrics, with a flexible implementation;
+\end{itemize}
 
 \section{Project offerings}
 
 The contributions from our work can be summarized as follows:
 
 \begin{enumerate}
-\item The estimation of departure and arrival times based on AVL data for the specific case of Bus Time. This will be implemented in a flexible way, allowing for variations to be incorporated into the code.
-\item Flexible and potentially novel bus performance metrics.
-\item Data quality assessment for the Bus Time data.
+\item The estimation of departure and arrival times based on AVL data for the specific case of Bus Time. 
+\item Flexible and potentially novel bus performance metrics for the data set in question.
+\item Quality assessment for the Bus Time data.
+\item Flexible and reproducible code to allow for further implementations and variations of our analysis.
+
 \end{enumerate}
 
 
@@ -245,9 +274,9 @@ Vehicle ID is public and not anonymized.
 While the MTA does not publish archived BusTime data (except for a sample in 2014), we are providing the code for anybody to collect it
 
 
-\section{Conclusions and future work}
+\subsection{Conclusions and future work}
 
-\subsection{Conclusions}
+\subsubsection{Conclusions}
 
 This project studies the bus performance in New York City and its correlation metrics based on the GPS data offered by MTA. The MTA bus GPS database collects the location of each bus every 30 seconds. After estimating the departure and arrival time for each bus at each stop, we use measurement like headways and wait assessment to figure out the bus performance and reliability. Aimed at helping DOT improve the bus performance efficiently, the metrics focus on not only bus operation element, but also on other traffic aspects. Taking one-year data as our object of study, the data is extremely huge so that big data technology like Spark is widely used in this project. In order to make our work easy to share and reproduce, we choose to use SQL API to manipulate the data, which enable DOT to easily make change by editing the SQL script. 
 Conclusion for the model we use. (Introduction, Pros and Cons, Bias)
@@ -268,7 +297,7 @@ Influence：
 The main goal for us is to figure out the other potential influence factor besides operation to help DOT control and improve bus performance on planning level. Similar methodology and concept could be used in other cities and traffic mode. The big data technology applied in not only traffic analysis but also city wide urban issue offers more reliable result compared with traditional sample studies. 
 
 
-\subsection{Future work}
+\subsubsection{Future work}
 
 Feature Selection optimization
 Pre study and investigation for NYC
