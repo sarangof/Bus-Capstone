@@ -167,19 +167,19 @@
 % *** GRAPHICS RELATED PACKAGES ***
 %
 \ifCLASSINFOpdf
-  % \usepackage[pdftex]{graphicx}
+  \usepackage[pdftex]{graphicx}
   % declare the path(s) where your graphic files are
-  % \graphicspath{{../pdf/}{../jpeg/}}
+  \graphicspath{{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots}}
   % and their extensions so you won't have to specify these with
   % every instance of \includegraphics
-  % \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+  \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
 \else
   % or other class option (dvipsone, dvipdf, if not using dvips). graphicx
   % will default to the driver specified in the system graphics.cfg if no
   % driver is specified.
-  % \usepackage[dvips]{graphicx}
+  \usepackage[dvips]{graphicx}
   % declare the path(s) where your graphic files are
-  % \graphicspath{{../eps/}}
+  \graphicspath{{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots}}
   % and their extensions so you won't have to specify these with
   % every instance of \includegraphics
   % \DeclareGraphicsExtensions{.eps}
@@ -482,10 +482,12 @@ pdfauthor={Michael D. Shell},%<!CHANGE!
 pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
              template}}%<^!CHANGE!
 %\ifCLASSINFOpdf
+
+\usepackage{amsmath, amsthm, amssymb, amsfonts}
 %\usepackage[\MYhyperrefoptions,pdftex]{hyperref}
 %\else
 %\usepackage[\MYhyperrefoptions,breaklinks=true,dvips]{hyperref}
-%\usepackage{breakurl}
+%\usepackage[•]{•}{breakurl}
 %\fi
 % One significant drawback of using hyperref under DVI output is that the
 % LaTeX compiler cannot break URLs across lines or pages as can be done
@@ -641,7 +643,7 @@ pdfkeywords={Computer Society, IEEEtran, journal, LaTeX, paper,
 % in the abstract or keywords.
 \IEEEtitleabstractindextext{%
 \begin{abstract}
-With the growing demand for public transportation, bus reliability becomes an important issue. New York University’s Center for Urban Science and Progress (CUSP) collaborates with the New York City Department of Transportation (DOT) to provide user focused reliability metrics relevant to the agency’s capabilities to improve user experience. This paper summarizes and analyses common bus reliability metrics. Based on the public Bus Time Advanced Vehicle Location (AVL) data from the public Metropolitan Transportation Authority (MTA) and the schedule data (GTFS), this paper discusses data extraction and parsing, data quality, big data techniques, and inference of time at stops to aim at measuring bus reliability. Several extraction, parsing and interpolation exercises are critically discussed. By comparing with Bus Service Measurement Standards (NYCT), this paper presents a method using the AVL system to improve bus operations. Finally, it aims at aiding the DOT with some bus operation, traffic, and some other potential elements that affect bus reliability to help the agency control and improve bus performance on the planning level. 
+With the growing demand for public transportation, bus  becomes an important issue. New York University’s Center for Urban Science and Progress (CUSP) collaborates with the New York City Department of Transportation (DOT) to provide user focused reliability metrics relevant to the agency’s capabilities to improve user experience. This paper summarizes and analyses common bus reliability metrics. Based on the public Bus Time Advanced Vehicle Location (AVL) data from the public Metropolitan Transportation Authority (MTA) and the schedule data (GTFS), this paper discusses data extraction and parsing, data quality, big data techniques, and inference of time at stops to aim at measuring bus reliability. Several extraction, parsing and interpolation exercises are critically discussed. By comparing with Bus Service Measurement Standards (NYCT), this paper presents a method using the AVL system to improve bus operations. Finally, it aims at aiding the DOT with some bus operation, traffic, and some other potential elements that affect bus reliability to help the agency control and improve bus performance on the planning level. 
 \end{abstract}
 
 % Note that keywords are not normally used for peerreview papers.
@@ -941,16 +943,16 @@ The Performance Indicator (PI) program was established in 1994 in response to th
 
 1.     Percentage of completed trips (PI)
 The percent of total scheduled bus trips completed (by lines/dates)
-$$\% of Completed Trips = Completed bus trips/total bus trips * 100\%$$
+$$PCT_i = \frac{CT_i}{T_i} * 100\%$$
 2.     Bus "on-time performance" (PI)
 The percentage reflects the number of buses that arrive within a certain time before or after the published schedule.
 (During low-frequency period, the on-time percentage is more important while during the high frequency period, the headways matter more.)
-$$OTP (On-Time Performance) = Bus trips arrived within a threshold / Total Bus trips * 100\%$$
+$$OP  =  \frac{OT_i}{T_i} * 100\%$$
 Cons:
 The single on-time performance percentage also does not identify problems with bus bunching, especially on frequent routes.
 3.     Excess waiting time (improved on-time performance measurement by London)
 All that time you have to wait for a bus that's running late or is bunched with others is added up and averaged over the route, and the excess waiting is compared to how much you'd normally have to wait assuming you come to the bus stop randomly.
-$$EWT = Actual wait time – The Scheduled Time Point$$
+$$EWT_{i} = \frac{1}{n}  \sum_{j=1}^n \max \{  0,ah_{ij} - sh_{ij}    \}$$
 (Under the London system, buses don't get credit for making you wait less than average.)
 Pros: This makes it easy to see when high-frequency buses are not meeting the required headways
 4.     Headway
@@ -959,10 +961,13 @@ Headway variance is the difference among the real headway and schedule headway.
 5.     Wait Assessment (PI)
 The percent of actual intervals between buses that are no more than the scheduled interval plus 3 minutes during peak hours (6 AM - 9 PM) and plus 5 minutes during off-peak hours (9 AM - 4 PM and 7 PM - midnight). Wait assessment is measured weekdays between 6:00 AM and midnight when service is relatively frequent.
 measures customers’ maximum wait times while waiting to board at stations 
-
+$$RTA_i = \left( \sum_{j=1}^n \frac{|art_{ij}-srt_{ij}|}{srt} \right)/n * 100\%$$
 Defined as percent of headways between trains not exceeding 125$\%$ of scheduled headways 
 
 6.     Interruption data rate (count or sum duration, normalized for trip distance or time)
+$$WT_i = \frac{WT_i}{T_i} * 100\%$$
+$$WT_i = card \left( \left\lbrace  bus:bus \in route_i ,  t_{bus0} - t_{bus} < T \right\rbrace \right)$$
+
 
 \section{Results and implications}
 
@@ -989,7 +994,7 @@ Time at location
 
 Some time at location exercises (without accounting for time at stops) were performed in one day for all the trips in one route. The following images represent some of the partial results, as there is no validation data to measure accuracy.
 
-
+%%\includegraphics[scale=1.0]{cuteplot.png}
 
 
 

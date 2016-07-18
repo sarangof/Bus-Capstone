@@ -7,8 +7,9 @@ import os
 # zip rows(lists)                                                                                                                          
 def parse_list(p):
     if p.Line!=None:
-        return zip(p.Line,p.Latitude,p.Longitude,p.RecordedAtTime,p.vehicleID,p.Trip,p.TripDate,p.TripPattern,p.MonitoredCallRef,p.DistFro\
-mCall,p.CallDistAlongRoute,p.PresentableDistance)
+        return zip(p.ROUTE_ID,p.latitude,p.longitude,p.recorded_time\
+                   ,p.vehicle_id,p.TRIP_ID,p.tripdate,p.SHAPE_ID\
+                   ,p.STOP_ID,p.distance_stop,p.distance_shape,p.status,p.destination)
     else:
         return []
 
@@ -23,6 +24,6 @@ if __name__=='__main__':
     output = sqlContext.sql(query)     
     output.flatMap(parse_list)\
           .map(lambda x: ",".join(map(str, x)))\
-          .map(lambda x: x.replace('MTA NYCT_', '').replace('MTA BC_','').replace('MTA_','').replace('-05:00',''))\
+          .map(lambda x: x.replace('MTA NYCT_', '').replace('MTABC_','').replace('MTA_','').replace('-05:00',''))\
           .saveAsTextFile(sys.argv[-1])
 
