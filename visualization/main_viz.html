@@ -1,89 +1,82 @@
 <!DOCTYPE html>
+
+<!--
+
+Credits to http://bl.ocks.org/phil-pedruco/6646844
+
+Data from http://catalog.opendata.city/
+
+-->
+
 <meta charset="utf-8">
 
-<head>
-   
+<style>
+#boroughs {
+    stroke: grey;
+	stroke-width: 0.5px;
+	fill: white;
+}
+    
+#mapWrapper{
+        margin:2%;
+		padding:10px;
+		border:2px solid #d0d0d0;
+		border-radius: 2px; 
+        text-align: center
+    }
+</style>
+
+<script src="http://d3js.org/d3.v3.min.js" charset="utf-8"></script>
+
+<body>
+    
     <title>
     
-        Bus reliability in NYC (2015)
+        Bus reliability in 2015
         
     </title>
     
-    <style>
     
-        #mapWrapper{
-            margin:2%;
-            padding:10px;
-            border:2px solid #d0d0d0;
-            border-radius: 2px; 
-            text-align: center
-        }
-    
-    </style>
+    <div id="title"> 
+        <h1> Stops and lines </h1>
+    </div>
     
     
-
-    
-</head>
-
-<body>
-
     <div id="mapWrapper"> 
-        <g id="USmap" > </g>
     </div>
 
-</body>
+<script>
 
+var width = 860,
+   height = 500;
 
-<script src="https://d3js.org/d3.v3.min.js"></script>
-<script src="https://d3js.org/topojson.v1.min.js"></script>
-<script src="https://d3js.org/queue.v1.min.js"></script>
+var svg = d3.select("#mapWrapper").append("svg")
+    .attr("width", width)
+    .attr("height", height);
 
-<script type="text/javascript">
-    
-    
-    
-    var width = 900,
-        height = 500;
-    
-    var svg = d3.select("#mapWrapper")
-        .append("svg")
-        .attr("width", width)
-        .attr("height", height);
-    
-    
-    var projection = d3.geo.albersUsa()
-        .scale(1000);
-    
-    var path = d3.geo.path()
-        .projection(projection);
-    
-    function plotMap() {
+  d3.json("nyc-borough.json", function(error, nyb) {
 
-           d3.json("https://raw.githubusercontent.com/NYU-CS6313-SPRING2016/Group-2-INET-Twitter-Verbal-Abuse/master/input_files/us-states.json",function(error, result){
-           us = result;
-           if (error) throw error;   
+  	console.log(nyb)
 
-           var counties = svg.append("path",".graticule")
-                                .style("width", "100%")
-                                .attr("class", "counties")
-                                .datum(topojson.feature(us, us.objects.counties))
-                                .attr("d", path);
+    var projection = d3.geo.mercator()
+  					.center([-73.94, 40.70])
+  					.scale(50000)
+  					.translate([(width) / 2, (height)/2]);
 
-           var state_boundary = svg.append("path",".graticule")
-                                    .style("width", "100%")
-                                    .datum(topojson.mesh(us,us.objects.states, function(a,b){return a!==b;}))
-                                    .attr("class","state-boundary")
-                                    .attr("d",path);
+	var path = d3.geo.path()
+			.projection(projection);
 
-           var land = svg.append("path",".graticule")
-                            .style("width", "100%")
-                            .datum(topojson.feature(us,us.objects.land))
-                            .attr("class","land")
-                            .attr("d",path);
-            })
-        };
-    
-    plotMap();
+	var g = svg.append("g");
+
+	g.append("g")
+		.attr("id", "boroughs")
+		.selectAll(".state")
+		.data(nyb.features)
+		.enter().append("path")
+		.attr("class", function(d){ return d.properties.name; })
+		.attr("d", path);
+
+	});
 
 </script>
+</body>
