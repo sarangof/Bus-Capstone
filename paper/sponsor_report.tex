@@ -140,6 +140,8 @@ The project has been developed following the milestones below:
 \item Measurement of bus performance and reliability metrics, with a flexible implementation;
 \end{itemize}
 
+\newpage
+
 \section{Project offerings}
 
 The contributions from our work can be summarized as follows:
@@ -152,6 +154,7 @@ The contributions from our work can be summarized as follows:
 
 \end{enumerate}
 
+\newpage
 
 \section{Approach}
 
@@ -175,7 +178,7 @@ Note that time zone information is dropped in this conversion.  While this may b
 
 \subsection{Measurement techniques}
 
-Two methods are investigated for estimating a vehicle's arrival time at a certain location, such as a bus stop.  Arrival time estimates are the basis for most measurement and identification related to bus reliability, such as vehicle speeds, block times, and headway (which in turn is required for wait assessment).  The first method is use to use a spatial algorithm to identify any datapoints within a certain radius of the location, and make an estimation from within that subset.  Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location.  The second method is to apply an interpolation algorithm to all observations from a given vehicle on each trip.  The tradeoff is that this may be more computation than required if not many along the trip are to be estimated.
+Two methods are investigated for estimating a vehicle's arrival time at a certain location, such as a bus stop.  Arrival time estimates are the basis for most measurement and identification related to bus reliability, such as vehicle speeds, block times, and headway (which in turn is required for wait assessment).  The first method uses a spatial algorithm to identify any datapoints within a certain radius of the location, and make an estimation from within that subset.  Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location.  The second method is to apply an interpolation algorithm to all observations from a given vehicle on each trip.  The tradeoff is that this may be more computation than required if not many along the trip are to be estimated.
 
 \textbf{[Processing time - big data techniques required]}
 
@@ -186,14 +189,19 @@ Calculation of headway also requires estimates of all vehicles' arrival times at
 
 Wait Assessment is a metric used by New York City Transit, defined in the Transit Capacity and Quality of Service Manual as the percentage of actual headways between successive vehicle arrivals that are less than or equal to a given standard.  For example the standard for transit lines operating at XXX scheduled headway is +3 mins during peak hours and +5 mins during off-peak hours.  Peak hours are defined as 6am to 9am and 4pm to 7pm.  Wait Assessment is a simple calculation that can be performed after all headway calculations have been performed for a given location.
 
+\textbf{Some of Jiaxu's part here.}
 
-Higher-Level Analysis (demonstration of data applied)
-Trends along a route - small data (after processing headway data)
-Time-period partitions - small data (after processing block time data)
-Interruptions - medium data (after processing speed data)
-Recurring events - small data (after processing interruptions data)
+\begin{itemize}
+\item Higher-Level Analysis (demonstration of data applied)
+\item Trends along a route - small data (after processing headway data)
+\item Time-period partitions - small data (after processing block time data)
+\item Interruptions - medium data (after processing speed data)
+\item Recurring events - small data (after processing interruptions data)
+\end{itemize}
 
-Big Data Techniques
+
+
+\subsection{Big Data Techniques}
 
 HDFS
 HDFS is a Java-based file system that provides scalable and reliable data storage, and it was designed to span large clusters of commodity servers.
@@ -209,17 +217,59 @@ The original data is stored in nested json format with lots of redundant informa
 The schema function based on Spark Dataframe allows us to understand the data structure in a more distinguishable fashion.
 
 
-\textbf{(image of the data schema)}
+
+\resizebox{\textwidth}{!}{
+\begin{tabular}[small]{l|l|l}
+
+\textbf{JSON ELEMENT(schema)} & \textbf{Column NAME} & \textbf{Explanation} \\
+\hline
+\hline
+LineRef &	ROUTE\_ID &	Name of bus line(B42) \\
+VehicleLocation.Latitude	& latitude	& latitude of record \\
+VehicleLocation.Longitude &	longitude	& longitude of record \\
+RecordedAtTime & recorded\_time & What time it gets recorded \\
+VehicleRef & vehicle\_id & ID of vehicle \\
+FramedVehicleJourneyRef.DatedVehicleJourneyRef	& TRIP\_ID & 	Same as trip\_id in GTFS*\\
+FramedVehicleJourneyRef.DataFrameRef &	trip\_date	& Date of the trip \\
+JourneyPatternRef & SHAPE\_ID	& Same as shape\_id in GTFS* \\
+StopPointRef	&STOP\_ID &	Id of next stop,Same as stop\_id in GTFS*\\
+Extensions.Distances.DistanceFromCall & distance\_stop & Distance to next stop \\
+Extensions. Distances.CallDistanceAlongRoute & distance\_shape & 	Stop\_s total distance along the shape \\
+Extensions. Distances.PresentableDistance & status & Report the current status of bus to next stop \footnote{Approaching, at stop, 1 station away.}\\
+DestinationRef & destination & Headsign of bus\\
+
+
+\end{tabular}
+}
+
+\subsection{}
+
+\newpage
 
 \section{Results and implications for practice}
 
+\begin{itemize}
 
-What is the central message of the project? What do practitioners, city managers, and/or data experts need to know about it?
-MTA provides the public API but it is impossible to fully replicate the density of the data they keep internally
-Density (time and spatial) may be sufficient for stop and route reliability metrics, but questionable for vehicle speed measurement. (?)
-Processing of raw data into useful measurements requires more power than offered by a typical personal computer.
-The impact of our results on DOT operations and decision making depends on the to-be-discussed tradeoffs between required accuracy, easy of use, and investment in IT processes. 
-Data quality assessment 
+
+\item Central message
+
+\begin{itemize}
+\item MTA provides the public API but it is impossible to fully replicate the density of the data they keep internally.
+
+\item Density (time and spatial) may be sufficient for stop and route reliability metrics, but questionable for vehicle speed measurement. (?)
+
+\item Processing of raw data into useful measurements requires more power than offered by a typical personal computer.
+\end{itemize}
+
+\item The impact of our results on DOT operations and decision making depends on the to-be-discussed tradeoffs between required accuracy, easy of use, and investment in IT processes.
+
+\end{itemize}
+
+
+
+ 
+
+\subsection{Data quality assessment}
 Gaps (Time dimension)
 Missing observations occur XXXX often
 XX% of gaps occur when there is a gap in the API response time, although we cannot rule out an error in the AVL signal
@@ -236,7 +286,10 @@ Potentially running one simple exercise (one line)
 Potentially mapping a heatmap of the delay (by one sample metric, does not need to be definitive) by stations/lines
 Through the big data technique, we can analyse the whole year data of all the bus lines by using the bus runtime dataset and bus schedule dataset.
 Although the dataset given for 2015 is not perfectly collected since missing observations occur quite often, in the large scale, we should be able to predict the delay by using some basic statistical criterias such as standard deviation and mean.
-Discussion about the theory
+
+\subsection{Discussion about the theory}
+
+
 Data Extraction and organization
 Our data extraction step picks the useful information from the original json and dumps the redundancies. This step shrinks file size by 30 times and facilitates the future analysis.
 Our data organization step turns messy json file into human readable and executable csv that can even been easily analysed through Excel by anyone.
@@ -299,15 +352,19 @@ The main goal for us is to figure out the other potential influence factor besid
 
 \subsubsection{Future work}
 
-Feature Selection optimization
-Pre study and investigation for NYC
-Visualization
-Use Javascript to create interactive heat map that predicts the chance of delay of specific bus line or stop
-Algorithm optimization
-Many analyses right now are not computed using big data technique, which means those analyses are hard to applied in large scale such as one year data. In order to analyse quickly in large scale, we must optimize our algorithms to ensure compatibility with big data techniques such as Spark.
-Further Application
-Other cities (need to pay attention to data structure, bus GPS data in some cities collect departure and arrival time instead of location)
-Other traffic mode (eg. Subway, city bike. Need to pay attention to the different features of each kinds of traffic mode)
+\begin{itemize}
+\item Inference study of the effect of several traffic or design conditions on reliability.
+\item Improve the current visualization tool, and adapt it to be responsive and interactive to different queries.
+\item Have a more detailed work flow including our code, to be easily implemented into every day tasks in the DOT.
+\item Further optimize the algorithms hereby used for the Big Data portion of the work.
+\item Further Applications
+\begin{itemize}
+\item Other cities (need to pay attention to data structure, bus GPS data in some cities collect departure and arrival time instead of location).
+\item Other traffic mode (eg. Subway, city bike. Need to pay attention to the different features of each kinds of traffic mode).
+\end{itemize}
+\end{itemize}
+
+
 
 
 
