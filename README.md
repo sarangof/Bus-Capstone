@@ -23,3 +23,4 @@ Use command
 ./XXX.sh XXX.py XXX.sql output XXX.csv [NumofExecutors]
 ```
 to submit the job
+### For more info, please refer Spark_All for all the information
