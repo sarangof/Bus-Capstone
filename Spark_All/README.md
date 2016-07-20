@@ -26,7 +26,7 @@ SparkSQL manipulation
 `Inner join` the interpolated data with GTFS schedule
 `IF` `COUNT` to calculate the multiple on time perfornace.
 ```
-For more info. Refer `ontime_ratio.sql`
+For more info. Refer `ontime_ratio/ontime_ratio.sql`
 ## Data Schema
 ```
 | JSON ELEMENT(schema)                           | Column NAME    | explanation                                                 |                           |                 | 
