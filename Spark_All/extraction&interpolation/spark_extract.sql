@@ -11,4 +11,4 @@ select Siri.ServiceDelivery.VehicleMonitoringDelivery.VehicleActivity[0].Monitor
 	   Siri.ServiceDelivery.VehicleMonitoringDelivery.VehicleActivity[0].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances.CallDistanceAlongRoute as distance_shape,
 	   Siri.ServiceDelivery.VehicleMonitoringDelivery.VehicleActivity[0].MonitoredVehicleJourney.MonitoredCall.Extensions.Distances.PresentableDistance as status,
 	   Siri.ServiceDelivery.VehicleMonitoringDelivery.VehicleActivity[0].MonitoredVehicleJourney.DestinationRef as destination
-from bus;
+from bus

@@ -15,3 +15,13 @@ return a pandas dataframe with the following columns: `Line`, `RecordedAtTime`, 
 
 ##### gtfs
 
+### Spark Method
+
+The data processing and manipulating is all done in Spark for the whole dataset in 2015.
+Use command 
+```
+./XXX.sh XXX.py XXX.sql output XXX.csv [NumofExecutors]
+```
+to submit the job
+#### For more info
+please refer `Spark_All` for all the information

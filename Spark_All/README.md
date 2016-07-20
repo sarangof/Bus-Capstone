@@ -5,8 +5,11 @@
 ## Techniques Included
 
 
-Read JSON & Read home SQL query to select the right elements
-
+Read JSON & CSV
+```
+sqlContext.read.json()
+qlContext.read.format('com.databricks.spark.csv').options(header='true').load()
+```
 
 Flatten Arrays using flatMap
 ```
@@ -15,6 +18,8 @@ Flatten Arrays using flatMap
 groupByKey & Interpolate
 ```
 use groupBykey to cast interpolation of time&distance to all trips
+Interpolate1D 
+Link:http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html#scipy.interpolate.interp1d
 ```
 Read csv using Spark_CSV tool
 ```
@@ -22,6 +27,11 @@ https://github.com/databricks/spark-csv
 ```
 SparkSQL manipulation
 
+```
+`Inner join` the interpolated data with GTFS schedule
+`IF` `COUNT` to calculate the multiple on time perfornace.
+```
+For more info. Refer `ontime_ratio/ontime_ratio.sql`
 ## Data Schema
 ```
 | JSON ELEMENT(schema)                           | Column NAME    | explanation                                                 |                           |                 | 
