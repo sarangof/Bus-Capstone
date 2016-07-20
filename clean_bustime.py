@@ -37,7 +37,8 @@ if __name__=='__main__':
     bustime = pd.read_csv(infile,header=None)
     bustime.columns = ['ROUTE_ID','latitude','longitude','recorded_time',
                        'vehicle_id','TRIP_ID','trip_date','SHAPE_ID',
-                       'STOP_ID','distance_stop','distance_shape','status']
+                       'STOP_ID','distance_stop','distance_shape','status',
+                       'destination']
     
     bustime.drop_duplicates(['vehicle_id','recorded_time'],inplace=True)
     bustime['TRIP_ID'] = bustime['TRIP_ID'].str.replace('MTA NYCT_','')
