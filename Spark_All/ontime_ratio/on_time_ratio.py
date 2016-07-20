@@ -36,15 +36,15 @@ if __name__=='__main__':
 
 	sqlContext.registerFunction("getsec", lambda x: get_sec(x), IntegerType()) #register python function into sql
 
-	join = sqlContext.sql('SELECT ROUTE_ID,TRIP_ID,STOP_ID,time,realtime,(getsec(realtime)-getsec(arrival_time)) as delay\
+	join = sqlContext.sql('SELECT ROUTE_ID,TRIP_ID,STOP_ID,time,(getsec(realtime)-getsec(arrival_time)) as delay\
                 		   FROM new_time\
                  		   INNNER JOIN stoptimes\
                     	   ON (TRIP_ID = trip_id AND STOP_ID = stop_id)') # join with GTFS data
-  with open(sys.argv[-2]) as fr: #read sql                                                                                               
-    query = fr.read()
-
+	
 	join.registerTempTable('new_join')
-	ontime_ratio = sqlContext.sql(query)
+	ontime_ratio = sqlContext.sql('SELECT ROUTE_ID, COUNT(IF((delay BETWEEN -60 AND 300),1,null))/COUNT(delay) as ontime_ratio\
+                      			   FROM new_join\
+                      			   GROUP BY ROUTE_ID')
 
 
 	ontime_ratio.write\
