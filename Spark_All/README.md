@@ -16,6 +16,8 @@ Flatten Arrays using flatMap
 (1,2,3) (a,b,c) ($,#,&) => (1,a,$),(2,b,#),(3,c,&)
 ```
 groupByKey & Interpolate
+Interpolate1D 
+Link:http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html#scipy.interpolate.interp1d
 ```
 use groupBykey to cast interpolation of time&distance to all trips
 ```
