@@ -18,6 +18,7 @@
 \usepackage{lastpage}
 \usepackage{biblatex}
 \usepackage{url}
+\usepackage{hyperref}
 \usepackage{graphicx, wrapfig, subcaption, setspace, booktabs}
 \usepackage[T1]{fontenc}
 \usepackage[font=small, labelfont=bf]{caption}
@@ -107,7 +108,6 @@ We would like to express our sincere appreciation to all who have lent us hands 
 
 \section{Overview and background}
 
-%%\includegraphics[scale=0.2]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/cuteplot}
 
 \subsection{	Statement and Description}
 Although demand for public transportation in New York City is growing, bus ridership levels are declining.  Many reasons can explain this, including drops in vehicle speeds and customer perceptions of dependability.  This project focuses on identifying these two factors along the city's MTA operated bus routes, in the form of reliability metrics that are relevant to the DOT as the municipal traffic authority.
@@ -157,25 +157,40 @@ The contributions from our work can be summarized as follows:
 
 \section{Approach}
 
+In this section we discuss the data parsing, processing and reliability measurement techniques.
+
 \subsection{Data techniques}
 
-Overall goal of this section: Process can be compared to exchange of daily flat file between MTA and  DOT 
-
-MTA's AVL data is acquired using a ''get'' request to a web service offered by the MTA to the public.  The web service uses a data standard called Service Interface for Real-Time Information (SIRI).  ''This standard has been adopted by the European standards-setting body CEN, and is not owned by any one vendor, public transportation agency or operator.  It has been implemented in a growing number of different projects by vendors and agencies around Europe. ''
-
-
+MTA's AVL data is acquired using a ''get'' request to a \href{http://bustime.mta.info/}{web service} offered by the MTA to the public.  The service uses a data standard called \textit{Service Interface for Real-Time Information} (SIRI). 
 
 \textbf{[Discuss parameters, API response time, and dependency constant internet connection.  Also discuss accumulated size (each is ~3MB, so an entire year can be >3TB).]}
 
-Per MTA's recommendation, the response data is requested in JSON format (Javascript Object Notation).  JSON offers a flexible structure, for example allowing elements to be stored as hierarchy, or a combination of named and unnamed elements.  JSON does not transform directly to a tabular layout and as a result cannot be imported by typical data analysis tools like Microsoft Access or Excel without first parsing it.
-Parsing can be performed using a variety of approaches.  A small program that can be written on almost any personal computer (a macro, or command-line script) may be acceptable for parsing one JSON response, requiring in the order-of-magnitude one second for each JSON.  However this is likely unacceptable for reading and aggregating any meaningful amount of archived JSON response files (entire days, or entire lines over multiple days).  Advanced techniques requiring additional software or hardware, which are explored in this report, can significantly improve processing time by distributing the data across multiple ''workers.''  Regardless of the technique, the extracted data has a straightforward structure, containing text and numerical elements (which can be stored as text), appropriate for storage in a comma-separated values (CSV) file.
+Per MTA's recommendation, the response data is requested in JSON format (\textit{Javascript Object Notation}).  JSON offers a flexible structure, for example allowing elements to be stored in hierarchies, or a combination of named and unnamed elements.  JSON does not transform directly to a tabular layout and as a result cannot be imported by typical data analysis tools like Microsoft Access or Excel without first parsing it.
+
+Parsing can be performed using a variety of approaches.  A small program that can be written on almost any personal computer (a macro, or command-line script) may be acceptable for parsing one JSON response, requiring in the order-of-magnitude one second for each JSON.  However this is likely unacceptable for reading and aggregating any meaningful amount of archived JSON response files (entire days, or entire lines over multiple days).  Advanced techniques requiring additional software or hardware (to be discussed further on in this report) can significantly improve processing time by distributing the data across multipler processing units.  Regardless of the technique, the extracted data has a straightforward structure, containing text and numerical elements (which can be stored as text), appropriate for storage in a comma-separated values (CSV) file.
+
 A risk that remains to be investigated is incomplete (blank) vehicle data elements.  Faster techniques for parsing of JSON into tabular format require each observation to contain data according to each element extracted.  This results in rectangle-shape data set with no need for validation of each row.
 
 \textbf{]Discuss GTFS. Bus schedules for a given trip include a reference date]}
 
 The SIRI standard calls for date-time representation according to the ISO 8601 standard.  While this can be read directly and used for many typical calculations (for example, elapsed time), it poses a problem when performing any analysis requiring date or time data from the planned schedule for the buses.  Those analysis require both the “true'' date-time element as well as the trip reference date.  Here are two example comparisons of a bus trip's estimated departure from its first stop and the corresponding scheduled departure time. Such a comparison may be used to explain whether bus reliability can be attributed to operational issues such as late departures from the depot.  Note the conversion.
 
-\textbf{(table goes here)}
+\vspace{0.5cm}
+
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l l l l}
+\hline
+trip\_id & Time stamp & Converted time stamp & Scheduled time \\
+\hline
+OH\_B6\-Weekday\-SDon\-077600\_M101\_100 & 2016\-06\-13T13:09:32.000\-04:00 & 0d\+13:09:32
+& 13:08:55 \\
+MV\_B6\-Weekday\-SDon\-041500\_M5\_206 & 2016\-06\-14T01:20:42.000\-04:00 & 1d\+01:20:42 &
+25:12:15 \\
+\hline
+\end{tabular}
+}
+
+\vspace{0.5cm}
 
 Note that time zone information is dropped in this conversion.  While this may become problematic if these approaches are applied outside of New York City, the only related risk in this application is to the validity of data from bus trips that occur during Daylight Savings Time shifts.  We elect to deal with those issues tactically rather than add complexity across the entire data set.
 
@@ -299,9 +314,18 @@ Data Extraction and organization
 Our data extraction step picks the useful information from the original json and dumps the redundancies. This step shrinks file size by 30 times and facilitates the future analysis.
 Our data organization step turns messy json file into human readable and executable csv that can even been easily analysed through Excel by anyone.
 
-\textbf{(sample table image goes here)}
 
-\textbf{(sample table image goes here)}
+\begin{figure}[!ht]
+  \caption{Original sample extraction from DOT.}
+  \centering
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/DOT}
+\end{figure}
+
+\begin{figure}[!ht]
+  \caption{Our data extraction using Spark.}
+  \centering
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/Spark}
+\end{figure}
 
 
 [Location estimation methods and their impact on measured reliability]
