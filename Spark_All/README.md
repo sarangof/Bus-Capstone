@@ -5,8 +5,11 @@
 ## Techniques Included
 
 
-Read JSON & Read home SQL query to select the right elements
-
+Read JSON & CSV
+```
+sqlContext.read.json()
+qlContext.read.format('com.databricks.spark.csv').options(header='true').load()
+```
 
 Flatten Arrays using flatMap
 ```
