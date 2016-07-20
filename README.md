@@ -1,9 +1,9 @@
 ##Bus Reliability Metrics using Public MTA Bus Time Data
 #### Capstone Project of the New York University Center for Urban Science and Progress
 
-* [Technical report]: (https://github.com/sarangof/Bus-Capstone/blob/master/paper/technical_report.pdf)
+* [Technical report] (https://github.com/sarangof/Bus-Capstone/blob/master/paper/technical_report.pdf)
 
-* [Sponsor report:] (https://github.com/sarangof/Bus-Capstone/blob/master/paper/sponsor_report.pdf)
+* [Sponsor report] (https://github.com/sarangof/Bus-Capstone/blob/master/paper/sponsor_report.pdf)
 
 #### Data retrieval modules
 ##### siri_parser
