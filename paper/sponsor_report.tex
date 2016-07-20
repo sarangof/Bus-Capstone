@@ -16,6 +16,9 @@
 \usepackage[myheadings]{fullpage}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
+\usepackage{biblatex}
+\usepackage{url}
+\usepackage{hyperref}
 \usepackage{graphicx, wrapfig, subcaption, setspace, booktabs}
 \usepackage[T1]{fontenc}
 \usepackage[font=small, labelfont=bf]{caption}
@@ -37,7 +40,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 \setlength\headheight{15pt}
-\fancyhead[R]{NYU CUSP}
+\fancyhead[R]{Center for Urban Science and Progress}
 \fancyfoot[R]{Page \thepage\ of \pageref{LastPage}}
 %-------------------------------------------------------------------------------
 % TITLE PAGE
@@ -50,19 +53,29 @@
 		\HRule{0.5pt} \\
 		\LARGE \textbf{\uppercase{Bus Reliability Metrics using Public MTA Bus Time Data}}
 		\HRule{2pt} \\ [0.5cm]
-		\normalsize \today \vspace*{5\baselineskip}}
+		\normalsize \today %\vspace*{5\baselineskip}
+		}
 
 \date{}
 
-\author{
-		Jiaxu Zhou \\
-		Yuqiao Cen \\
-		Matthew Urbanek \\
-		Bonan Yuan \\
-		Sara Arango-Franco \\ 
-		\\
+		\author{
+				Jiaxu Zhou \\
+				Yuqiao Cen \\
+				Matthew Urbanek \\
+				Bonan Yuan \\
+				Sara Arango-Franco \\ 
+				\\
+				Advisors: \\
+				Dr. Kaan Ozbay \\
+				Dr. Huy T. Vo \\
+				\\
+				Sponsor Agency:\\
+				Department of Transportation, City of New York\\
+				\\
 		\textbf{Center for Urban Science and Progress} \\
 		\textbf{New York University}}
+		
+	
 
 \maketitle
 \tableofcontents
@@ -79,11 +92,13 @@
 
 \section*{Brief}
 
-        Despite a growing demand for public transportation in New York City, bus ridership levels are declining. This can be explained by drops in vehicle speeds and customers' perceptions of dependability. The New York City Department of Transportation (NYC DOT) wishes to engage the New York University Center for Urban Science and Progress (CUSP) to explore the use of public vehicle location data from MTA Bus Time to generate operational data relevant to NYC DOT planning decisions. This information will be provided in the form of reliability metrics for bus service.
-        Based on the MTA Bus Time data, this project uses big data techniques and data analysis methods and algorithms. At the end, it will provide methods for estimating bus travel times, measuring reliability, and potentially identifying the distribution of those measurements as a functions of factors regarded as relevant.
+Despite a growing demand for public transportation in New York City, bus ridership levels are declining.  This can be explained by drops in vehicle speeds and customer perceptions of dependability.  The \textit{New York City Department of Transportation} (NYC DOT) wished to engage the \textit{New York University Center for Urban Science and Progress} (CUSP) to explore the use of public vehicle location data from the \textit{Metropolitan Transit Authority} (MTA) Bus Time to generate operational data relevant to the DOT's planning decisions.  This information is provided in the form of reliability metrics for bus service.
+
+Based on the MTA \textit{Automated Vehicle Location} (AVL) data and its public Bus Time API, the team performed a data assessment analysis for the data generating process and the data collection process. We also deliver methods for estimating bus travel and stop times, measuring reliability with different metrics, and settles the ground for the DOT to identify the distribution of reliability measurements as a function of factors regarded as relevant to their practice.
         
 \section*{Aknowledgements}
-    At the point of processing this Bus Reliability Project, we would like to express our sincere thanks to all those who have lent us hands in the previous time. First of all, we would like to show our sincere gratitude to our sponsor agency, the New York City Department of Transportation, who gave us an opportunity to focus on this important city issue. Especially, we would like to take this opportunity to thank Jeremy, who gave us a lots of advices about how DOT want us to do with this project. Secondly, we would like to express our gratitude to our advisors, Dr. Kaan Ozbay and Dr. Huy T. Vo. They not only gave us some technical supports but also offered us a lot of references and information on time. Last but not the least, we would like to thank Kai, Abdullah, and classmates who gave us assistances and advices during our processing. Without their help, it would be much harder for use to process this project.
+
+We would like to express our sincere appreciation to all who have lent us hands during this time.  First of all, we would like to show our sincere gratitude to our sponsor agency, the New York City Department of Transportation, for giving us an opportunity to focus on this important city issue.  We would specially like to to thank Jeremy Safran, who gave us plenty of insight into the way the DOT wants to treat and understand bus data analytics.  Secondly, we would like to express our gratitude to our advisors, Dr. Kaan Ozbay and Dr. Huy T. Vo., not only for their technical expertise but for their generosity and willingness to lead us through this process.  Last but not least, we would like to thank Kai Zhao, Abdullah Kurkcu, Ender Morgul, and our classmates in CUSP who gave us assistance and advice during this process.  We will always be thankful.
 
 
 %-------------------------------------------------------------------------------
@@ -93,78 +108,93 @@
 
 \section{Overview and background}
 
+
 \subsection{	Statement and Description}
-Though demand for public transportation in New York City is growing, bus ridership levels are declining. Many reasons can explain this but drops in vehicle speeds and customers' perceptions of dependability will be the two main factors that affect bus ridership levels this project focuses on.
+Although demand for public transportation in New York City is growing, bus ridership levels are declining.  Many reasons can explain this, including drops in vehicle speeds and customer perceptions of dependability.  This project focuses on identifying these two factors along the city's MTA operated bus routes, in the form of reliability metrics that are relevant to the DOT as the municipal traffic authority.
 
-NYC DOT has already collected the bus time data. But DOT lacks a formal process for compiling and applying it. That makes DOT cannot fully use the data to help to make effective planning decisions. 
-Despite MTA who is in the practice of operations has internally defined metrics used for planning and analysis of buses, it pays more attention to bus level but not the whole system level which DOT is concern about. 
+The DOT keeps records of the MTA bus system, but the agency lacks a formal process for compiling and analysing it according to their decision making capabilities (such as those related with road design and traffic management), which substantially differ from the MTA's purposes and reach. Despite the MTA (which is the agency in charge of operations) has internally defined metrics used for scheduling, planning and analysis of the bus service, this agency pays more attention to the bus level instead of the whole system level, which is more of the interest of the DOT.
+ 
+To help the DOT improve their planning efficiency, this project aims to measure the dependent variable metrics related to bus performance and reliability, enabling the agency to, in a further analysis, understand the effect of independent variables that affect service quality. CUSP developed methods for estimating bus travel times and measuring reliability, while performing data quality analysis of the MTA Bus Time API data (from which the data was collected to this exercise) and the MTA schedule data (referred to as \textit{GTFS} in this document for its format, \textit{General Transit Feed Specification}). 
 
-In this project, CUSP is going to collaborate with DOT to find out what factors are related to the bus performance and reliability. Since DOT concerns more about customers' satisfaction and is responsible for all the traffic elements in the city, this project will not just limit in bus itself as DOT is able to improve bus performance by controlling other traffic elements, but not only bus operation element. By exploring that, DOT will be able to improve the bus performance and reliability by control certain factors.
+\subsection{Goals}
 
-\subsection{Goals of the project}
+The goals of the project can be summarized as follows:
 
-Unlike MTA, DOT takes more responsibility on traffic planning instead of bus operation management and concerns more about customers' expectation. To help DOT improves their planning efficiency, this project aims to figure out the independent variable metrics related to bus performance and reliability. CUSP will collaborate with the DOT to develop methods for estimating bus travel times and measuring reliability, while performing data quality analysis of the Bus Time data and the schedule data (GTFS). 
+\begin{enumerate}
+\item Perform a thorough data quality assessment on the MTA Bus Time data.
 
-In the first phase of the project, CUSP will develop algorithms to measure or estimate certain types of events associated with bus vehicles' trips using publically­ available data, such as departures from terminals, vehicle arrivals at stops and interruptions between stops.  
+\item Implement metrics related to the performance of the buses with respect to their planned schedule.
 
-In the second phase, CUSP will analyze the resulting data and calculate metrics related to the performance of the buses with respect to their planned schedule.  Finally, in consultation with the DOT, CUSP will develop hypotheses about the significance of contextual factors on those performance metrics.
+\item Document the entire process and deliver flexible code, so both data quality assessment and reliability measurements are more clearly evaluated by the agency.
+\end{enumerate}
 
-The entire process has been and will continue to be documented and flexible in the code, so both data quality assessment and reliability measurements are more clearly evaluated.
 
-The project has been developed under the following milestones: Bibliography review; Data extraction; Estimation of the departure and arrival times at bus stops and other locations (in other words, interpolation); Measurement of bus performance and reliability metrics, with a flexible implementation; and Potentially hypothesizing about the possible factors that influence bus reliability.
+The project has been developed following the milestones below:
+
+\begin{itemize}
+\item Bibliography review; 
+\item Data extraction; 
+\item Identification of pitfalls and irregularities in the data generating process;
+\item Estimation of the departure and arrival times at bus stops and other locations (in other words, extrapolation); 
+\item Measurement of bus performance and reliability metrics, with a flexible implementation;
+\end{itemize}
+
+\newpage
 
 \section{Project offerings}
 
 The contributions from our work can be summarized as follows:
 
 \begin{enumerate}
-\item The estimation of departure and arrival times based on AVL data for the specific case of Bus Time. This will be implemented in a flexible way, allowing for variations to be incorporated into the code.
-\item Flexible and potentially novel bus performance metrics.
-\item Data quality assessment for the Bus Time data.
+\item The estimation of departure and arrival times based on AVL data for the specific case of the Bus Time API records. 
+\item Flexible and potentially novel bus performance metrics for the data set in question.
+\item Quality assessment for the Bus Time API dataset.
+\item Flexible and reproducible code to allow further implementations and variations of our analysis.
+
 \end{enumerate}
 
+\newpage
 
 \section{Approach}
 
+In this section we discuss the data parsing, processing and reliability measurement techniques.
+
 \subsection{Data techniques}
 
-Overall goal of this section: Process can be compared to exchange of daily flat file between MTA and  DOT MTA's Automated Vehicle Location (AVL) data is acquired using a ''get'' request to a web service offered by the MTA to the public.  The web service uses a data standard called Service Interface for Real-Time Information (SIRI).  ''This standard has been adopted by the European standards-setting body CEN, and is not owned by any one vendor, public transportation agency or operator.  It has been implemented in a growing number of different projects by vendors and agencies around Europe. ''
+MTA's AVL data is acquired using a ''get'' request to a \href{http://bustime.mta.info/}{web service} offered by the MTA to the public.  The service uses a data standard called \textit{Service Interface for Real-Time Information} (SIRI). 
 
 \textbf{[Discuss parameters, API response time, and dependency constant internet connection.  Also discuss accumulated size (each is ~3MB, so an entire year can be >3TB).]}
 
-Per MTA's recommendation, the response data is requested in JSON format (Javascript Object Notation).  JSON offers a flexible structure, for example allowing elements to be stored as hierarchy, or a combination of named and unnamed elements.  JSON does not transform directly to a tabular layout and as a result cannot be imported by typical data analysis tools like Microsoft Access or Excel without first parsing it.
-Parsing can be performed using a variety of approaches.  A small program that can be written on almost any personal computer (a macro, or command-line script) may be acceptable for parsing one JSON response, requiring in the order-of-magnitude one second for each JSON.  However this is likely unacceptable for reading and aggregating any meaningful amount of archived JSON response files (entire days, or entire lines over multiple days).  Advanced techniques requiring additional software or hardware, which are explored in this report, can significantly improve processing time by distributing the data across multiple ''workers.''  Regardless of the technique, the extracted data has a straightforward structure, containing text and numerical elements (which can be stored as text), appropriate for storage in a comma-separated values (CSV) file.
+Per MTA's recommendation, the response data is requested in JSON format (\textit{Javascript Object Notation}).  JSON offers a flexible structure, for example allowing elements to be stored in hierarchies, or a combination of named and unnamed elements.  JSON does not transform directly to a tabular layout and as a result cannot be imported by typical data analysis tools like Microsoft Access or Excel without first parsing it.
+
+Parsing can be performed using a variety of approaches.  A small program that can be written on almost any personal computer (a macro, or command-line script) may be acceptable for parsing one JSON response, requiring in the order-of-magnitude one second for each JSON.  However this is likely unacceptable for reading and aggregating any meaningful amount of archived JSON response files (entire days, or entire lines over multiple days).  Advanced techniques requiring additional software or hardware (to be discussed further on in this report) can significantly improve processing time by distributing the data across multipler processing units.  Regardless of the technique, the extracted data has a straightforward structure, containing text and numerical elements (which can be stored as text), appropriate for storage in a comma-separated values (CSV) file.
+
 A risk that remains to be investigated is incomplete (blank) vehicle data elements.  Faster techniques for parsing of JSON into tabular format require each observation to contain data according to each element extracted.  This results in rectangle-shape data set with no need for validation of each row.
 
 \textbf{]Discuss GTFS. Bus schedules for a given trip include a reference date]}
 
 The SIRI standard calls for date-time representation according to the ISO 8601 standard.  While this can be read directly and used for many typical calculations (for example, elapsed time), it poses a problem when performing any analysis requiring date or time data from the planned schedule for the buses.  Those analysis require both the “true'' date-time element as well as the trip reference date.  Here are two example comparisons of a bus trip's estimated departure from its first stop and the corresponding scheduled departure time. Such a comparison may be used to explain whether bus reliability can be attributed to operational issues such as late departures from the depot.  Note the conversion.
 
-\textbf{(table goes here)}
+\vspace{0.5cm}
+
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l l l l}
+\hline
+trip\_id & Time stamp & Converted time stamp & Scheduled time \\
+\hline
+OH\_B6\-Weekday\-SDon\-077600\_M101\_100 & 2016\-06\-13T13:09:32.000\-04:00 & 0d\+13:09:32
+& 13:08:55 \\
+MV\_B6\-Weekday\-SDon\-041500\_M5\_206 & 2016\-06\-14T01:20:42.000\-04:00 & 1d\+01:20:42 &
+25:12:15 \\
+\hline
+\end{tabular}
+}
+
+\vspace{0.5cm}
 
 Note that time zone information is dropped in this conversion.  While this may become problematic if these approaches are applied outside of New York City, the only related risk in this application is to the validity of data from bus trips that occur during Daylight Savings Time shifts.  We elect to deal with those issues tactically rather than add complexity across the entire data set.
 
-\subsection{Measurement techniques}
-
-Two methods are investigated for estimating a vehicle's arrival time at a certain location, such as a bus stop.  Arrival time estimates are the basis for most measurement and identification related to bus reliability, such as vehicle speeds, block times, and headway (which in turn is required for wait assessment).  The first method is use to use a spatial algorithm to identify any datapoints within a certain radius of the location, and make an estimation from within that subset.  Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location.  The second method is to apply an interpolation algorithm to all observations from a given vehicle on each trip.  The tradeoff is that this may be more computation than required if not many along the trip are to be estimated.
-
-\textbf{[Processing time - big data techniques required]}
-
-
-Average vehicle speed is calculated as the difference between estimated arrival times at two points divided by the distance traveled.  A key assumption is that vehicle motion is monotonic (never reversing direction) along any given axis.  Approaches to account for variations in vehicle heading remain to be explored.  The size of the post-processed average speed data set depends on how many point-pairs within each trip are to be calculated.  A dataset reporting the total time (“block time'') and average speed, using only the beginning and end points, would be manageable for most typical desktop application; an entire year would be less than 1GB and could be organized by month, route etc. for easier access.
-
-Calculation of headway also requires estimates of all vehicles' arrival times at a certain location.  Missing estimates (whether due to the data generating process or the estimation algorithm) must be identified, as skipping them may result in an overstatement, based on the time between two or more vehicles' arrivals.  A compiled, processed dataset supporting headway measurement -- that is, containing arrival times of each trip at each stop -- is approximately 2M rows per day of operations.  While the calculations on selected data are simple enough for any typical desktop application, the total size of the database (50-100GB) would require additional hardware and a database management system.
-
-Wait Assessment is a metric used by New York City Transit, defined in the Transit Capacity and Quality of Service Manual as the percentage of actual headways between successive vehicle arrivals that are less than or equal to a given standard.  For example the standard for transit lines operating at XXX scheduled headway is +3 mins during peak hours and +5 mins during off-peak hours.  Peak hours are defined as 6am to 9am and 4pm to 7pm.  Wait Assessment is a simple calculation that can be performed after all headway calculations have been performed for a given location.
-
-
-Higher-Level Analysis (demonstration of data applied)
-Trends along a route - small data (after processing headway data)
-Time-period partitions - small data (after processing block time data)
-Interruptions - medium data (after processing speed data)
-Recurring events - small data (after processing interruptions data)
-
-Big Data Techniques
+\subsection{Big Data Techniques}
 
 HDFS
 HDFS is a Java-based file system that provides scalable and reliable data storage, and it was designed to span large clusters of commodity servers.
@@ -180,17 +210,86 @@ The original data is stored in nested json format with lots of redundant informa
 The schema function based on Spark Dataframe allows us to understand the data structure in a more distinguishable fashion.
 
 
-\textbf{(image of the data schema)}
+
+\resizebox{\textwidth}{!}{
+\begin{tabular}[small]{l|l|l}
+
+\textbf{JSON ELEMENT(schema)} & \textbf{Column NAME} & \textbf{Explanation} \\
+\hline
+\hline
+LineRef &	ROUTE\_ID &	Name of bus line(B42) \\
+VehicleLocation.Latitude	& latitude	& latitude of record \\
+VehicleLocation.Longitude &	longitude	& longitude of record \\
+RecordedAtTime & recorded\_time & What time it gets recorded \\
+VehicleRef & vehicle\_id & ID of vehicle \\
+FramedVehicleJourneyRef.DatedVehicleJourneyRef	& TRIP\_ID & 	Same as trip\_id in GTFS*\\
+FramedVehicleJourneyRef.DataFrameRef &	trip\_date	& Date of the trip \\
+JourneyPatternRef & SHAPE\_ID	& Same as shape\_id in GTFS* \\
+StopPointRef	&STOP\_ID &	Id of next stop,Same as stop\_id in GTFS*\\
+Extensions.Distances.DistanceFromCall & distance\_stop & Distance to next stop \\
+Extensions. Distances.CallDistanceAlongRoute & distance\_shape & 	Stop\_s total distance along the shape \\
+Extensions. Distances.PresentableDistance & status & Report the current status of bus to next stop \footnote{Approaching, at stop, 1 station away.}\\
+DestinationRef & destination & Headsign of bus\\
+
+
+\end{tabular}
+}
+
+\subsection{Measurement techniques}
+
+Two methods are investigated for estimating a vehicle's arrival time at a certain location, such as a bus stop.  Arrival time estimates are the basis for most measurement and identification related to bus reliability, such as vehicle speeds, block times, and headway (which in turn is required for wait assessment).  The first method uses a spatial algorithm to identify any datapoints within a certain radius of the location, and make an estimation from within that subset.  Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location.  The second method is to apply an interpolation algorithm to all observations from a given vehicle on each trip.  The tradeoff is that this may be more computation than required if not many along the trip are to be estimated.
+
+\textbf{[Processing time - big data techniques required]}
+
+
+Average vehicle speed is calculated as the difference between estimated arrival times at two points divided by the distance traveled.  A key assumption is that vehicle motion is monotonic (never reversing direction) along any given axis.  Approaches to account for variations in vehicle heading remain to be explored.  The size of the post-processed average speed data set depends on how many point-pairs within each trip are to be calculated.  A dataset reporting the total time (“block time'') and average speed, using only the beginning and end points, would be manageable for most typical desktop application; an entire year would be less than 1GB and could be organized by month, route etc. for easier access.
+
+Calculation of headway also requires estimates of all vehicles' arrival times at a certain location.  Missing estimates (whether due to the data generating process or the estimation algorithm) must be identified, as skipping them may result in an overstatement, based on the time between two or more vehicles' arrivals.  A compiled, processed dataset supporting headway measurement -- that is, containing arrival times of each trip at each stop -- is approximately 2M rows per day of operations.  While the calculations on selected data are simple enough for any typical desktop application, the total size of the database (50-100GB) would require additional hardware and a database management system.
+
+Wait Assessment is a metric used by New York City Transit, defined in the Transit Capacity and Quality of Service Manual as the percentage of actual headways between successive vehicle arrivals that are less than or equal to a given standard.  For example the standard for transit lines operating at XXX scheduled headway is +3 mins during peak hours and +5 mins during off-peak hours.  Peak hours are defined as 6am to 9am and 4pm to 7pm.  Wait Assessment is a simple calculation that can be performed after all headway calculations have been performed for a given location.
+
+\textbf{Some of Jiaxu's part here.}
+
+\begin{itemize}
+\item Higher-Level Analysis (demonstration of data applied)
+\item Trends along a route - small data (after processing headway data)
+\item Time-period partitions - small data (after processing block time data)
+\item Interruptions - medium data (after processing speed data)
+\item Recurring events - small data (after processing interruptions data)
+\end{itemize}
+
+
+
+
+
+\subsection{}
+
+\newpage
 
 \section{Results and implications for practice}
 
+\begin{itemize}
 
-What is the central message of the project? What do practitioners, city managers, and/or data experts need to know about it?
-MTA provides the public API but it is impossible to fully replicate the density of the data they keep internally
-Density (time and spatial) may be sufficient for stop and route reliability metrics, but questionable for vehicle speed measurement. (?)
-Processing of raw data into useful measurements requires more power than offered by a typical personal computer.
-The impact of our results on DOT operations and decision making depends on the to-be-discussed tradeoffs between required accuracy, easy of use, and investment in IT processes. 
-Data quality assessment 
+
+\item Central message
+
+\begin{itemize}
+\item MTA provides the public API but it is impossible to fully replicate the density of the data they keep internally.
+
+\item Density (time and spatial) may be sufficient for stop and route reliability metrics, but questionable for vehicle speed measurement. (?)
+
+\item Processing of raw data into useful measurements requires more power than offered by a typical personal computer.
+\end{itemize}
+
+\item The impact of our results on DOT operations and decision making depends on the to-be-discussed tradeoffs between required accuracy, easy of use, and investment in IT processes.
+
+\end{itemize}
+
+
+
+ 
+
+\subsection{Data quality assessment}
 Gaps (Time dimension)
 Missing observations occur XXXX often
 XX% of gaps occur when there is a gap in the API response time, although we cannot rule out an error in the AVL signal
@@ -207,14 +306,26 @@ Potentially running one simple exercise (one line)
 Potentially mapping a heatmap of the delay (by one sample metric, does not need to be definitive) by stations/lines
 Through the big data technique, we can analyse the whole year data of all the bus lines by using the bus runtime dataset and bus schedule dataset.
 Although the dataset given for 2015 is not perfectly collected since missing observations occur quite often, in the large scale, we should be able to predict the delay by using some basic statistical criterias such as standard deviation and mean.
-Discussion about the theory
+
+\subsection{Discussion about the theory}
+
+
 Data Extraction and organization
 Our data extraction step picks the useful information from the original json and dumps the redundancies. This step shrinks file size by 30 times and facilitates the future analysis.
 Our data organization step turns messy json file into human readable and executable csv that can even been easily analysed through Excel by anyone.
 
-\textbf{(sample table image goes here)}
 
-\textbf{(sample table image goes here)}
+\begin{figure}[!ht]
+  \caption{Original sample extraction from DOT.}
+  \centering
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/DOT}
+\end{figure}
+
+\begin{figure}[!ht]
+  \caption{Our data extraction using Spark.}
+  \centering
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/Spark}
+\end{figure}
 
 
 [Location estimation methods and their impact on measured reliability]
@@ -245,9 +356,9 @@ Vehicle ID is public and not anonymized.
 While the MTA does not publish archived BusTime data (except for a sample in 2014), we are providing the code for anybody to collect it
 
 
-\section{Conclusions and future work}
+\subsection{Conclusions and future work}
 
-\subsection{Conclusions}
+\subsubsection{Conclusions}
 
 This project studies the bus performance in New York City and its correlation metrics based on the GPS data offered by MTA. The MTA bus GPS database collects the location of each bus every 30 seconds. After estimating the departure and arrival time for each bus at each stop, we use measurement like headways and wait assessment to figure out the bus performance and reliability. Aimed at helping DOT improve the bus performance efficiently, the metrics focus on not only bus operation element, but also on other traffic aspects. Taking one-year data as our object of study, the data is extremely huge so that big data technology like Spark is widely used in this project. In order to make our work easy to share and reproduce, we choose to use SQL API to manipulate the data, which enable DOT to easily make change by editing the SQL script. 
 Conclusion for the model we use. (Introduction, Pros and Cons, Bias)
@@ -268,137 +379,67 @@ Influence：
 The main goal for us is to figure out the other potential influence factor besides operation to help DOT control and improve bus performance on planning level. Similar methodology and concept could be used in other cities and traffic mode. The big data technology applied in not only traffic analysis but also city wide urban issue offers more reliable result compared with traditional sample studies. 
 
 
-\subsection{Future work}
+\subsubsection{Future work}
 
-Feature Selection optimization
-Pre study and investigation for NYC
-Visualization
-Use Javascript to create interactive heat map that predicts the chance of delay of specific bus line or stop
-Algorithm optimization
-Many analyses right now are not computed using big data technique, which means those analyses are hard to applied in large scale such as one year data. In order to analyse quickly in large scale, we must optimize our algorithms to ensure compatibility with big data techniques such as Spark.
-Further Application
-Other cities (need to pay attention to data structure, bus GPS data in some cities collect departure and arrival time instead of location)
-Other traffic mode (eg. Subway, city bike. Need to pay attention to the different features of each kinds of traffic mode)
+\begin{itemize}
+\item Inference study of the effect of several traffic or design conditions on reliability.
+\item Improve the current visualization tool, and adapt it to be responsive and interactive to different queries.
+\item Have a more detailed work flow including our code, to be easily implemented into every day tasks in the DOT.
+\item Further optimize the algorithms hereby used for the Big Data portion of the work.
+\item Further Applications
+\begin{itemize}
+\item Other cities (need to pay attention to data structure, bus GPS data in some cities collect departure and arrival time instead of location).
+\item Other traffic mode (eg. Subway, city bike. Need to pay attention to the different features of each kinds of traffic mode).
+\end{itemize}
+\end{itemize}
 
 
 
-\newpage
+\begin{thebibliography}{9}
 
-\section*{References}
-\addcontentsline{toc}{section}{References}
+\bibitem{LinZeng}
+W. H. Lin and J. Zeng, "An experimental study of real-time bus arrival time prediction with GPS data," Transp. Res. Rec., no. 1666, pp. 101- 109, Jan. 1999.
 
-Anand, U., 2010. The Elusive Free Radicals, \textit{The Clinical Chemist,} [e-journal] Available at:<\url{http://www.clinchem.org/content/56/10/1649.full.pdf}> [Accessed 2 November 2013]
-\newline
-\newline
+\bibitem{Rajbhandari}
+Rajat Rajbhandari, Steven I. Chien, and Janice R. Daniel, “Estimation of bus dwell times with APC information”, Transportation Research Record 1841 Paper No. 03- 2675, 2003
 
-Biology Forums, 2012. \textit{Normal glomerulus. Acute glomerulonephritis.} [online] Available at: <\url{http://biology-forums.com/index.php?action=gallery;sa=view;id=9284}> [Accessed 23 October 2013].
-\newline
-\newline
+\bibitem{TangLi}
+Min-Tang Li, Fang Zhao, Lee-Fang Chow, Haitao Zhang, and Shi-Chiang Li, Simulation Model for Estimating Bus Dwell Time by Simultaneously Considering Numbers of Disembarking and
+Boarding Passengers, Transportation Research Record 1971, 2006
 
-Budisavljevic, M., Hodge, L., Barber, K., Fulmer, J., Durazo-Arvizu, R., Self, S., Kuhlmann, M., Raymond, J. and Greene, E., 2003. Oxidative stress in the pathogenesis of experimental mesangial proliferative glomerulonephritis, \textit{American Journal of Physiology - Renal Physiology,} 285(6), pp. 1138-1148.
-\newline
-\newline
+\bibitem{Fazhi}
+LI Fazhi, YANG Dongyuan and MA Kai, BUS RAPID TRANSIT (BRT) BUNCHING ANALYSIS WITH MASSIVE GPS DAT, National Science and Technology Support Program of China (NO. 2009BAG17B01), 2013
 
-Chien, C., Lee, P., Chen, C., Ma, M., Lai, M. and Hsu, S., 2001. De Novo Demonstration and Co-localization of Free-Radical Production and Apoptosis Formation in Rat Kidney Subjected to Ischemia/Reperfusion, \textit{Journal of the American Society of Nephrology,} 12(5), pp. 973-982.
-\newline
-\newline
+\bibitem{Levine}
+Brian Levine, Alex Lu,Alla Reddy, Measuring Subway Service Performance at New York City Transit: A Case Study Using Automated Train Supervision (ATS) Track- Occupancy Data, TRB 2013 Annual Meeting, 2013
 
-Couser, W., 1993. Pathogenesis of glomerulonephritis, \textit{Kidney International Supplements,} 42, pp. 19-26.
-\newline
-\newline
+\bibitem{DanWan}
+Dan Wan, Camille Kamga, Jun Liu, Aaron Sugiura, Eric B. Beaton, Rider perception of a “light” Bus Rapid Transit system - The New York City Select Bus Service, Transport Policy 49 (2016) 41–55, Apr. 2016.
 
-De Gasparo, M., 2002. Angiotensin II and nitric oxide interaction, \textit{Heart Failure Reviews,} [e-journal] Available at:<\url{http://www.ncbi.nlm.nih.gov/pubmed/12379820}> [Accessed 26 October 2013]
-\newline
-\newline
+\bibitem{Bie}
+Yiming Bie, Xiaolin Gong, Zhiyuan Liu, Time of day intervals partition for bus schedule using GPS data, Transportation Research Part C 60 (2015) 443–456, Sep. 2015.
 
-Edinburgh Renal Education Pages, 2012. \textit{Glomerulonephritis} [online] Available at: <\url{http://www.edrep.org/pages/textbook/glomerulonephritis.php}> [Accessed 25 October 2013].
-\newline
-\newline
+\bibitem{Safran}
+Jeremy S. Safran, Eric B. Beaton, Robert Thompson, Factors Contributing to Bus Lane Obstruction and Usage in NYC: Does Design Matter? TRB 2014 Annual Meeting, 2014
+ 
+\bibitem{Pangilinan}
+Christopher Pangilinan, Nigel Wilson, and Angela Moore, Bus Supervision Deployment Strategies and Use of Real-Time Automatic
+Vehicle Location for Improved
+Bus Service Reliability, Transportation Research Record: Journal of the Transportation Research Board, No. 2063, Transportation Research Board of the National Academies, Washington, D.C., 2008, pp. 28–33.
+DOI: 10.3141/2063-04
+\bibitem{Yang}
+Yingxiang Yang, David Gerstle, Peter Widhalm, Dietmar Bauer, The potential of low-frequency AVL data for the monitoring and control of bus performance, TRB 2013 Annual Meeting, 2013.
 
-Forbes, J., Coughlan, M. and Cooper, M., 2008. Oxidative Stress as a Major Culprit in Kidney Disease in Diabetes, \textit{Diabetes,} 57(6), pp. 1446-1454.
-\newline
-\newline
+\bibitem{An}
+Shi An, Xinming Zhang and Jian Wang, Finding Causes of Irregular Headways Integrating Data Mining and AHP, ISPRS Int. J. Geo-Inf. 2015, 4, 2604-2618; DOI:10.3390/ijgi4042604, Nov. 2015.
 
-Geeky Medics, 2010. \textit{Glomerulonephritis} [online] Available at: <\url{http://geekymedics.com/2010/10/27/glomerulonephritis/}> [Accessed 25 October 2013].
-\newline
-\newline
+\bibitem{Chang}
+Jinil Chang, Mohamad Tala, Satya Muthuswamy, A SIMPLE METHODOLOGY TO ESTIMATE QUEUE LENGTHS AT SIGNALIZED INTERSECTIONS USING DETECTOR DATA, TRB 2013 Annual Meeting, 2013
 
-Gryglewski, R., Palmer, R., Moncada, S., 1986. Superoxide anion is involved in the break­down of endothelium derived relaxing factor, \textit{Nature,} 320, pp. 454-456.
-\newline
-\newline
 
-Halliwell, B., 2001. Free Radicals and other reactive species in Disease, \textit{Encyclopedia of Life Sciences,} [e-journal] Available at:<\url{http://web.sls.hw.ac.uk/teaching/level4/bcm1_2/reading/oxidative_stress/files/Oxidative_stress.pdf}> [Accessed 19 October 2013]
-\newline
-\newline
 
-Huang, H., Patel, P. and Salahudeen, A., 2001. Lazaroid compounds prevent early but not late stages of oxidant-induced cell injury: potential explanation for the lack of efficacy of lazaroids in clinical trials, \textit{Pharmacological Research,} 41(1), pp. 55-61.
-\newline
-\newline
 
-Klinger, J., Abman, S. and Gladwin, M., 2013. Nitric Oxide Deficiency and Endothelial Dysfunction in Pulmonary Arterial Hypertension, \textit{American Journal of Respiratory and Critical Care Medicine,} 188(6), pp. 639-646.
-\newline
-\newline
-
-Lindemann, I., Boettcher, J., Oertel, K., Pasternack, R., Heine, A. and Klebe, G. 2012. Inhibitors of Transglutaminase 2: A therapeutic option in celiac disease, \textit{To be Published,} [e-journal + PDB structure] Available at:<\url{http://www.ebi.ac.uk/pdbe-srv/view/entry/3s3s/summary}> [Accessed 24 October 2013]
-\newline
-\newline
-
-Mayo Clinic, 2011. \textit{Glomerulonephritis} [online] Available at: <\url{http://www.mayoclinic.com/health/glomerulonephritis/DS00503/}> [Accessed 20 October 2013].
-\newline
-\newline
-
-McCord, J., Roy, R. and Schaffer, S., 1985. Free radicals and myocardial ischemia. The role of xanthine oxidase, \textit{Advances in myocardiology,} [e-journal] Available at:<\url{http://www.ncbi.nlm.nih.gov/pubmed/2982206}> [Accessed 24 October 2013]
-\newline
-\newline
-
-National Health Service, 2012. \textit{Causes of glomerulonephritis} [online] Available at: <\url{http://www.nhs.uk/Conditions/Glomerulonephritis/Pages/Causes.aspx}> [Accessed 20 October 2013].
-\newline
-\newline
-
-Niaudet, P., 2013. \textit{Overview of the pathogenesis and causes of glomerulonephritis in children.} [online] Available at: <\url{http://www.uptodate.com/contents/overview-of- \ the-pathogenesis-and-causes-of-glomerulonephritis-in-children}> [Accessed 21 October 2013].
-\newline
-\newline
-
-Ronco, P., 2013. \textit{Mechanisms of glomerular crescent formation.} [online] Available at: <\url{http://www.uptodate.com/contents/mechanisms-of-glomerular-crescent-formation}> [Accessed 21 October 2013].
-\newline
-\newline
-
-Rutchik, J., 2013. \textit{Toxic Neuropathy Clinical Presentation.} [online] Available at: <\url{http://emedicine.medscape.com/article/1175276-clinical#a0216}> [Accessed 26 October 2013].
-\newline
-\newline
-
-R\&D Systems, 2013. \textit{Technical Information. Ischemia/Reperfusion Injury.} [online] Available at: <\url{http://www.rndsystems.com/cb_detail_objectname_SP96_Ischemia.aspx}> [Accessed 28 October 2013].
-\newline
-\newline
-
-Salahudeen, A., 1999. Free Radicals in Kidney Disease and Transplantation, \textit{Saudi Journal of Kidney Diseases and Transplantation,} 10(2), pp. 137-143.
-\newline
-\newline
-
-Sarma, A., Mallick, A. and Ghosh, A., 2010. Free Radicals and Their Role in Different Clinical Conditions: An Overview, \textit{International Journal of Pharma Sciences and Research,} 1(3), pp. 182-192.
-\newline
-\newline
-
-Shah, S., Baliga, R., Rajapurkar, M. and Fonseca, V., 2007. Oxidants in Chronic Kidney Disease, \textit{Journal of the American Society of Nephrology,} 18(1), pp. 16-28.
-\newline
-\newline
-
-The University of Utah, Unknown. \textit{Glomerulonephritis} [online] Available at: <\url{http://library.med.utah.edu/WebPath/RENAHTML/RENALIDX.html#8}> [Accessed 25 October 2013].
-\newline
-\newline
-
-Wang, C. and Salahudeen, A., 1994. Cyclosporine nephrotoxicity: attenuation by an antioxidant -inhibitor of lipid peroxidation in-vitro and in-vivo, \textit{Transplantation,} 58, pp. 940-946.
-\newline
-\newline
-
-Wang, C. and Salahudeen, A., 1995. Lipid peroxidation accompanies cyclosporine nephrotoxicity: effects of vitamin E, \textit{Kidney International,} 47, pp. 927-934.
-\newline
-\newline
-
-Weiss, S., 1989. Tissue Destruction by Neutrophils, \textit{New England Journal of Medicine,} 320, pp. 365-376.
-\newline
-\newline
-
+\end{thebibliography}
 
 \end{document}
 
