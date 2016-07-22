@@ -1,0 +1,35 @@
+\boolfalse {citerequest}\boolfalse {citetracker}\boolfalse {pagetracker}\boolfalse {backtracker}\relax 
+\defcounter {refsection}{0}\relax 
+\select@language {english}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {0.1}Overview and background}{3}{section.0.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.1.1} Statement and Description}{3}{subsection.0.1.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.1.2}Goals}{3}{subsection.0.1.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {0.2}Project offerings}{5}{section.0.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {0.3}Approach}{6}{section.0.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.3.1}Data techniques}{6}{subsection.0.3.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.3.2}Big Data Techniques}{7}{subsection.0.3.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.3.3}Measurement techniques}{8}{subsection.0.3.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.3.4}}{8}{subsection.0.3.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {0.4}Results and implications for practice}{9}{section.0.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.4.1}Data quality assessment}{9}{subsection.0.4.1}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.4.2}Discussion about the theory}{9}{subsection.0.4.2}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.4.3}Samples of the deliverables}{10}{subsection.0.4.3}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.4.4}Risks and advantages of the approach}{10}{subsection.0.4.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.4.5}Conclusions and future work}{10}{subsection.0.4.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {section}{\numberline {.1}\\Sample visualizations}{12}{section.Alph0.1}
