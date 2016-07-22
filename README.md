@@ -5,6 +5,12 @@
 
 * [Sponsor report] (https://github.com/sarangof/Bus-Capstone/blob/master/paper/sponsor_report.pdf)
 
+
+Inline-style: 
+![alt text](https://github.com/sarangof/Bus-Capstone/blob/master/plots/on_time_performance_stops.png "Sample of on time performance")
+
+
+
 #### Data retrieval modules
 ##### siri_parser
 *method* siri_parser.**json_to_df**(a)
