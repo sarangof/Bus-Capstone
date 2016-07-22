@@ -481,7 +481,7 @@ One example descriptive analysis is to plot the distribution of normalized runni
 
 \item \textbf{Spatial distribution of slow/stopped condition} - A list of slow/stopped events can be created by identifying the beginning and end location and times for each occurrence of the condition.  Naturally, many of these events will be at stop locations.   That subset of the slow/stopped events may theoretically support analysis of dwell time, however even when using data having the maximum density possible according the data generation process (every 30 seconds), analysis of dwell time at individual stops is not possible; previous research suggests that the majority of stops have dwell time of less than 30 seconds (Pangilinan 2011).  The remaining subset are slow/stopped events not occurring at stop locations.  High spatial density of these events indicates a recurring problem with traffic flow, which in turn increases travel time and contributes to occurrence of bunching condition.  (In order to exclude the normal interaction with traffic signals, the events can be filtered to only include those above some minimum, related to traffic signal cycle lengths).
 
-\textbf{Figure XXX} shows the estimated percentage of vehicles in slow/stopped condition and many points along a route-shape.  While some extreme values are apparent, they are generally at stop locations and the variance of the remaining points is minimal, even at other stop locations.  This suggests that the density of the data may be insufficient to identify .
+Figure \ref{adh} shows the estimated percentage of vehicles in slow/stopped condition and many points along a route-shape.  While some extreme values are apparent, they are generally at stop locations and the variance of the remaining points is minimal, even at other stop locations.  This suggests that the density of the data may be insufficient to identify .
 
 
 
@@ -504,7 +504,7 @@ The main risk identified by our approach is reproducibility in terms of data fet
 
 The main advantages of our approach rely on the fact that it is based on open source software (such as Python, HDFS and Spark) with a wide and increasing support community around them, but also on the fact that our code is simple to share and reproduce. Since Big Data software is relatively new, we kept most of the data manipulation in simple SQL or Python scripts, which is specially convenient for the client.
 
-The biggest challenge for our approach to be implemented in practice by cities is that of processing large amounts of raw data into information because it requires big data techniques for anything beyond small samples (i.e. one line, one day, etc.). Even processed datasets being structured can demand more than what can be offered by single/dual core applications. Data supporting higher-level analysis techniques can be managed with any off-the-shelf database system, including sqLite (open source SQL) or even a series of CSVs
+The biggest challenge for our approach to be implemented in practice by cities is that of processing large amounts of raw data into information because it requires big data techniques for anything beyond small samples (i.e. one line, one day, etc.). Even processed datasets being structured can demand more than what can be offered by single/dual core applications. Data supporting higher-level analysis techniques can be managed with any off-the-shelf database system, including sqLite (open source SQL) or even a series of CSVs.
 
 It is worth noting that, while the MTA does not publish archived Bus Time data (except for a sample in 2014), we are providing the code for anybody to collect it, and this is an important step that must be kept into account when discussing about Privacy.  Besides this, the Vehicle ID field is not anonymized, so the contributions of our project are subject to have unlikely yet feasible implications regarding Privacy.
 
@@ -514,21 +514,12 @@ It is worth noting that, while the MTA does not publish archived Bus Time data (
 
 
 This project studies the bus performance in New York City and its correlation metrics based on the GPS data offered by MTA. The MTA bus GPS database collects the location of each bus every 30 seconds. After estimating the departure and arrival time for each bus at each stop, we use measurement like headways and wait assessment to figure out the bus performance and reliability. Taking one-year data as our object of study, the data is extremely huge so that big data techniques (mainly Spark) are widely used in this project. In order to make our work easy to share and reproduce, we choose to use the SQL API to decide on the parsing of the data, which enables the DOT to easily make changes by editing the SQL script. 
-Conclusion for the model we use. (Introduction, Pros and Cons, Bias)
-Model for time estimation
-Measurement for bus performance
-Method for feature selection
-Conclusion for the results we get. (How the result influence the future operation)
-Conclusion for the whole analysis process. (Pros and Cons, Bias, Influence)
-
 
 Positive aspects of our approach include the fact that we focused this analysis on the viewpoint of the DOT; the fact that we were able to successfully process large volumes of data; the fact that we identified pitfalls and challenges of using the MTA Bus Time data for the purposes of the agency (as it was requested from us) and the fact that we enable a flexible implementation of different methods to estimate times and locations, as well as to measure schedule-reliability performance.
 
 Potential pitfalls and areas of improvement are the fact that we used formal metrics that were not tailored for the DOT nor New York City, and the abundance of assumptions that inevitably scale up in the form of measurement errors.
 
-Influence：
-
-The main goal for us is to figure out the other potential influence factor besides operation to help DOT control and improve bus performance on planning level. Similar methodology and concept could be used in other cities and traffic mode. The big data technology applied in not only traffic analysis but also city wide urban issue offers more reliable result compared with traditional sample studies.  
+Influence: Similar methodologies and concepts could be used in other cities and traffic models. The big data technology applied in not only traffic analysis but also city wide urban issue offers more reliable results compared with traditional sample studies.  
 
 
 \subsubsection*{Future work}
@@ -541,7 +532,7 @@ The main goal for us is to figure out the other potential influence factor besid
 \item Further Applications
 \begin{itemize}
 \item Other cities (need to pay attention to data structure, bus GPS data in some cities collect departure and arrival time instead of location).
-\item Other traffic mode (eg. Subway, city bike. Need to pay attention to the different features of each kinds of traffic mode).
+\item Other traffic modes (eg. Subway, city bike. Need to pay attention to the different features of each kinds of traffic mode).
 \end{itemize}
 \end{itemize}
 
@@ -573,6 +564,8 @@ Q34	& 501132 & 1/30/2015 & 0.666667 & 0.910714 & 0.918699 \\
 \hline
 \end{tabular}
 }
+
+\vspace{1cm}
 
 The fields \textit{Running time adherence}, \textit{Headway regularity} and \textit{Excess wait time} remain to be calculated and added to the schema.
 
