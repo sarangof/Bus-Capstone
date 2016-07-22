@@ -153,6 +153,8 @@ The contributions from our work can be summarized as follows:
 
 \end{enumerate}
 
+\textbf{From the SOW, include the deliverables here.}
+
 \newpage
 
 \section{Approach}
@@ -237,26 +239,6 @@ DestinationRef & destination & Headsign of bus\\
 
 \subsection{Measurement techniques}
 
-Two methods are investigated for estimating a vehicle's arrival time at a certain location, such as a bus stop.  Arrival time estimates are the basis for most measurement and identification related to bus reliability, such as vehicle speeds, block times, and headway (which in turn is required for wait assessment).  The first method uses a spatial algorithm to identify any datapoints within a certain radius of the location, and make an estimation from within that subset.  Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location.  The second method is to apply an interpolation algorithm to all observations from a given vehicle on each trip.  The tradeoff is that this may be more computation than required if not many along the trip are to be estimated.
-
-\textbf{[Processing time - big data techniques required]}
-
-
-Average vehicle speed is calculated as the difference between estimated arrival times at two points divided by the distance traveled.  A key assumption is that vehicle motion is monotonic (never reversing direction) along any given axis.  Approaches to account for variations in vehicle heading remain to be explored.  The size of the post-processed average speed data set depends on how many point-pairs within each trip are to be calculated.  A dataset reporting the total time (“block time'') and average speed, using only the beginning and end points, would be manageable for most typical desktop application; an entire year would be less than 1GB and could be organized by month, route etc. for easier access.
-
-Calculation of headway also requires estimates of all vehicles' arrival times at a certain location.  Missing estimates (whether due to the data generating process or the estimation algorithm) must be identified, as skipping them may result in an overstatement, based on the time between two or more vehicles' arrivals.  A compiled, processed dataset supporting headway measurement -- that is, containing arrival times of each trip at each stop -- is approximately 2M rows per day of operations.  While the calculations on selected data are simple enough for any typical desktop application, the total size of the database (50-100GB) would require additional hardware and a database management system.
-
-Wait Assessment is a metric used by New York City Transit, defined in the Transit Capacity and Quality of Service Manual as the percentage of actual headways between successive vehicle arrivals that are less than or equal to a given standard.  For example the standard for transit lines operating at XXX scheduled headway is +3 mins during peak hours and +5 mins during off-peak hours.  Peak hours are defined as 6am to 9am and 4pm to 7pm.  Wait Assessment is a simple calculation that can be performed after all headway calculations have been performed for a given location.
-
-\textbf{Some of Jiaxu's part here.}
-
-\begin{itemize}
-\item Higher-Level Analysis (demonstration of data applied)
-\item Trends along a route - small data (after processing headway data)
-\item Time-period partitions - small data (after processing block time data)
-\item Interruptions - medium data (after processing speed data)
-\item Recurring events - small data (after processing interruptions data)
-\end{itemize}
 
 
 
@@ -268,51 +250,37 @@ Wait Assessment is a metric used by New York City Transit, defined in the Transi
 
 \section{Results and implications for practice}
 
-\begin{itemize}
+
+\vspace{0.5cm}
+
+\captionof{table}{Differences between DOT and Bus Time data.}
+\resizebox{\textwidth}{!}{
+\begin{tabular}{l| ll}
+ & \textbf{DOT flat file} & \textbf{Bus Time API} \\
+ \hline
+Source database & Archived & Real-time \\
+Sample frequency & 30 seconds & Limited by reliability of interface (max 30 seconds) \\
+Spatiotemporal elements & Raw NMEA, including speed* & Only time and location (projected 
+onto shapeline) \\
+Trip elements & Route and status only & Includes inferred elements, like Next Stop and Trip ID
+\end{tabular}
+}
 
 
-\item Central message
 
-\begin{itemize}
-\item MTA provides the public API but it is impossible to fully replicate the density of the data they keep internally.
 
-\item Density (time and spatial) may be sufficient for stop and route reliability metrics, but questionable for vehicle speed measurement. (?)
 
-\item Processing of raw data into useful measurements requires more power than offered by a typical personal computer.
-\end{itemize}
-
-\item The impact of our results on DOT operations and decision making depends on the to-be-discussed tradeoffs between required accuracy, easy of use, and investment in IT processes.
-
-\end{itemize}
 
 
 
  
 
 \subsection{Data quality assessment}
-Gaps (Time dimension)
-Missing observations occur XXXX often
-XX% of gaps occur when there is a gap in the API response time, although we cannot rule out an error in the AVL signal
-Missing observations ARE/ARE NOT correlated to….
-Location (Spatial dimensions)
-Coordinates now appear to be projected on to route shape-lines, likely in order to correct for signal noise or simplify distance-along-route calculations
-Buses were equipped with Dead Reckoning Units in XXXX, improving location accuracy compared to 2014
-Published Bus Stop locations ARE/ARE NOT specific enough to analyze position of stop around intersection/street features
-Attributes (line/trip)
-Unknown data generating process: Vehicle hardware measures location and time automatically.  The driver inputs, at a minimum, the line and the headsign (destination of the trip).  This process dependency is a potential source of error. It is unknown how additional elements are determined the resulting rate of error.
-XX percent of scheduled trips have no reported data in BusTime.  Unknown if that is a technical issue or a ''cancelled trip''
-XX percent of trips have BusTime data have no reported data near the beginning or end. Unknown if that is a technical issue or truncated trip.
-Potentially running one simple exercise (one line)
-Potentially mapping a heatmap of the delay (by one sample metric, does not need to be definitive) by stations/lines
-Through the big data technique, we can analyse the whole year data of all the bus lines by using the bus runtime dataset and bus schedule dataset.
-Although the dataset given for 2015 is not perfectly collected since missing observations occur quite often, in the large scale, we should be able to predict the delay by using some basic statistical criterias such as standard deviation and mean.
+
 
 \subsection{Discussion about the theory}
 
 
-Data Extraction and organization
-Our data extraction step picks the useful information from the original json and dumps the redundancies. This step shrinks file size by 30 times and facilitates the future analysis.
-Our data organization step turns messy json file into human readable and executable csv that can even been easily analysed through Excel by anyone.
 
 
 \begin{figure}[!ht]
@@ -328,37 +296,14 @@ Our data organization step turns messy json file into human readable and executa
 \end{figure}
 
 
-[Location estimation methods and their impact on measured reliability]
-Compare distributions generated from each method
-Compare computation time
-Also compare to ground-truth, if available
-Recommend, based on the tradeoff (if any)
 
-What are the risks? What are the advantages of the approach?
-Risks
-Reproducibility - dependence on public API feed
-Reproducibility - Framework Dependency such as HDFS and Spark
-Big data technique requires HDFS and Spark dependencies. It may take some time and resources to install them
-Advantages
-Big Data Technique
-Open source
-HDFS and Spark are both open sourced, which means no extra investment is necessary
-Ease to share and reproduce
-Since big data is very new technology (Spark is release in few years), we are trying to keep all the data manipulation in simple SQL script. 
-DOT can easily change SQL script to fulfill their demand and no extra operation is needed. 
-What is required for the approach to be applied in practice/cities today?
-Processing of raw data into information (e.g. at stop level) requires big-data techniques for anything beyond small samples (e.g. one day / one line)
-Processed data structure is straightforward but still too large for single/dual-core applications.
-Data supporting higher-level analysis techniques can be managed with any off-the-shelf database system, including sqLite (open source SQL) or even a series of CSVs
-What ethical or privacy considerations are important to the application of the project? 
-Implications about causes of variance in bus performance (e.g. infrequent but long dwell time for customer with disability)
-Vehicle ID is public and not anonymized. 
-While the MTA does not publish archived BusTime data (except for a sample in 2014), we are providing the code for anybody to collect it
+\subsection{Samples of the deliverables}
 
+\subsection{Risks and advantages of the approach}
 
 \subsection{Conclusions and future work}
 
-\subsubsection{Conclusions}
+\subsubsection*{Conclusions}
 
 This project studies the bus performance in New York City and its correlation metrics based on the GPS data offered by MTA. The MTA bus GPS database collects the location of each bus every 30 seconds. After estimating the departure and arrival time for each bus at each stop, we use measurement like headways and wait assessment to figure out the bus performance and reliability. Aimed at helping DOT improve the bus performance efficiently, the metrics focus on not only bus operation element, but also on other traffic aspects. Taking one-year data as our object of study, the data is extremely huge so that big data technology like Spark is widely used in this project. In order to make our work easy to share and reproduce, we choose to use SQL API to manipulate the data, which enable DOT to easily make change by editing the SQL script. 
 Conclusion for the model we use. (Introduction, Pros and Cons, Bias)
@@ -379,7 +324,7 @@ Influence：
 The main goal for us is to figure out the other potential influence factor besides operation to help DOT control and improve bus performance on planning level. Similar methodology and concept could be used in other cities and traffic mode. The big data technology applied in not only traffic analysis but also city wide urban issue offers more reliable result compared with traditional sample studies. 
 
 
-\subsubsection{Future work}
+\subsubsection*{Future work}
 
 \begin{itemize}
 \item Inference study of the effect of several traffic or design conditions on reliability.
@@ -393,6 +338,18 @@ The main goal for us is to figure out the other potential influence factor besid
 \end{itemize}
 \end{itemize}
 
+
+
+\newpage
+\appendix
+\section{\\Sample visualizations} \label{App:AppendixA}
+
+
+\begin{figure}[!ht]
+  \caption{On time performance aggregated by stop over 2015.}
+  \centering
+    \includegraphics[scale=0.8]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/on_time_performance_stops}
+\end{figure}
 
 
 \begin{thebibliography}{9}
