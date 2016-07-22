@@ -164,7 +164,7 @@ According to the Scope of Work presented at the beginning of this project, its d
 
 \end{itemize}
 
-\item Metrics recommendations: a report discussing proposed performance metrics, along with their relevance or weakness when implemented using data generated in deliverable number 1. 
+\item \textbf{Metrics recommendations}: a report discussing proposed performance metrics, along with their relevance or weakness when implemented using data generated in deliverable number 1. 
 
 \item \textbf{Bus performance metrics} provided in the following static files:
 
@@ -471,13 +471,14 @@ One example descriptive analysis is to plot the distribution of normalized runni
 
 \item \textbf{Spatial distribution of travel speeds:} Because Bus Time records contain discrete time and location, speed calculations are difference-based averages, not instantaneous (or quasi-instantaneous) samples.  The other challenge in descriptive statistics about speed at fixed location(s) is that the sequential observation points of multiple vehicles are not aligned; for example it is extremely unlikely that multiple vehicles record the "ping" from exactly 100 meters and again at exactly 200 meters along a route-shape.  However re-sampling is possible if mean speeds are treated as continuous curves with respect to distance.  The new distribution at a point is defined as the collection of mean speeds of all vehicles passing that point.  \ref{msd} demonstrates the changing moments of the distribution over the length of a route-shape, along with grid lines indicating the stop locations.
 
-
+\begin{center}
 \begin{figure}[!ht]
   \caption{Moving speed distribution.}
   \label{msd}
   \centering
-    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/moving_speed_distribution}
+    \includegraphics[scale=0.45]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/moving_speed_distribution}
 \end{figure}
+\end{center}
 
 \item \textbf{Spatial distribution of slow/stopped condition} - A list of slow/stopped events can be created by identifying the beginning and end location and times for each occurrence of the condition.  Naturally, many of these events will be at stop locations.   That subset of the slow/stopped events may theoretically support analysis of dwell time, however even when using data having the maximum density possible according the data generation process (every 30 seconds), analysis of dwell time at individual stops is not possible; previous research suggests that the majority of stops have dwell time of less than 30 seconds (Pangilinan 2011).  The remaining subset are slow/stopped events not occurring at stop locations.  High spatial density of these events indicates a recurring problem with traffic flow, which in turn increases travel time and contributes to occurrence of bunching condition.  (In order to exclude the normal interaction with traffic signals, the events can be filtered to only include those above some minimum, related to traffic signal cycle lengths).
 
