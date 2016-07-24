@@ -16,16 +16,14 @@ Flatten Arrays using flatMap
 (1,2,3) (a,b,c) ($,#,&) => (1,a,$),(2,b,#),(3,c,&)
 ```
 groupByKey & Interpolate
-```
-use groupBykey to cast interpolation of time&distance to all trips
-Interpolate1D 
-Link:http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html#scipy.interpolate.interp1d
-```
+`use groupBykey` to cast interpolation of time&distance to all trips
+[Scipy Interpolate1D](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html#scipy.interpolate.interp1d)
+
 Read csv using Spark_CSV tool
 ```
 sqlContext.read.format('com.databricks.spark.csv').options(header='true').load()
 ```
-(https://github.com/databricks/spark-csv "Spark_CSV_package")
+[Spark_CSV_package](https://github.com/databricks/spark-csv)
 
 SparkSQL manipulation
 
