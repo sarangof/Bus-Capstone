@@ -1,7 +1,7 @@
 # Parsing and Manipulate Bus Time Data using PySpark
 
 ##### This project reads 3 TB of nested JSON data and apply bunch of spark techniques to analysis the bus delays and headways
-Original [Sample Data](https://raw.githubusercontent.com/sarangof/Bus-Capstone/master/Spark/test.jsons) and Schema()
+Original [Sample Data](https://raw.githubusercontent.com/sarangof/Bus-Capstone/master/Spark/test.jsons) and [Schema](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/schema.txt)
 ## Techniques Included
 
 - __Read JSON__
