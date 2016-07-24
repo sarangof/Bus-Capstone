@@ -4,35 +4,38 @@
 
 ## Techniques Included
 
-- _Read JSON_
+- __Read JSON__
 ```
 sqlContext.read.json()
 ```
-- _Extract elements from JSON using Spark Query_ [spark_extract.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/spark_extract.sql)
+- __Extract elements from JSON using Spark Query__ [spark_extract.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/spark_extract.sql)
 
-- _Flatten Arrays_ using `flatMap(zip([columns]))`
+- __Flatten Arrays__ using `flatMap(zip([columns]))`
 ```
 (1,2,3) (a,b,c) ($,#,&) => (1,a,$),(2,b,#),(3,c,&)
 ```
-- _groupByKey & Interpolate_
-use `groupBykey` to cast interpolation of time&distance to all trips
+- __groupByKey & Interpolate__
+⋅⋅* use `groupBykey` to cast interpolation of time&distance to all trips
 
-using[Scipy Interpolate1D](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html#scipy.interpolate.interp1d)
+⋅⋅* use Scipy Interpolte Tool to interpolate all stop times
 
-- _Read csv using Spark_CSV tool_
+For more information:[Scipy Interpolate1D](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html#scipy.interpolate.interp1d)
+
+- __Read csv using Spark_CSV tool__
 ```
 sqlContext.read.format('com.databricks.spark.csv').options(header='true').load()
 ```
 [Spark_CSV_package](https://github.com/databricks/spark-csv)
 
-- _SparkSQL manipulation_
+- __SparkSQL manipulation__
 
 `Inner join` the interpolated data with GTFS schedule
 `IF` `COUNT` to calculate the multiple on time perfornace.
 
-_if_ clause in spark is same as case in regular SQL
+__if__ clause in spark is same as case in regular SQL
 For more info. [ontime_ratio.sql]('https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql')
 
+## Data Schema
 | JSON ELEMENT(schema)                           | Column NAME    | explanation                                   |
 |------------------------------------------------|----------------|-----------------------------------------------|
 | LineRef                                        | ROUTE_ID       | Name of bus line(B42)                         |
