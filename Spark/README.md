@@ -9,6 +9,7 @@
 sqlContext.read.json()
 ```
 - __Extract elements from JSON using Spark Query__ [spark_extract.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/spark_extract.sql)
+
 `SELECT XXX FROM table`
 
 - __Flatten Arrays__ using `flatMap(zip([columns]))`
