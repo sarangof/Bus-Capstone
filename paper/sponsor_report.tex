@@ -241,7 +241,7 @@ Three methods are investigated for estimating a vehicle’s arrival time at a ce
 
 The first method is use to use a spatial algorithm to identify any data points within a certain radius of the location, and make an estimation from within that subset. Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location. The second method is to apply an interpolation algorithm to all observations reported for a given vehicle’s trip. The tradeoff is that this may be more computation than required if few points along the trip are to be estimated.  The risk Interpolation is that it assumes the bus traveling at uniform speed while in reality the bus speed changes a lot due the complicated traffic condition and traffic lights, especially in New York.
 
-The third method is to apply the interpolation only for stops that are reported in Bus Time as a ”Monitored Call,” that is, the upcoming stop. The advantage of only interpolating the reported stops is that it avoids the risk of reporting stops that the bus never made (for example, due to a detour) and the risk of high inaccuracy in the event the bus did make the stop (due to the long distance over which times must be interpolated).The tradeoff for the third method is that since many trips are not completely recorded, we may lose a lot of information for the missing part.
+The third method is to apply the interpolation only for stops that are reported in Bus Time as a ''Monitored Call,'' that is, the upcoming stop. The advantage of only interpolating the reported stops is that it avoids the risk of reporting stops that the bus never made (for example, due to a detour) and the risk of high inaccuracy in the event the bus did make the stop (due to the long distance over which times must be interpolated).The tradeoff for the third method is that since many trips are not completely recorded, we may lose a lot of information for the missing part.
 
 \subsection{Reliability metrics}
 
@@ -257,12 +257,14 @@ Similarly, headway regularity (measured in \%) is defined as the average differe
 
 \section{Results and implications for practice}
 
+Differences worth noting between the compilation of Bus Time data and DOT's files are listed in Table \ref{diff}. \footnote{Unclear if reported speed is instantaneous or averaged since last transmission.}
 
 \vspace{0.5cm}
 
-\captionof{table}{Differences between DOT and Bus Time data.}
+\captionof{table}{Differences between DOT and Bus Time data. }
 \resizebox{\textwidth}{!}{
 \begin{tabular}{l| ll}
+\label{diff}
  & \textbf{DOT flat file} & \textbf{Bus Time API} \\
  \hline
 Source database & Archived & Real-time \\
@@ -521,46 +523,52 @@ Q34	& 501132 & 1/30/2015 & 0.666667 & 0.910714 & 0.918699 \\
 
 The fields \textit{Running time adherence}, \textit{Headway regularity} and \textit{Excess wait time} remain to be calculated and added to the schema.
 
-\begin{thebibliography}{9}
+\begin{thebibliography}{14}
 
-\bibitem{LinZeng}
+\bibitem{Lin}
 W. H. Lin and J. Zeng, "An experimental study of real-time bus arrival time prediction with GPS data," Transp. Res. Rec., no. 1666, pp. 101- 109, Jan. 1999.
 
-\bibitem{Rajbhandari}
-Rajat Rajbhandari, Steven I. Chien, and Janice R. Daniel, ''Estimation of bus dwell times with APC information'', Transportation Research Record 1841 Paper No. 03- 2675, 2003
+\bibitem{Raj}
+Rajat Rajbhandari, Steven I. Chien, and Janice R. Daniel, ''Estimation of bus dwell times with APC information'', Transportation Research Record 1841 Paper No. 03- 2675, 2003.
 
-\bibitem{TangLi}
-Min-Tang Li, Fang Zhao, Lee-Fang Chow, Haitao Zhang, and Shi-Chiang Li, Simulation Model for Estimating Bus Dwell Time by Simultaneously Considering Numbers of Disembarking and
-Boarding Passengers, Transportation Research Record 1971, 2006
+\bibitem{Min-Tang}
+Min-Tang Li, Fang Zhao, Lee-Fang Chow, Haitao Zhang, and Shi-Chiang Li, ''Simulation Model for Estimating Bus Dwell Time by Simultaneously Considering Numbers of Disembarking and Boarding Passengers'', Transportation Research Record 1971, 2006.
 
 \bibitem{Fazhi}
-LI Fazhi, YANG Dongyuan and MA Kai, BUS RAPID TRANSIT (BRT) BUNCHING ANALYSIS WITH MASSIVE GPS DAT, National Science and Technology Support Program of China (NO. 2009BAG17B01), 2013
+LI Fazhi, Yang Dongyuan, and Ma Kai, ''Bus Rapid Transit (BRT) Bunching Analysis With Massive GPS Data,'' National Science and Technology Support Program of China (NO. 2009BAG17B01), 2013.
 
 \bibitem{Levine}
-Brian Levine, Alex Lu,Alla Reddy, Measuring Subway Service Performance at New York City Transit: A Case Study Using Automated Train Supervision (ATS) Track- Occupancy Data, TRB 2013 Annual Meeting, 2013
+Brian Levine, Alex Lu, and Alla Reddy, ''Measuring Subway Service Performance at New York City Transit: A Case Study Using Automated Train Supervision (ATS) Track-Occupancy Data,'' TRB 2013 Annual Meeting, 2013.
 
 \bibitem{DanWan}
-Dan Wan, Camille Kamga, Jun Liu, Aaron Sugiura, Eric B. Beaton, Rider perception of a ''light'' Bus Rapid Transit system - The New York City Select Bus Service, Transport Policy 49 (2016) 41-55, Apr. 2016.
+Dan Wan, Camille Kamga, Jun Liu, Aaron Sugiura, and Eric B. Beaton, ''Rider perception of a ‘light’ Bus Rapid Transit system - The New York City Select Bus Service,'' Transport Policy 49 (2016) 41–55, Apr. 2016.
 
 \bibitem{Bie}
-Yiming Bie, Xiaolin Gong, Zhiyuan Liu, Time of day intervals partition for bus schedule using GPS data, Transportation Research Part C 60 (2015) 443-456, Sep. 2015.
+
+Yiming Bie, Xiaolin Gong, and Zhiyuan Liu, ''Time of day intervals partition for bus schedule using GPS data,'' Transportation Research Part C 60, pp. 443–456, Sep. 2015.
 
 \bibitem{Safran}
-Jeremy S. Safran, Eric B. Beaton, Robert Thompson, Factors Contributing to Bus Lane Obstruction and Usage in NYC: Does Design Matter? TRB 2014 Annual Meeting, 2014
- 
-\bibitem{Pangilinan}
-Christopher Pangilinan, Nigel Wilson, and Angela Moore, Bus Supervision Deployment Strategies and Use of Real-Time Automatic
-Vehicle Location for Improved
-Bus Service Reliability, Transportation Research Record: Journal of the Transportation Research Board, No. 2063, Transportation Research Board of the National Academies, Washington, D.C., 2008, pp. 28-33.
-DOI: 10.3141/2063-04
+Jeremy S. Safran, Eric B. Beaton, and Robert Thompson, ''Factors Contributing to Bus Lane Obstruction and Usage in NYC: Does Design Matter?'' TRB 2014 Annual Meeting, 2014
+
+\bibitem{Pangil}
+Christopher Pangilinan, Nigel Wilson, and Angela Moore, ''Bus Supervision Deployment Strategies and Use of Real-Time Automatic
+Vehicle Location for Improved Bus Service Reliability,'' Transportation Research Record: Journal of the Transportation Research Board, No. 2063, Transportation Research Board of the National Academies, Washington, D.C., 2008, pp. 28–33. DOI: 10.3141/2063-04.
+
 \bibitem{Yang}
-Yingxiang Yang, David Gerstle, Peter Widhalm, Dietmar Bauer, The potential of low-frequency AVL data for the monitoring and control of bus performance, TRB 2013 Annual Meeting, 2013.
+Yingxiang Yang, David Gerstle, Peter Widhalm, and Dietmar Bauer, ''The Potential of Low-Frequency AVL Data for the Monitoring and Control of Bus Performance,'' TRB 2013 Annual Meeting, 2013.
 
-\bibitem{An}
-Shi An, Xinming Zhang and Jian Wang, Finding Causes of Irregular Headways Integrating Data Mining and AHP, ISPRS Int. J. Geo-Inf. 2015, 4, 2604-2618; DOI:10.3390/ijgi4042604, Nov. 2015.
+\bibitem{ShiAn}
+Shi An, Xinming Zhang and Jian Wang, ''Finding Causes of Irregular Headways Integrating Data Mining and AHP,'' ISPRS Int. J. Geo-Inf. 2015, 4, 2604-2618; DOI:10.3390/ijgi4042604, Nov. 2015.
 
-\bibitem{Chang}
-Jinil Chang, Mohamad Tala, Satya Muthuswamy, A SIMPLE METHODOLOGY TO ESTIMATE QUEUE LENGTHS AT SIGNALIZED INTERSECTIONS USING DETECTOR DATA, TRB 2013 Annual Meeting, 2013
+\bibitem{Jinil}
+Jinil Chang, Mohamad Tala, and Satya Muthuswamy, ''A Simple Methodology To Estimate Queue Lengths at Signalized Intersections Using Detector Data,'' TRB 2013 Annual Meeting, 2013.
+
+\bibitem{Chris}
+Christopher Pangilinan and Kristen Carnarius, ''Traffic Signal Timing for Optimal Transit Progression in Downtown San Francisco,'' San Francisco Municipal Transportation Agency, San Francisco, CA, 2011.
+
+\bibitem{Reed}
+Simon Reed, ''Transport for London - Using Tools, Analytics and Data to Inform Passengers,'' JOURNEYS, September 2013. \url{https://www.lta.gov.sg/ltaacademy/doc/13Sep096-Reed_TfL-InformPassengers.pdf, accessed 20 Jul 2016.}
+
 
 
 
