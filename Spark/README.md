@@ -6,11 +6,11 @@
 
 - __Read JSON__
 ```
-sqlContext.read.json()
+⋅⋅⋅sqlContext.read.json()
 ```
 - __Extract elements from JSON using Spark Query__ [spark_extract.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/spark_extract.sql)
 
-`SELECT XXX FROM table`
+⋅⋅⋅`SELECT XXX FROM table`
 
 - __Flatten Arrays__ using `flatMap(zip([columns]))`
 ```
@@ -26,14 +26,14 @@ For more information:[Scipy Interpolate1D](http://docs.scipy.org/doc/scipy/refer
 
 - __Read csv using Spark_CSV tool__
 ```
-sqlContext.read.format('com.databricks.spark.csv').options(header='true').load()
+⋅⋅⋅sqlContext.read.format('com.databricks.spark.csv').options(header='true').load()
 ```
 [Spark_CSV_package](https://github.com/databricks/spark-csv)
 
 - __SparkSQL manipulation__
 
-`Inner join` the interpolated data with GTFS schedule
-`IF` `COUNT` to calculate the multiple on time perfornace.
+⋅⋅⋅`Inner join` the interpolated data with GTFS schedule
+⋅⋅⋅`IF` `COUNT` to calculate the multiple on time perfornace.
 
 __if__ clause in spark is same as case in regular SQL
 For more info. [ontime_ratio.sql]('https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql')
