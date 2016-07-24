@@ -937,6 +937,23 @@ Finally, we can merge the actual stop times with scheduled stops. We can then ca
 \subsubsection{Performance indicators - reliability}
 
 Based on the formal research, we choose the most common indexes below to measure the reliability of bus performance.
+
+1. Wait Assessment (PI)
+It is defined as the percentage of observed service intervals that are no more than the scheduled interval plus 3 minutes during peak (7 a.m. - 9 a.m., 4 p.m. - 7 p.m.) and plus 5 minutes during off-peak (12 a.m - 7 a.m., 9 a.m. - 4 p.m, 7 p.m. - 12 a.m.). Wait Assessment is a simple calculation that can be performed after all headway calculations have been performed for a given location.
+$$WT_i = \frac{WT_i}{T_i} * 100\%$$
+where $WT_i$ is number of actual intervals between buses that are no more than the scheduled interval plus 3 minutes during peak hours (7 a.m. - 9 a.m., 4 p.m. - 7 p.m.) and plus 5 minutes during off-peak hours of bus route $i$. That is:\\
+$$WT_i = card \left( \left\lbrace  bus:bus \in route_i ,  t_{bus_0} - t_{bus} < T \right\rbrace \right)$$
+where,\\
+$card$ is a mathematics function which counts the elements of a given set. \\
+$route_i$ is the set of all buses of bus route $i$.   \\
+$t_bus$ is the time when  arrived a particular station.  \\
+$bus_0$ is the nearest bus ahead of $bus$.\\
+$T$ equals 3 minutes during peak hours (7 a.m. - 9 a.m., 4 p.m. - 7 p.m.) and 5 minutes during off-peak hours.\\
+
+2. On Time Performance (OTP)
+It is defined as the positive difference between actual arrival time and schedule arrival time. However, During low-frequency period, on-time performance is more important while during the high frequency period, the headways matter more.
+$$OTP_$$
+
 1. Percentage of completed trip
 The percent of total scheduled bus trips completed (by lines/dates)
 The Performance Indicator (PI) program was established in 1994 in response to the MTA Inspector General’s research (4) recommending the need for measures of service reliability other than the traditional Terminal On-Time Performance (TOTP). 
