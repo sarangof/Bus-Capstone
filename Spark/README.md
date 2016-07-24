@@ -33,7 +33,6 @@ sqlContext.read.format('com.databricks.spark.csv').options(header='true').load()
 _if_ clause in spark is same as case in regular SQL
 For more info. [ontime_ratio.sql]('https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql')
 
-## Data Schema
 | JSON ELEMENT(schema)                           | Column NAME    | explanation                                   |
 |------------------------------------------------|----------------|-----------------------------------------------|
 | LineRef                                        | ROUTE_ID       | Name of bus line(B42)                         |
