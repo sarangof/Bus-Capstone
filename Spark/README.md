@@ -8,7 +8,9 @@
 ```
 sqlContext.read.json()
 ```
-- __Extract elements from JSON using Spark Query__ [spark_extract.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/spark_extract.sql)
+- __Extract elements from JSON using Spark Query__
+
+[spark_extract.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/spark_extract.sql)
 `SELECT XXX FROM table`
 
 - __Flatten Arrays__ using `flatMap(zip([columns]))`
@@ -35,7 +37,8 @@ for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 `IF` `COUNT` to calculate the multiple on time perfornace.
 
 __if__ clause in spark is same as __case__ in regular SQL
-For more info. [ontime_ratio.sql]('https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql')
+
+For more info.[ontime_ratio.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql)
 
 ## Data Schema
 | JSON ELEMENT(schema)                           | Column NAME    | explanation                                   |
