@@ -1,6 +1,6 @@
 # Parsing and Manipulate Bus Time Data using PySpark
 
-### This project reads 3 TB of nested JSON data and apply bunch of spark techniques to analysis the bus delays and headways
+##### This project reads 3 TB of nested JSON data and apply bunch of spark techniques to analysis the bus delays and headways
 
 ## Techniques Included
 
