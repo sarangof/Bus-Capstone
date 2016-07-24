@@ -1,7 +1,7 @@
 # Parsing and Manipulate Bus Time Data using PySpark
 
 ##### This project reads 3 TB of nested JSON data and apply bunch of spark techniques to analysis the bus delays and headways
-
+Original [Sample Data](https://raw.githubusercontent.com/sarangof/Bus-Capstone/master/Spark/test.jsons) and Schema()
 ## Techniques Included
 
 - __Read JSON__
@@ -58,6 +58,8 @@ for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 | Extensions. Distances.PresentableDistance      | status         | Report the current status of bus to next stop |
 | DestinationRef                                 | destination    | Headsign of bus                               |
 ## Final Product
+Darker means poorer on time performance for the buses
+
 ![alt text](https://github.com/sarangof/Bus-Capstone/blob/master/plots/on_time_performance_stops.png "Sample of on time performance")
 
 Open Interactive Map in [Carto Map](https://saf537.carto.com/viz/c21efdeb-ec45-45f2-b2d3-c47993bb89ff/public_map)
