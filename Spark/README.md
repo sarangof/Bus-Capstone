@@ -9,15 +9,17 @@
 sqlContext.read.json()
 ```
 - __Extract elements from JSON using Spark Query__ [spark_extract.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/spark_extract.sql)
+`SELECT XXX FROM table`
 
 - __Flatten Arrays__ using `flatMap(zip([columns]))`
 ```
 (1,2,3) (a,b,c) ($,#,&) => (1,a,$),(2,b,#),(3,c,&)
 ```
 - __groupByKey & Interpolate__
-⋅⋅* use `groupBykey` to cast interpolation of time&distance to all trips
 
-⋅⋅* use Scipy Interpolte Tool to interpolate all stop times
+⋅⋅* use `groupBykey` to cast interpolation of time&distance to all trips.
+
+⋅⋅* use Scipy Interpolte Tool to interpolate all stop times.
 
 For more information:[Scipy Interpolate1D](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html#scipy.interpolate.interp1d)
 
