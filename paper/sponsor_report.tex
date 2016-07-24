@@ -144,19 +144,18 @@ This Capstone project hopes to address the core urban challenge of transportatio
 
 \section{Approach}
 
-In this section we discuss the data parsing, processing and reliability measurement techniques.
+In this section we discuss the data retrieval, processing and reliability measurement techniques.  Because MTA does not continually publish archived AVL data, data was retrieved from the Bus Time API in real-time and stored on NYU CUSP servers.  Parsing is required both to store data efficiently and to decrease processing time of subsequent methods.  We then propose a variety of transit system performance metrics that can be applied using these data before discussing the results.
 
-\subsection{Data techniques}
 
-MTA's AVL data is acquired using a ''get'' request to a \href{http://bustime.mta.info/}{web service} offered by the MTA to the public.  The service uses a data standard called \textit{Service Interface for Real-Time Information} (SIRI). 
+\subsection{Bus time data extraction}
+
+MTA's AVL data is acquired using a ''get'' request to a \href{http://bustime.mta.info/}{web service} offered by the MTA to the public.  The service uses a standard rotocol, originally developed in Europe, called \textit{Service Interface for Real-Time Information} (SIRI). 
 
 Per MTA's recommendation, the response data is requested in JSON format (\textit{Javascript Object Notation}).  JSON offers a flexible structure, for example allowing elements to be stored in hierarchies, or a combination of named and unnamed elements.  JSON does not transform directly to a tabular layout and as a result cannot be imported by typical data analysis tools like Microsoft Access or Excel without first parsing it.
 
-Parsing can be performed using a variety of approaches.  A small program that can be written on almost any personal computer (a macro, or command-line script) may be acceptable for parsing one JSON response, requiring in the order-of-magnitude one second for each JSON.  However this is likely unacceptable for reading and aggregating any meaningful amount of archived JSON response files (entire days, or entire lines over multiple days).  Advanced techniques requiring additional software or hardware (to be discussed further on in this report) can significantly improve processing time by distributing the data across multipler processing units.  Regardless of the technique, the extracted data has a straightforward structure, containing text and numerical elements (which can be stored as text), appropriate for storage in a comma-separated values (CSV) file.
+Parsing can be performed using a variety of approaches.  A small program that can be written on almost any personal computer (a macro, or command-line script) may be acceptable for parsing one JSON response, requiring in the order-of-magnitude one second for each JSON.  However this is likely unacceptable for reading and aggregating any meaningful amount of archived JSON response files (entire days, or entire lines over multiple days).  Advanced techniques requiring additional software or hardware can significantly improve processing time by distributing the data across multiple processing units.  Regardless of the technique, the extracted data has a straightforward structure, containing text and numerical elements (which can be stored as text), appropriate for storage in a comma-separated values (CSV) file.
 
-A risk that remains to be investigated is incomplete (blank) vehicle data elements.  Faster techniques for parsing of JSON into tabular format require each observation to contain data according to each element extracted.  This results in rectangle-shape data set with no need for validation of each row.
-
-The SIRI standard calls for date-time representation according to the ISO 8601 standard.  While this can be read directly and used for many typical calculations (for example, elapsed time), it poses a problem when performing any analysis requiring date or time data from the planned schedule for the buses.  Those analysis require both the ''true'' date-time element as well as the trip reference date.  Here are two example comparisons of a bus trip's estimated departure from its first stop and the corresponding scheduled departure time. Such a comparison may be used to explain whether bus reliability can be attributed to operational issues such as late departures from the depot.  Note the conversion.
+The SIRI standard calls for date-time representation according to the ISO 8601 standard.  While this can be read directly and used for many typical calculations (for example, elapsed time), it poses a problem when performing any analysis requiring date or time data from the planned schedule for the buses.  Those analysis require both the ''true'' date-time element as well as the trip reference date.  Here are two example comparisons of a bus trip's estimated departure from its first stop and the corresponding scheduled departure time. Such a comparison may be used to explain whether bus reliability can be attributed to operational issues such as late departures from the depot.  Note the conversion and that time zone information is dropped; in the data for this project, both SIRI response and schedule data time elements are written in the local time zone.
 
 \vspace{0.5cm}
 
@@ -175,31 +174,26 @@ MV\_B6\-Weekday\-SDon\-041500\_M5\_206 & 2016\-06\-14T01:20:42.000\-04:00 & 1d\+
 
 \vspace{0.5cm}
 
-Note that time zone information is dropped in this conversion.  While this may become problematic if these approaches are applied outside of New York City, the only related risk in this application is to the validity of data from bus trips that occur during Daylight Savings Time shifts.  We elect to deal with those issues tactically rather than add complexity across the entire data set.
-
-
-\subsubsection*{Data Extraction and organization} 
-Our data extraction step picks the useful information from the original json and dumps the redundancies. This step shrinks file size by 30 times and facilitates the future analysis.
-Our data organization step turns messy json file into human readable and executable csv that can even been easily analysed through Excel by anyone.
-
-
-\begin{figure}[!ht]
-  \caption{Original sample extraction from DOT.}
-  \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/DOT}
-\end{figure}
-
-\begin{figure}[!ht]
-  \caption{Our data extraction using Spark.}
-  \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/Spark}
-\end{figure}
-
 
 \subsection{Big Data Techniques}
 
+Our data extraction step picks the useful information from the original json and dumps the redundancies. This step shrinks file size by 30 times and facilitates future analysis by creating a  human readable table that can easily be analysed through Excel by anyone.
 
-Due to the large volume of data, which is about 3 Terabyte, we decided to apply big data techniques for the data. We apply Apache Spark along with some Spark SQL techniques for manipulating the data in large scale. It takes around 30 - 45 minutes for the processing the entire year data depending on the performance of the server.
+
+%\begin{figure}[!ht]
+%  \caption{Original sample extraction from DOT.}
+%  \centering
+%    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/DOT}
+%\end{figure}
+
+However, due to the time required to process and parse each JSON, we decided to apply big data techniques for the data. Each JSON file is originally between one and three megabytes, before parsing; the entire set of collected data is about 3 terabytes..We apply Apache Spark along with some Spark SQL techniques for manipulating the data in large scale. It takes around 30 to 45 minutes for the processing the entire year data depending on the performance of the server.  Without the use of this technique, processing only one day of data takes 10 to 15 minutes.
+
+%\begin{figure}[!ht]
+%  \caption{Our data extraction using Spark.}
+%  \centering
+%    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/Spark}
+%\end{figure}
+
 
 
 \resizebox{\textwidth}{!}{
@@ -226,43 +220,51 @@ DestinationRef & destination & Headsign of bus\\
 \end{tabular}
 }
 
-\subsection{Measurement techniques}
+\subsection{Schedule data extraction}
 
+Schedule data is published by MTA according to the General Transit Feed Specification, a standard established in 2006 and now widely used by transit agencies and developers.  One transit feed is essentially a small relational database, containing a minimum of six tables and any of seven optional tables.  Basic required data in a transit feed file are routes, trips, stops, stop times, and effective date ranges.  MTA does not include optional metadata that can be used to distinguish multiple publications covering the same schedule period.
 
-Three methods are investigated for estimating a vehicle's arrival time at a certain location, such as a bus stop.  Arrival time estimates are the basis for most measurement and identification related to bus reliability, such as vehicle speeds, block times, and headway (which in turn is required for wait assessment). 
- 
-The first method is use to use a spatial algorithm to identify any data points within a certain radius of the location, and make an estimation from within that subset.  Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location.  The second method is to apply an interpolation algorithm to all observations from a given vehicle on each trip.  The tradeoff is that this may be more computation than required if not many along the trip are to be estimated. 
- 
-The third method is to apply the interpolation only for stops that are reported in Bus Time as a ''Monitored Call,'' that is, the upcoming stop. The advantage of only interpolating the reported stops is that it generates less bias for the stop times by ignoring the empty records. Filling the gaps for missing records will assume the bus making uniform motions while in reality the bus speed changes a lot due the complicated traffic condition and traffic lights especially in New York. The tradeoff for the third method is that since many trips are not completely recorded, we may lose a lot of information for the missing part.
+\subsection{Data quality assessment} 
+We implement three general approaches to assessing the completeness and validity of Bus Time data.  Schedule data feeds from MTA are presumed to be complete and accurate, given their widespread use.
 
-Average vehicle speed is calculated as the difference between estimated arrival times at two points divided by the distance traveled.  A key assumption is that vehicle motion is monotonic (never reversing direction) along any given axis.  Approaches to account for variations in vehicle heading remain to be explored.  The size of the post-processed average speed data set depends on how many point-pairs within each trip are to be calculated.  A dataset reporting the total time (''block time'') and average speed, using only the beginning and end points, would be manageable for most typical desktop application; an entire year would be less than 1GB and could be organized by month, route etc. for easier access.
-
-Calculation of headway also requires estimates of all vehicles' arrival times at a certain location.  Missing estimates (whether due to the data generating process or the estimation algorithm) must be identified, as skipping them may result in an overstatement, based on the time between two or more vehicles' arrivals.  A compiled, processed dataset supporting headway measurement -- that is, containing arrival times of each trip at each stop -- is approximately 2M rows per day of operations.  While the calculations on selected data are simple enough for any typical desktop application, the total size of the database (50-100GB) would require additional hardware and a database management system.
-
-Wait Assessment is a metric used by New York City Transit, defined in the Transit Capacity and Quality of Service Manual as the percentage of actual headways between successive vehicle arrivals that are less than or equal to a given standard. The wait assessment for bus is only measured on weekdays. It is defined as the percentage of observed service intervals that are no more than the scheduled interval plus 3 minutes during peak (7 a.m. - 9 a.m., 4 p.m. - 7 p.m.) and plus 5 during off-peak (12 a.m - 7 a.m., 9 a.m. - 4 p.m, 7 p.m. - 12 a.m.)  For example the standard for transit lines operating at a given scheduled headway is +3 mins during peak hours and +5 mins during off-peak hours.  Peak hours are defined as 6am to 9am and 4pm to 7pm.  Wait Assessment is a simple calculation that can be performed after all headway calculations have been performed for a given location.
-
-OTP(On Time Performance) is defined as the absolute value of decrement between actual arrival time and schedule arrival time. It reflects how close the actual arrival time is compared with schedule arrival time directly. Different from the measurement of on-time performance percentage by MTA, which is the percentage reflects the number of buses that arrive within a certain time before or after the published schedule, we use the distribution of a group of data to describe the on-time performance for a single trip. The main reason is the criteria is not provided by MTA for buses. However, During low-frequency period, on-time performance is more important while during the high frequency period, the headways matter more.
-OTP = |Actual Arrival Time - Schedule Time|
-
-Running Time Adherence (measured in \%) is defined as the average difference between the actual and the scheduled running times relative to the scheduled running time. When the actual running time is shorter than the schedule, the measure is called shorter running time and otherwise longer running time.
-
-
-Similarly, headway regularity (measured in \%) is defined as the average difference between the actual and the scheduled headways relative to the scheduled headway. The Headway Regularity describes how evenly distributed actual bus is in relation to scheduled service.
-If two consecutive buses are further from (or closer to) each other than the scheduled headway, the difference is called a longer (or shorter) headway difference. Bus bunching is an extreme example of short headway. 
+\begin{enumerate}
+\item Analysis of time-series patterns
+\item Correlation of Bus Time data length to planned level of bus activity, as informed by schedule data
+\item Validation of individual elements
+\end{enumerate}
 
 
 
+\subsection{Arrival time estimation techniques}
+
+Three methods are investigated for estimating a vehicle’s arrival time at a certain location, such as a bus stop. Arrival time estimates are the basis for most measurement and identification related to bus reliability, such as running times and headway.  Calculation of headway, which is in turn the basis for many performance metrics, also requires estimates of all vehicles’ arrival times at a certain location. Missing estimates (whether due to the data generating process or the chosen estimation algorithm) must be identified; without them, the resulting headway will be the difference in arrival times of non-sequential vehicles.
+
+The first method is use to use a spatial algorithm to identify any data points within a certain radius of the location, and make an estimation from within that subset. Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location. The second method is to apply an interpolation algorithm to all observations reported for a given vehicle’s trip. The tradeoff is that this may be more computation than required if few points along the trip are to be estimated.  The risk Interpolation is that it assumes the bus traveling at uniform speed while in reality the bus speed changes a lot due the complicated traffic condition and traffic lights, especially in New York.
+
+The third method is to apply the interpolation only for stops that are reported in Bus Time as a ''Monitored Call,'' that is, the upcoming stop. The advantage of only interpolating the reported stops is that it avoids the risk of reporting stops that the bus never made (for example, due to a detour) and the risk of high inaccuracy in the event the bus did make the stop (due to the long distance over which times must be interpolated).The tradeoff for the third method is that since many trips are not completely recorded, we may lose a lot of information for the missing part.
+
+\subsection{Reliability metrics}
+
+Wait Assessment is a metric used by New York City Transit, defined in the Transit Capacity and Quality of Service Manual as the percentage of actual headways between successive vehicle arrivals that are less than or equal to a given standard. The wait assessment for bus is only measured on weekdays. It is defined as the percentage of observed service intervals that are no more than the scheduled interval plus 3 minutes during peak (7 a.m. - 9 a.m., 4 p.m. - 7 p.m.) and plus 5 minutes during off-peak (12 a.m - 7 a.m., 9 a.m. - 4 p.m, 7 p.m. - 12 a.m.)
+
+\textit{Wait Assessment} is a simple calculation that can be performed after all headway calculations have been performed for a given location.
+
+\textit{OTP (On Time Performance)} is defined as the positive difference between actual arrival time and schedule arrival time. Different from the measurement of on-time performance percentage by MTA, which is the percentage reflects the number of buses that arrive within a certain time before or after the published schedule, we use the distribution of a group of data to describe the on-time performance for a single trip. The main reason is the criteria is not provided by MTA for buses. However, During low-frequency period, on-time performance is more important while during the high frequency period, the headways matter more. Running Time Adherence (measured in \%) is defined as the average difference between the actual and the scheduled running times relative to the scheduled running time. When the actual running time is shorter than the schedule, the measure is called shorter running time and otherwise longer running time.
+
+Similarly, headway regularity (measured in \%) is defined as the average difference between the actual and the scheduled headways relative to the scheduled headway. The Headway Regularity describes how evenly distributed actual bus is in relation to scheduled service. If two consecutive buses are further from (or closer to) each other than the scheduled headway, the difference is called a longer (or shorter) headway difference. Bus bunching is an extreme example of short headway.
 
 \newpage
 
 \section{Results and implications for practice}
 
+Differences worth noting between the compilation of Bus Time data and DOT's files are listed in Table \ref{diff}. \footnote{Unclear if reported speed is instantaneous or averaged since last transmission.}
 
 \vspace{0.5cm}
 
-\captionof{table}{Differences between DOT and Bus Time data.}
+\captionof{table}{Differences between DOT and Bus Time data. }
 \resizebox{\textwidth}{!}{
 \begin{tabular}{l| ll}
+\label{diff}
  & \textbf{DOT flat file} & \textbf{Bus Time API} \\
  \hline
 Source database & Archived & Real-time \\
@@ -506,61 +508,69 @@ Influence: Similar methodologies and concepts could be used in other cities and 
 
 \captionof{table}{Sample result metrics file (headshot example).}
 \resizebox{\textwidth}{!}{
-\begin{tabular}{|l|c|c|c|c|c|}
+\begin{tabular}{|l|c|}
 \hline
-route id & stop id &	date & On Time Performance &	Peak Wait Assessment	& Off-Peak Wait Assessment \\
-\hline
-Q07 & 350232 & 1/2/2015 &	0.831395 & 	0.891566 &	1  \\
-Q25 & 550032 & 1/2/2015 & 0.720737 &	0.72388 &	0.760368 \\
-Q34	& 501132 & 1/30/2015 & 0.666667 & 0.910714 & 0.918699 \\
+name & description \\
+On Time Performance & description	\\
+Peak Wait Assessment	& description\\
+Off-Peak Wait Assessment & description \\
+Running time adherence & description \\
+Headway regularity & description\\
+Excess wait time & description\\
 \hline
 \end{tabular}
 }
 
 \vspace{1cm}
 
-The fields \textit{Running time adherence}, \textit{Headway regularity} and \textit{Excess wait time} remain to be calculated and added to the schema.
 
-\begin{thebibliography}{9}
 
-\bibitem{LinZeng}
+\begin{thebibliography}{14}
+
+\bibitem{Lin}
 W. H. Lin and J. Zeng, "An experimental study of real-time bus arrival time prediction with GPS data," Transp. Res. Rec., no. 1666, pp. 101- 109, Jan. 1999.
 
-\bibitem{Rajbhandari}
-Rajat Rajbhandari, Steven I. Chien, and Janice R. Daniel, ''Estimation of bus dwell times with APC information'', Transportation Research Record 1841 Paper No. 03- 2675, 2003
+\bibitem{Raj}
+Rajat Rajbhandari, Steven I. Chien, and Janice R. Daniel, ''Estimation of bus dwell times with APC information'', Transportation Research Record 1841 Paper No. 03- 2675, 2003.
 
-\bibitem{TangLi}
-Min-Tang Li, Fang Zhao, Lee-Fang Chow, Haitao Zhang, and Shi-Chiang Li, Simulation Model for Estimating Bus Dwell Time by Simultaneously Considering Numbers of Disembarking and
-Boarding Passengers, Transportation Research Record 1971, 2006
+\bibitem{Min-Tang}
+Min-Tang Li, Fang Zhao, Lee-Fang Chow, Haitao Zhang, and Shi-Chiang Li, ''Simulation Model for Estimating Bus Dwell Time by Simultaneously Considering Numbers of Disembarking and Boarding Passengers'', Transportation Research Record 1971, 2006.
 
 \bibitem{Fazhi}
-LI Fazhi, YANG Dongyuan and MA Kai, BUS RAPID TRANSIT (BRT) BUNCHING ANALYSIS WITH MASSIVE GPS DAT, National Science and Technology Support Program of China (NO. 2009BAG17B01), 2013
+LI Fazhi, Yang Dongyuan, and Ma Kai, ''Bus Rapid Transit (BRT) Bunching Analysis With Massive GPS Data,'' National Science and Technology Support Program of China (NO. 2009BAG17B01), 2013.
 
 \bibitem{Levine}
-Brian Levine, Alex Lu,Alla Reddy, Measuring Subway Service Performance at New York City Transit: A Case Study Using Automated Train Supervision (ATS) Track- Occupancy Data, TRB 2013 Annual Meeting, 2013
+Brian Levine, Alex Lu, and Alla Reddy, ''Measuring Subway Service Performance at New York City Transit: A Case Study Using Automated Train Supervision (ATS) Track-Occupancy Data,'' TRB 2013 Annual Meeting, 2013.
 
 \bibitem{DanWan}
-Dan Wan, Camille Kamga, Jun Liu, Aaron Sugiura, Eric B. Beaton, Rider perception of a ''light'' Bus Rapid Transit system - The New York City Select Bus Service, Transport Policy 49 (2016) 41-55, Apr. 2016.
+Dan Wan, Camille Kamga, Jun Liu, Aaron Sugiura, and Eric B. Beaton, ''Rider perception of a ‘light’ Bus Rapid Transit system - The New York City Select Bus Service,'' Transport Policy 49 (2016) 41–55, Apr. 2016.
 
 \bibitem{Bie}
-Yiming Bie, Xiaolin Gong, Zhiyuan Liu, Time of day intervals partition for bus schedule using GPS data, Transportation Research Part C 60 (2015) 443-456, Sep. 2015.
+
+Yiming Bie, Xiaolin Gong, and Zhiyuan Liu, ''Time of day intervals partition for bus schedule using GPS data,'' Transportation Research Part C 60, pp. 443–456, Sep. 2015.
 
 \bibitem{Safran}
-Jeremy S. Safran, Eric B. Beaton, Robert Thompson, Factors Contributing to Bus Lane Obstruction and Usage in NYC: Does Design Matter? TRB 2014 Annual Meeting, 2014
- 
-\bibitem{Pangilinan}
-Christopher Pangilinan, Nigel Wilson, and Angela Moore, Bus Supervision Deployment Strategies and Use of Real-Time Automatic
-Vehicle Location for Improved
-Bus Service Reliability, Transportation Research Record: Journal of the Transportation Research Board, No. 2063, Transportation Research Board of the National Academies, Washington, D.C., 2008, pp. 28-33.
-DOI: 10.3141/2063-04
+Jeremy S. Safran, Eric B. Beaton, and Robert Thompson, ''Factors Contributing to Bus Lane Obstruction and Usage in NYC: Does Design Matter?'' TRB 2014 Annual Meeting, 2014
+
+\bibitem{Pangil}
+Christopher Pangilinan, Nigel Wilson, and Angela Moore, ''Bus Supervision Deployment Strategies and Use of Real-Time Automatic
+Vehicle Location for Improved Bus Service Reliability,'' Transportation Research Record: Journal of the Transportation Research Board, No. 2063, Transportation Research Board of the National Academies, Washington, D.C., 2008, pp. 28–33. DOI: 10.3141/2063-04.
+
 \bibitem{Yang}
-Yingxiang Yang, David Gerstle, Peter Widhalm, Dietmar Bauer, The potential of low-frequency AVL data for the monitoring and control of bus performance, TRB 2013 Annual Meeting, 2013.
+Yingxiang Yang, David Gerstle, Peter Widhalm, and Dietmar Bauer, ''The Potential of Low-Frequency AVL Data for the Monitoring and Control of Bus Performance,'' TRB 2013 Annual Meeting, 2013.
 
-\bibitem{An}
-Shi An, Xinming Zhang and Jian Wang, Finding Causes of Irregular Headways Integrating Data Mining and AHP, ISPRS Int. J. Geo-Inf. 2015, 4, 2604-2618; DOI:10.3390/ijgi4042604, Nov. 2015.
+\bibitem{ShiAn}
+Shi An, Xinming Zhang and Jian Wang, ''Finding Causes of Irregular Headways Integrating Data Mining and AHP,'' ISPRS Int. J. Geo-Inf. 2015, 4, 2604-2618; DOI:10.3390/ijgi4042604, Nov. 2015.
 
-\bibitem{Chang}
-Jinil Chang, Mohamad Tala, Satya Muthuswamy, A SIMPLE METHODOLOGY TO ESTIMATE QUEUE LENGTHS AT SIGNALIZED INTERSECTIONS USING DETECTOR DATA, TRB 2013 Annual Meeting, 2013
+\bibitem{Jinil}
+Jinil Chang, Mohamad Tala, and Satya Muthuswamy, ''A Simple Methodology To Estimate Queue Lengths at Signalized Intersections Using Detector Data,'' TRB 2013 Annual Meeting, 2013.
+
+\bibitem{Chris}
+Christopher Pangilinan and Kristen Carnarius, ''Traffic Signal Timing for Optimal Transit Progression in Downtown San Francisco,'' San Francisco Municipal Transportation Agency, San Francisco, CA, 2011.
+
+\bibitem{Reed}
+Simon Reed, ''Transport for London - Using Tools, Analytics and Data to Inform Passengers,'' JOURNEYS, September 2013. \url{https://www.lta.gov.sg/ltaacademy/doc/13Sep096-Reed_TfL-InformPassengers.pdf, accessed 20 Jul 2016.}
+
 
 
 
