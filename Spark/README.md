@@ -54,6 +54,6 @@ For more info. [ontime_ratio.sql]('https://github.com/sarangof/Bus-Capstone/blob
 | Extensions. Distances.PresentableDistance      | status         | Report the current status of bus to next stop |
 | DestinationRef                                 | destination    | Headsign of bus                               |
 ## Final Product
-Inline-style:
 ![alt text](https://github.com/sarangof/Bus-Capstone/blob/master/plots/on_time_performance_stops.png "Sample of on time performance")
+
 [Carto Map](https://saf537.carto.com/viz/c21efdeb-ec45-45f2-b2d3-c47993bb89ff/public_map)
