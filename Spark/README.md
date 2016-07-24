@@ -1,4 +1,4 @@
-# Spark_project
+# Parsing and Manipulate Bus Time Data using PySpark
 
 ### This project reads 3 TB of nested JSON data and apply bunch of spark techniques to analysis the bus delays and headways
 
@@ -39,7 +39,7 @@ for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 
     * __if__ clause in spark is same as __case__ in regular SQL
 
-For more info.check [ontime_ratio.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql)
+    For more info.check [ontime_ratio.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql)
 
 ## Data Schema
 | JSON ELEMENT(schema)                           | Column NAME    | explanation                                   |
@@ -60,4 +60,4 @@ For more info.check [ontime_ratio.sql](https://github.com/sarangof/Bus-Capstone/
 ## Final Product
 ![alt text](https://github.com/sarangof/Bus-Capstone/blob/master/plots/on_time_performance_stops.png "Sample of on time performance")
 
-[Carto Map](https://saf537.carto.com/viz/c21efdeb-ec45-45f2-b2d3-c47993bb89ff/public_map)
+Open Interactive Map in [Carto Map](https://saf537.carto.com/viz/c21efdeb-ec45-45f2-b2d3-c47993bb89ff/public_map)
