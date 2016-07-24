@@ -96,9 +96,9 @@ Despite a growing demand for public transportation in New York City, bus ridersh
 
 Based on the MTA \textit{Automated Vehicle Location} (AVL) data and its public Bus Time API, the team performed a data assessment analysis for the data generating process and the data collection process. We also deliver methods for estimating bus travel and stop times, measuring reliability with different metrics, and settles the ground for the DOT to identify the distribution of reliability measurements as a function of factors regarded as relevant to their practice.
         
-\section*{Aknowledgements}
+\section*{Acknowledgements}
 
-We would like to express our sincere appreciation to all who have lent us hands during this time.  First of all, we would like to show our sincere gratitude to our sponsor agency, the New York City Department of Transportation, for giving us an opportunity to focus on this important city issue.  We would specially like to to thank Jeremy Safran, who gave us plenty of insight into the way the DOT wants to treat and understand bus data analytics.  Secondly, we would like to express our gratitude to our advisors, Dr. Kaan Ozbay and Dr. Huy T. Vo., not only for their technical expertise but for their generosity and willingness to lead us through this process.  Last but not least, we would like to thank Kai Zhao, Abdullah Kurkcu, Ender Morgul, and our classmates in CUSP who gave us assistance and advice during this process.  We will always be thankful.
+We would like to express our sincere appreciation to all who have lent us hands during this time.  First of all, we would like to show our sincere gratitude to our sponsor agency, the New York City Department of Transportation, for giving us an opportunity to focus on this important city issue.  We would specially like to to thank Jeremy Safran, who gave us plenty of insight into the way the DOT wants to treat and understand bus data analytics.  Secondly, we would like to express our gratitude to our advisors, Dr. Kaan Ozbay and Dr. Huy T. Vo., not only for their technical expertise but for their generosity and willingness to lead us through this process.  Invaluable consultation on use of the Bus Time API for performance analysis was provided by Nathan Johnson and Kuan Butts, primary authors of the NYC Bus Transit Data project (http://busdataapi1.cloudapp.net/); and Chris Pangilinan and Zak Accuardi at Transit Center.  Last but not least, we would like to thank Kai Zhao, Abdullah Kurkcu, Ender Morgul, and our classmates in CUSP who gave us assistance and advice during this process.  We will always be thankful.
 
 
 %-------------------------------------------------------------------------------
@@ -112,9 +112,9 @@ We would like to express our sincere appreciation to all who have lent us hands 
 \subsection{	Statement and Description}
 Although demand for public transportation in New York City is growing, bus ridership levels are declining.  Many reasons can explain this, including drops in vehicle speeds and customer perceptions of dependability.  This project focuses on identifying these two factors along the city's MTA operated bus routes, in the form of reliability metrics that are relevant to the DOT as the municipal traffic authority.
 
-The DOT keeps records of the MTA bus system, but the agency lacks a formal process for compiling and analysing it according to their decision making capabilities (such as those related with road design and traffic management), which substantially differ from the MTA's purposes and reach. Despite the MTA (which is the agency in charge of operations) has internally defined metrics used for scheduling, planning and analysis of the bus service, this agency pays more attention to the bus level instead of the whole system level, which is more of the interest of the DOT.
+The DOT receives batch files from MTA containing archived basic AVL data, but the agency lacks a formal process for compiling and analysing it according to their decision making capabilities (such as those related with road design and traffic management), which substantially differ from the MTA's purposes and reach.  Additionally, the basic AVL data differs significantly in density and reported elements compared to those from the Bus Time API.  Although the MTA, being the agency in charge of operations, has internally defined metrics used for scheduling, planning and analysis of the bus service, this their attention is on the bus level instead of the whole system level, which is more of the interest of the DOT.
  
-To help the DOT improve their planning efficiency, this project aims to measure the dependent variable metrics related to bus performance and reliability, enabling the agency to, in a further analysis, understand the effect of independent variables that affect service quality. CUSP developed methods for estimating bus travel times and measuring reliability, while performing data quality analysis of the MTA Bus Time API data (from which the data was collected to this exercise) and the MTA schedule data (referred to as \textit{GTFS} in this document for its format, \textit{General Transit Feed Specification}). 
+To help the DOT improve their planning efficiency, this project aims to assess the usefulness of Bus Time data for measurement of the dependent variable metrics related to bus performance and reliability, enabling the agency to, in a further analysis, understand the effect of independent variables that affect service quality. 
 
 \subsection{Goals}
 
@@ -123,71 +123,22 @@ The goals of the project can be summarized as follows:
 \begin{enumerate}
 \item Perform a thorough data quality assessment on the MTA Bus Time data.
 
-\item Implement metrics related to the performance of the buses with respect to their planned schedule.
+\item Implement metrics related to the performance of the buses with respect to customer experience, which in part considers their planned schedule.
 
-\item Document the entire process and deliver flexible code, so both data quality assessment and reliability measurements are more clearly evaluated by the agency.
+\item Document the entire process and deliver flexible code, so both data quality assessment and reliability measurements can be reproduced by the agency.
 \end{enumerate}
-
-
-The project has been developed following the milestones below:
-
-\begin{itemize}
-\item Bibliography review; 
-\item Data extraction; 
-\item Identification of pitfalls and irregularities in the data generating process;
-\item Estimation of the departure and arrival times at bus stops and other locations (in other words, extrapolation); 
-\item Measurement of bus performance and reliability metrics, with a flexible implementation;
-\end{itemize}
 
 \newpage
 
 \section{Project offerings}
 
-The contributions from our work can be summarized as follows:
-
-\begin{enumerate}
-\item The estimation of departure and arrival times based on AVL data for the specific case of the Bus Time API records. 
-\item Flexible and potentially novel bus performance metrics for the data set in question.
-\item Quality assessment for the Bus Time API dataset.
-\item Flexible and reproducible code to allow further implementations and variations of our analysis.
-
-\end{enumerate}
-
-According to the Scope of Work presented at the beginning of this project, its deliverables are:
-
-\begin{enumerate}
-\item \textbf{Data review and sample}:
-
+This Capstone project hopes to address the core urban challenge of transportation planning with the following contributions:
 \begin{itemize}
-\item Report of data usefulness (PDF format): This will list challenges and limitations,including known gaps and an analysis of their impact to accuracy.
-\item Cleaned version of the data sets used (CSV format).
-
+\item The conclusion that public, self-service data can be applied to evaluate transit operations performance, independent of the operating agency
+\item A framework for a new, more efficient data interface between agencies and for processing of the data
+\item Demonstration of the potential for implementation of the framework using only a personal computer and open source software
+\item New value realized from a public service originally implemented with a narrower scope in mind
 \end{itemize}
-
-\item \textbf{Metrics recommendations}: a report discussing proposed performance metrics, along with their relevance or weakness when implemented using data generated in deliverable number 1. 
-
-\item \textbf{Bus performance metrics} provided in the following static files:
-
-\begin{itemize}
-\item \textit{statistics (Excel format)}: This includes calculated values for each metric for each route and level of time and geographic aggregation.  For example: headway variance of Route M3, southbound, at the intersection of 3rd Avenue and 42nd Street, over the entire sample period.
-\item \textit{Geodatabase (shapefile package format)}: A database or zipped folder including spatial data formats related to features described by (2a) descriptive statistics
-\item \textit{Web based visualization (format dependent on incorporation into DOT BusTime tool)}: A static or interactive visualization of the data delivered in (2b) for the purpose of exploring the usefulness of MTA Bus Time data.
-
-
-\end{itemize}
-
-\item \textbf{Executable code} in Python language for the following procedures:
-
-\begin{itemize}
-\item Implementation of location interpolation method agreed upon by NYC DOT.
-\item Estimation of vehicle headways taking route, time period, and location as arguments.
-\item Identification of outliers in vehicle travel speed or dwell time at a given point..
-\item Estimation of distribution of customer waiting time at each stop.
-
-\end{itemize}
-
-\item \textbf{ETL process documentation}: Step-by-step instructions for refreshing the calculated metrics based on more recent or revised data.
-\end{enumerate}
 
 \newpage
 
