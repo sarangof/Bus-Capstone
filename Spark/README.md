@@ -33,12 +33,12 @@ for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 
 - __SparkSQL manipulation__
 
-`Inner join` the interpolated data with GTFS schedule
-`IF` `COUNT` to calculate the multiple on time perfornace.
+  _ `Inner join`  to join the interpolated data with GTFS schedule
+  _ `IF` `COUNT` to calculate the multiple on time perfornace.
 
-__if__ clause in spark is same as __case__ in regular SQL
+    _ __if__ clause in spark is same as __case__ in regular SQL
 
-For more info.[ontime_ratio.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql)
+For more info.check [ontime_ratio.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql)
 
 ## Data Schema
 | JSON ELEMENT(schema)                           | Column NAME    | explanation                                   |
