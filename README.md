@@ -1,7 +1,7 @@
 # Bus-Capstone
 Capstone project for NYC Department of Transportation.
 
-*** Important documentation:
+*Important documentation:*
 
 *[Documentation of data processing and Spark](https://github.com/sarangof/Bus-Capstone/tree/master/Spark)
 
