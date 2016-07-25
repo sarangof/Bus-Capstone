@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.6.1)  22 JUL 2016 12:51
+This is pdfTeX, Version 3.1415926-2.5-1.40.14 (TeX Live 2013/Debian) (format=pdflatex 2016.6.1)  24 JUL 2016 16:47
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -737,7 +737,11 @@ Package biblatex Warning: 'babel/polyglossia' detected but 'csquotes' missing.
 \@quotelevel=\count233
 Normal \count register pool exhausted, switching to extended pool.
 \@quotereset=\count277
-(./sponsor_report.aux)
+(./sponsor_report.aux
+
+LaTeX Warning: Label `adh' multiply defined.
+
+)
 \openout1 = `sponsor_report.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 49.
@@ -757,8 +761,7 @@ LaTeX Font Info:    ... okay on input line 49.
 LaTeX Font Info:    Checking defaults for FML/futm/m/it on input line 49.
 LaTeX Font Info:    Try loading font information for FML+futm on input line 49.
 
-
-(/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutm.fd
+ (/usr/share/texlive/texmf-dist/tex/latex/fourier/fmlfutm.fd
 File: fmlfutm.fd 2004/10/30 Fontinst v1.926 font definitions for FML/futm.
 )
 LaTeX Font Info:    ... okay on input line 49.
@@ -966,143 +969,310 @@ been already used, duplicate ignored
 <to be read again> 
                    \relax 
 l.107 \newpage
-               [2]
-LaTeX Font Info:    Try loading font information for TS1+futs on input line 135
+               [2] [3]
+LaTeX Font Info:    Try loading font information for TS1+futs on input line 137
 .
- (/usr/share/texlive/texmf-dist/tex/latex/fourier/ts1futs.fd
+
+(/usr/share/texlive/texmf-dist/tex/latex/fourier/ts1futs.fd
 File: ts1futs.fd 2004/03/26 Fontinst v1.926 font definitions for TS1/futs.
 )
 Package microtype Info: Loading generic settings for font family
 (microtype)             `futs' (encoding: TS1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-[3] [4]
+ [4] [5]
+Overfull \hbox (17.61966pt too wide) in paragraph at lines 162--174
+[][] 
+ []
+
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <12> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 156.
- [5] [6]
-Overfull \hbox (17.61966pt too wide) in paragraph at lines 182--194
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 221.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 6.99199pt on input line 221.
+LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
+(Font)              scaled to size 5.51999pt on input line 221.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 6.99199pt on input line 221.
+LaTeX Font Info:    Font shape `U/futm/m/n' will be
+(Font)              scaled to size 5.51999pt on input line 221.
+
+Overfull \hbox (17.63081pt too wide) in paragraph at lines 199--222
 [][] 
  []
 
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 238.
-LaTeX Font Info:    Font shape `FMX/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 238.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 6.99199pt on input line 238.
-LaTeX Font Info:    Font shape `U/futm/m/n' will be
-(Font)              scaled to size 5.51999pt on input line 238.
-
-Overfull \hbox (17.63081pt too wide) in paragraph at lines 216--239
-[][] 
- []
-
-[7] [8]
+[6] [7] [8]
 
 Package caption Warning: \captionsetup{type*=...} or \captionof
-(caption)                outside box or environment on input line 256.
+(caption)                outside box or environment on input line 264.
 See the caption package documentation for explanation.
 
 
 Package caption Warning: The option `hypcap=true' will be ignored for this
-(caption)                particular \caption on input line 256.
+(caption)                particular \caption on input line 264.
 See the caption package documentation for explanation.
 
 LaTeX Font Info:    Font shape `T1/futs/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/futs/b/n' tried instead on input line 256.
+(Font)              Font shape `T1/futs/b/n' tried instead on input line 264.
 
-</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/DOT.png, id=151, 812.0
-3375pt x 273.02pt>
-File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/DOT.png Graphic f
-ile (type png)
+</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/missing_days.png, id=1
+52, 795.97375pt x 84.315pt>
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/missing_days.png 
+Graphic file (type png)
 
-<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/DOT.png>
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/missing_days.png>
 Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
-s/DOT.png used on input line 289.
-(pdftex.def)             Requested size: 487.22401pt x 163.81326pt.
+s/missing_days.png used on input line 300.
+(pdftex.def)             Requested size: 477.58794pt x 50.58937pt.
 
-Overfull \hbox (34.25612pt too wide) in paragraph at lines 289--290
+Overfull \hbox (24.62004pt too wide) in paragraph at lines 300--301
  [][] 
  []
 
 
-</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/Spark.png, id=152, 804
-.00375pt x 228.855pt>
-File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/Spark.png Graphic
- file (type png)
+</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_year_record.png,
+ id=155, 803.0pt x 458.71375pt>
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_year_record
+.png Graphic file (type png)
 
-<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/Spark.png>
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_year_record.
+png>
 Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
-s/Spark.png used on input line 295.
-(pdftex.def)             Requested size: 482.40598pt x 137.31404pt.
+s/whole_year_record.png used on input line 315.
+(pdftex.def)             Requested size: 481.80373pt x 275.23038pt.
 
-Overfull \hbox (29.43808pt too wide) in paragraph at lines 295--296
+Overfull \hbox (28.83583pt too wide) in paragraph at lines 315--316
  [][] 
  []
 
-[9 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/DOT.png> </home/saf
-537/Documents/CUSP/Capstone/Bus-Capstone/plots/Spark.png>] [10] [11]
+[9 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/missing_days.png>]
 
-Package hyperref Warning: Token not allowed in a PDF string (PDFDocEncoding):
-(hyperref)                removing `\\' on input line 345.
+Package caption Warning: \label without proper \caption on input line 327.
+See the caption package documentation for explanation.
 
 
+LaTeX Warning: Reference `week' on page 10 undefined on input line 324.
+
+
+</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record.png, 
+id=167, 811.03pt x 519.9425pt>
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record.
+png Graphic file (type png)
+
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record.p
+ng>
+Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
+s/whole_day_record.png used on input line 330.
+(pdftex.def)             Requested size: 486.62175pt x 311.96791pt.
+
+Overfull \hbox (33.65385pt too wide) in paragraph at lines 330--331
+ [][] 
+ []
+
+[10 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_year_record.
+png>]
+
+Package caption Warning: \label without proper \caption on input line 341.
+See the caption package documentation for explanation.
+
+
+LaTeX Warning: Reference `week_day' on page 11 undefined on input line 338.
+
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record.
+png Graphic file (type png)
+
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record.p
+ng>
+Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
+s/whole_day_record.png used on input line 344.
+(pdftex.def)             Requested size: 486.62175pt x 311.96791pt.
+
+Overfull \hbox (33.65385pt too wide) in paragraph at lines 344--345
+ [][] 
+ []
+
+
+</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20150106
+.png, id=179, 378.41376pt x 256.96pt>
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_201
+50106.png Graphic file (type png)
+
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_2015
+0106.png>
+Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
+s/trip_coverage_20150106.png used on input line 356.
+(pdftex.def)             Requested size: 227.05pt x 154.17719pt.
+
+</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20151101
+.png, id=180, 378.41376pt x 256.96pt>
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_201
+51101.png Graphic file (type png)
+
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_2015
+1101.png>
+Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
+s/trip_coverage_20151101.png used on input line 363.
+(pdftex.def)             Requested size: 227.05pt x 154.17719pt.
+
+</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20151203
+.png, id=181, 378.41376pt x 256.96pt>
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_201
+51203.png Graphic file (type png)
+
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_2015
+1203.png>
+Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
+s/trip_coverage_20151203.png used on input line 370.
+(pdftex.def)             Requested size: 227.05pt x 154.17719pt.
+ [11 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record.
+png>] [12 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverag
+e_20150106.png>] [13 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/t
+rip_coverage_20151101.png> </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/p
+lots/trip_coverage_20151203.png>]
+</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/running_time_adherence
+.png, id=208, 1084.05pt x 578.16pt>
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/running_time_adhe
+rence.png Graphic file (type png)
+
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/running_time_adher
+ence.png>
+Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
+s/running_time_adherence.png used on input line 387.
+(pdftex.def)             Requested size: 433.61232pt x 231.2599pt.
+ [14 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/running_time_adhe
+rence.png>]
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/running_time_adhe
+rence.png Graphic file (type png)
+
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/running_time_adher
+ence.png>
+Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
+s/running_time_adherence.png used on input line 404.
+(pdftex.def)             Requested size: 433.61232pt x 231.2599pt.
+
+
+LaTeX Warning: Reference `ols' on page 15 undefined on input line 408.
+
+[15]
+</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/wa_by_stop_sequence.pn
+g, id=225, 1084.05pt x 578.16pt>
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/wa_by_stop_sequen
+ce.png Graphic file (type png)
+
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/wa_by_stop_sequenc
+e.png>
+Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
+s/wa_by_stop_sequence.png used on input line 422.
+(pdftex.def)             Requested size: 433.61232pt x 231.2599pt.
+
+</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/moving_speed_distribut
+ion.png, id=227, 1084.05pt x 578.16pt>
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/moving_speed_dist
+ribution.png Graphic file (type png)
+
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/moving_speed_distr
+ibution.png>
+Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
+s/moving_speed_distribution.png used on input line 432.
+(pdftex.def)             Requested size: 487.818pt x 260.16959pt.
+
+Overfull \hbox (34.8501pt too wide) in paragraph at lines 432--433
+ [][] 
+ []
+
+[16 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/wa_by_stop_sequenc
+e.png>]
+</home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/percent_vehicles_slow_
+or_stopped.png, id=237, 1084.05pt x 578.16pt>
+File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/percent_vehicles_
+slow_or_stopped.png Graphic file (type png)
+
+<use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/percent_vehicles_s
+low_or_stopped.png>
+Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
+s/percent_vehicles_slow_or_stopped.png used on input line 446.
+(pdftex.def)             Requested size: 433.61232pt x 231.2599pt.
+ [17 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/moving_speed_dist
+ribution.png>] [18 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/per
+cent_vehicles_slow_or_stopped.png>] [19] [20]
 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/on_time_performance_st
-ops.png, id=174, 414.54875pt x 432.61626pt>
+ops.png, id=263, 414.54875pt x 432.61626pt>
 File: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/on_time_performan
 ce_stops.png Graphic file (type png)
 
 <use /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/on_time_performanc
 e_stops.png>
 Package pdftex.def Info: /home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plot
-s/on_time_performance_stops.png used on input line 351.
+s/on_time_performance_stops.png used on input line 503.
 (pdftex.def)             Requested size: 331.63943pt x 346.09348pt.
- [12 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/on_time_performan
-ce_stops.png>] [13
+ [21 </home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/on_time_performan
+ce_stops.png>]
 
-] 
+Package caption Warning: The option `hypcap=true' will be ignored for this
+(caption)                particular \caption on input line 509.
+See the caption package documentation for explanation.
+
+[22] [23
+
+]
+Underfull \hbox (badness 2253) in paragraph at lines 563--564
+\T1/futs/m/n/12 (+20) In-te-grat-ing Data Min-ing and AHP,'' IS-PRS Int. J. Geo
+-Inf. 2015, 4, 2604-2618;
+ []
+
+LaTeX Font Info:    Try loading font information for T1+cmtt on input line 572.
+
+(/usr/share/texlive/texmf-dist/tex/latex/base/t1cmtt.fd
+File: t1cmtt.fd 1999/05/25 v2.5h Standard LaTeX font definitions
+)
+Package microtype Info: Loading generic settings for font family
+(microtype)             `cmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+
+
 AED: lastpage setting LastPage
-[14]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 401.
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 401.
+[24]
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 580.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 580.
  (./sponsor_report.aux)
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 401.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 401.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 580.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 580.
+Package rerunfilecheck Info: File `sponsor_report.out' has not changed.
+(rerunfilecheck)             Checksum: EF0E33C6D46DF963DFA14D6C606137B6;1183.
 
 
-Package rerunfilecheck Warning: File `sponsor_report.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
+LaTeX Warning: There were undefined references.
 
-Package rerunfilecheck Info: Checksums for `sponsor_report.out':
-(rerunfilecheck)             Before: 25E7E34DCE16783520F096F6BB4C17CE;1140
-(rerunfilecheck)             After:  334B942FE2D5C9458B6749C8CD694D1E;1112.
 
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
+LaTeX Warning: There were multiply-defined labels.
 
 Package logreq Info: Writing requests to 'sponsor_report.run.xml'.
 \openout1 = `sponsor_report.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 15176 strings out of 493304
- 244409 string characters out of 6139872
- 780574 words of memory out of 5000000
- 18117 multiletter control sequences out of 15000+600000
- 141605 words of font info for 260 fonts, out of 8000000 for 9000
+ 15299 strings out of 493304
+ 248787 string characters out of 6139872
+ 780306 words of memory out of 5000000
+ 18174 multiletter control sequences out of 15000+600000
+ 143668 words of font info for 278 fonts, out of 8000000 for 9000
  957 hyphenation exceptions out of 8191
- 44i,15n,43p,885b,1484s stack positions out of 5000i,500n,10000p,200000b,80000s
-pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exi
+ 44i,15n,43p,1149b,1484s stack positions out of 5000i,500n,10000p,200000b,80000s
+pdfTeX warning (dest): name{Hfootnote.2} has been referenced but does not exi
 st, replaced by a fixed one
 
-{/usr/share/texlive/texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/
-texmf-dist/fonts/type1/adobe/utopia/putb8a.pfb></usr/share/texlive/texmf-dist/f
-onts/type1/adobe/utopia/putr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/a
-dobe/utopia/putri8a.pfb>
-Output written on sponsor_report.pdf (16 pages, 495919 bytes).
+pdfTeX warning (dest): name{Hfootnote.1} has been referenced but does not exist
+, replaced by a fixed one
+
+{/usr/share/texmf/fonts/enc/dvips/cm-super/cm-super-t1.enc}{/usr/share/texlive/
+texmf-dist/fonts/enc/dvips/base/8r.enc}</usr/share/texlive/texmf-dist/fonts/typ
+e1/adobe/utopia/putb8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/uto
+pia/putr8a.pfb></usr/share/texlive/texmf-dist/fonts/type1/adobe/utopia/putri8a.
+pfb></usr/share/texmf/fonts/type1/public/cm-super/sftt1200.pfb>
+Output written on sponsor_report.pdf (26 pages, 811432 bytes).
 PDF statistics:
- 234 PDF objects out of 1000 (max. 8388607)
- 206 compressed objects within 3 object streams
- 61 named destinations out of 1000 (max. 500000)
- 41104 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 345 PDF objects out of 1000 (max. 8388607)
+ 288 compressed objects within 3 object streams
+ 90 named destinations out of 1000 (max. 500000)
+ 45752 words of extra memory for PDF output out of 51595 (max. 10000000)
 

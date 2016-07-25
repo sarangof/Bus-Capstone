@@ -30,4 +30,4 @@ Use command
 ```
 to submit the job
 #### For more info
-please refer `Spark_All` for all the information
+please refer [Spark](https://github.com/sarangof/Bus-Capstone/tree/master/Spark) for more the information
