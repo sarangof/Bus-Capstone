@@ -364,34 +364,28 @@ The time series analysis showing counter-cyclical data density, the strong antic
 \subsubsection*{Tactical validation of individual elements}
 
 
-Coordinates estimated using the Global Position System include some level of noise due to factors such as atmospheric conditions and multi-path effects. However the location elements of the Bus Time data appear to be transformed to adhere to shapelines of the reported bus route, eliminating any variation laterally across the street. Figure XXX shows an overlay of points from both Bus Time records and GTFS shape file data, for a short stretch of the B26 route in Fort Greene.  While the coordinates of stops are on the sides of the street, no lateral variation is observable in the Bus Time coordinates, even though the vehicles are known to travel along all four lanes of that specific roadway. Some error may remain along the orthogonal plane (the basis for distance calculations), but GPS-assistive equipment installed after the initial launch of Bus Time uses gyroscopes and speedometer readings to reduce this error to an immaterial level.
+Coordinates estimated using the Global Position System include some level of noise due to factors such as atmospheric conditions and multi-path effects. However the location elements of the Bus Time data appear to be transformed to adhere to shapelines of the reported bus route, eliminating any variation laterally across the street. Figure \ref{b26} shows an overlay of points from both Bus Time records and GTFS shape file data, for a short stretch of the B26 route in Fort Greene.  While the coordinates of stops are on the sides of the street, no lateral variation is observable in the Bus Time coordinates, even though the vehicles are known to travel along all four lanes of that specific roadway. Some error may remain along the orthogonal plane (the basis for distance calculations), but GPS-assistive equipment installed after the initial launch of Bus Time uses gyroscopes and speedometer readings to reduce this error to an immaterial level.
+
+\begin{figure}[!ht]
+\label{b26}
+  \caption{Sample of B25 route.}
+  \centering
+    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/b25_detail}
+\end{figure}
+
+The only elements reported by the vehicle itself are the time, location and headsign (the route and destination text displayed above the front of the vehicle).  All of the remaining elements are inferred by the Bus Time server.  Because those inferences are made real-time, the software has no opportunity to retrospectively validate and correct errors.  This analysis validates two key features by checking for two metadata properties: that reported trip IDs are unique to each vehicle and that stop distances are unique for each shape.  The first validation failed while the second property was confirmed.  Figure \ref{trip_val} is a sample summary of records records grouped by both trip and vehicle, for a sample date and route; it shows the duplication of trip ID across multiple vehicles, the number of records associate with each duplicate, and the timespan of those records.
 
 
-The only elements reported by the vehicle itself are the time, location and headsign (the route and destination text displayed above the front of the vehicle).  All of the remaining elements are inferred by the Bus Time server.  Because those inferences are made real-time, the software has no opportunity to retrospectively validate and correct errors.  This analysis validates two key features by checking for two metadata properties: that reported trip IDs are unique to each vehicle and that stop distances are unique for each shape.  The first validation failed while the second property was confirmed.  Figure XXX is a sample summary of records records grouped by both trip and vehicle, for a sample date and route; it shows the duplication of trip ID across multiple vehicles, the number of records associate with each duplicate, and the timespan of those records.
-
+\begin{figure}[!ht]
+\label{trip_val}
+  \caption{Duplicated records.}
+  \centering
+    \includegraphics[scale=0.9]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_vehicle_validation}
+\end{figure}
 
 The conclusions are that the Bus Time server sometimes makes errors in inference of the vehicle's trip ID, the inferred trip ID is not persistent for a vehicle (that is, it “flip flops”), but the reported stop distances for the inferred shape are persistent.  The variation in inferred trip ID is an important consideration in subsequent performance measurement because so much of the analysis requires grouping or sorting data (both input and output) by trip.
 
 
-\begin{figure}[!ht]
-  \caption{Bad: Major gaps without data for most vehicles, over several hours (2015-01-06).}
-  \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20150106}
-\end{figure}
-
-
-\begin{figure}[!ht]
-  \caption{Less Bad: Shorter gap (<1 hour) with no data from some vehicles (2015-11-01).}
-  \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20151101}
-\end{figure}
-
-
-\begin{figure}[!ht]
-  \caption{Good: No significant gaps in API performance (2015-12-03)}
-  \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20151203}
-\end{figure}
 
 
 \subsection{Demonstrations of the methods applied to the dataset}
