@@ -26,7 +26,6 @@ sqlContext.read.json()
   * use Scipy Interpolate Tool to interpolate all stop times.
 =======
 #### Data retrieval modules
-#### siri_repeat
 ##### siri_parser
 *method* siri_parser.**json_to_df**(a)
 >>>>>>> 27400abbbabe754c12d04d1af4925cd72da334a7
@@ -40,17 +39,16 @@ sqlContext.read.json()
     ```
 for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 
+<<<<<<< HEAD
 - __SparkSQL manipulation__
 =======
 *method* siri_parser.**extract**(inpath,outfile)
 
 *method* siri_parser.**extract_trip_dates**(inpath,outpath,datelist)
+=======
+>>>>>>> parent of 22c403c... minor typos in tex and README files
 ##### gtfs
 
-### Processing and analysis modules
-#### arrivals
-#### seqtools
-#### ttools
 ### Spark Method
 >>>>>>> 27400abbbabe754c12d04d1af4925cd72da334a7
 
