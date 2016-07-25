@@ -331,7 +331,7 @@ From the plot, it can find that weekdays have the same trend and weekends have t
       \subsubsection*{Data density with respect to level of scheduled activity}
       
        
-   As the bus is transmitting every 30 seconds, the interval between Bus Time records is expected to also be 30 seconds so long as the vehicle is operating with the AVL equipment activated.  Figure \ref{intervals} shows the actual intervals from the dataset collected.  In fact the typical interval turns out to be 60 seconds, with a significant portion of even longer intervals.  We examine these long intervals by comparing a measurement of total vehicle activity between the Bus Time data (in terms of record count) and the schedule data (in terms of aggregate running time of all scheduled trips). The measured activity from the two sources turn out to be strongly anticorrelated in the months analyzed (in the table below), whenever materially non-zero.  In other words, generally when scheduled activity increases, the density of data available in our dataset decreases.
+   As the bus is transmitting every 30 seconds, the interval between Bus Time records is expected to also be 30 seconds so long as the vehicle is operating with the AVL equipment activated.  Figure 4 shows the actual intervals from the dataset collected.  In fact the typical interval turns out to be 60 seconds, with a significant portion of even longer intervals.  We examine these long intervals by comparing a measurement of total vehicle activity between the Bus Time data (in terms of record count) and the schedule data (in terms of aggregate running time of all scheduled trips). The measured activity from the two sources turn out to be strongly anticorrelated in the months analyzed (in the table below), whenever materially non-zero.  In other words, generally when scheduled activity increases, the density of data available in our dataset decreases.
 \resizebox{\textwidth}{!}{
 \begin{tabular}{l l l l l l l l l l}
 \hline
@@ -341,21 +341,24 @@ Jan & Feb & Mar & Apr & May & Jun & Jul & Aug & Sep & Oct \\
 \hline
 \end{tabular}
 }
-To further diagnose the issue, the comparison is made on a finer temporal scale (6-minute timesteps) for a few random dates.  Figure \ref{trio} shows very different patterns when overlaying the level of scheduled activity onto the level of reported activity derived from the Bus Time data.  On one of the two weekdays examined  (the first and third), two large gaps are clearly visible and span the entirety of the two daily rush-hour peaks in the schedule.  On the weekend date examined, a short gap is visible in the late evening.
+
+\vspace{0.5 cm}
+
+To further diagnose the issue, the comparison is made on a finer temporal scale (6-minute timesteps) for a few random dates.  Figure 5 shows very different patterns when overlaying the level of scheduled activity onto the level of reported activity derived from the Bus Time data.  On one of the two weekdays examined  (the first and third), two large gaps are clearly visible and span the entirety of the two daily rush-hour peaks in the schedule.  On the weekend date examined, a short gap is visible in the late evening.
 
 The time series analysis showing counter-cyclical data density, the strong anticorrelation, and the tactical examination of a few dates all lead to the conclusion that the dataset collected by NYU CUSP cannot be used for performance analysis of an entire year without major risks to accuracy, in the form of both bias (as discussed in section 0.3.5: Arrival time estimation techniques) and variance (due to the most typical interval being twice as long as specified by MTA).  To continue with the demonstration of applying the data for performance metrics, we identified a week with the best density and limited gaps during rush hours (2015-12-01 to 2015-12-07).     
         
 \begin{figure}[!ht]
-\label{intervals}
-  \caption{Distribution of intervals between SIRI response records.}
-  \centering
+	\label{intervals}
+  	\caption{Distribution of intervals between SIRI response records.}
+  	\centering
     \includegraphics[scale=0.8]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/interva_distribution}
 \end{figure}
 
 \begin{figure}[!ht]
-\label{trio}
-  \caption{Comparison of active vehicle count for three example dates.}
-  \centering
+	\label{trio}
+  	\caption{Comparison of active vehicle count for three example dates.}
+  	\centering
     \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_trio}
 \end{figure}
 
@@ -372,7 +375,7 @@ Coordinates estimated using the Global Position System include some level of noi
     \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/b25_detail}
 \end{figure}
 
-The only elements reported by the vehicle itself are the time, location and headsign (the route and destination text displayed above the front of the vehicle).  All of the remaining elements are inferred by the Bus Time server.  Because those inferences are made real-time, the software has no opportunity to retrospectively validate and correct errors.  This analysis validates two key features by checking for two metadata properties: that reported trip IDs are unique to each vehicle and that stop distances are unique for each shape.  The first validation failed while the second property was confirmed.  Figure \ref{trip_val} is a sample summary of records records grouped by both trip and vehicle, for a sample date and route; it shows the duplication of trip ID across multiple vehicles, the number of records associate with each duplicate, and the timespan of those records.
+The only elements reported by the vehicle itself are the time, location and headsign (the route and destination text displayed above the front of the vehicle).  All of the remaining elements are inferred by the Bus Time server.  Because those inferences are made real-time, the software has no opportunity to retrospectively validate and correct errors.  This analysis validates two key features by checking for two metadata properties: that reported trip IDs are unique to each vehicle and that stop distances are unique for each shape.  The first validation failed while the second property was confirmed.  Figure 7 is a sample summary of records records grouped by both trip and vehicle, for a sample date and route; it shows the duplication of trip ID across multiple vehicles, the number of records associate with each duplicate, and the timespan of those records.
 
 
 \begin{figure}[!ht]
@@ -393,7 +396,7 @@ The practices of transportation planning and analysis rely heavily on vehicle ar
 
 \begin{itemize}
 \item \textbf{Distribution of headway}: In higher-frequency transit routes, arrivals are considered reliable when the headway is more consistent and closer to customers' expectation.  (The ideal distribution is 100\% density at the expected value, that is, no deviation.  Our definition of Headway Adherence is binary and allows for some deviation).  The distribution of headway for a less-than-reliable service is not always a normal bell-curve.  This is because of the tendency for delayed buses to become even more delayed, as the larger number of waiting passengers increases dwell times, which in turn reduces overall travel speed.  When bunching occurs, the headways of the "bunched" buses (i.e., those that closely follow a preceding delayed bus) approach zero, while there is no theoretical upper limit for the headway of the delayed bus.
-\item \textbf{Bunching rate}: Variations in dwell time and variations between-stop travel time related to traffic and operator behavior are the major causes of vehicle bunching along a route (Gellei 2010).  Measurement of dwell time and travel time will be discussed later in this section.  The resulting bunching condition can be measured.  For this analysis, we consider the bunching condition to occur when headway is less than one minute.  The bunching ratio is the percentage, at a certain stop, of arrivals under bunching condition compared to total vehicle arrivals.  This is very similar to Headway Adherence except that it measures the tail of the distribution, not the middle.  Bunching ratio can be calculated and compared for a variety of stops and routes, as shown in \ref{bunch}.
+\item \textbf{Bunching rate}: Variations in dwell time and variations between-stop travel time related to traffic and operator behavior are the major causes of vehicle bunching along a route (Gellei 2010).  Measurement of dwell time and travel time will be discussed later in this section.  The resulting bunching condition can be measured.  For this analysis, we consider the bunching condition to occur when headway is less than one minute.  The bunching ratio is the percentage, at a certain stop, of arrivals under bunching condition compared to total vehicle arrivals.  This is very similar to Headway Adherence except that it measures the tail of the distribution, not the middle.  Bunching ratio can be calculated and compared for a variety of stops and routes, as shown in Figure \ref{bunch}.
 
 
 \begin{figure}[!ht]
