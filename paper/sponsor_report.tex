@@ -183,7 +183,7 @@ Our data extraction step picks the useful information from the original json and
 %\begin{figure}[!ht]
 %  \caption{Original sample extraction from DOT.}
 %  \centering
-%    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/DOT}
+%    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/DOT}
 %\end{figure}
 
 However, due to the time required to process and parse each JSON, we decided to apply big data techniques for the data. Each JSON file is originally between one and three megabytes, before parsing; the entire set of collected data is about 3 terabytes..We apply Apache Spark along with some Spark SQL techniques for manipulating the data in large scale. It takes around 30 to 45 minutes for the processing the entire year data depending on the performance of the server.  Without the use of this technique, processing only one day of data takes 10 to 15 minutes.
@@ -191,7 +191,7 @@ However, due to the time required to process and parse each JSON, we decided to 
 %\begin{figure}[!ht]
 %  \caption{Our data extraction using Spark.}
 %  \centering
-%    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/Spark}
+%    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/Spark}
 %\end{figure}
 
 
@@ -295,7 +295,7 @@ The data covers a total number of 318 different bus lines and 340 days in a year
   \caption{Missing days in the dataset.}
   \label{m_days}
   \centering
-    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/missing_days}
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/missing_days}
 \end{figure}
 
 From the list of missing days, December is the month with the most missing data, which contains 21 days without data. It is necessary to find out what factors cause this problem. If it is caused by some uncontrollable factors such as weather, some mitigation plan may be devised. But if it is caused by some human factors of systems factors, it should be avoided in the future.
@@ -310,7 +310,7 @@ The total number of bus records by date are shown in Figure \ref{m_alldays}.
   \caption{Visualization of records throughout the year.}
   \label{m_alldays}
   \centering
-    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/whole_year_record}
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_year_record}
 \end{figure}
 
 From the plot, some regularities are immediately apparent, including the seven-day cycle. However there are four obvious changes throughout the year. The first one is in February, second in May, third in June, and the last one in December. Further analysis is needed to find out these factors affecting the changes and could help with the bus schedule planning. Also, it can find that March 7th has an extremely high record but March 8th is a day without data which do not exist in other missing days. One can infer that there exist some possibility that data for March 8th were merged with March 7th.
@@ -323,41 +323,20 @@ From the plot, some regularities are immediately apparent, including the seven-d
 	\label{week}
   \caption{Bus records count for day of the week in 2015.}
   \centering
-    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/whole_day_record}
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record}
 \end{figure}
 
 From the plot, it can find that weekdays have the same trend and weekends have the same trend.   On weekdays, the record count regularly decreases as the morning progresses before peaking twice in the middle of the day.  In fact, one would expect the opposite based on typical characteristics of urban mobility: one peak during the morning rush-hour and one during the evening rush-hour.
 
         \ref{week_day}.
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
->>>>>>> parent of 22c403c... minor typos in tex and README files
-=======
->>>>>>> parent of 22c403c... minor typos in tex and README files
 \begin{figure}[!ht]
 \label{week_day}
   \caption{Bus records count for day of the week in 2015.}
   \centering
-<<<<<<< HEAD
-<<<<<<< HEAD
-    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/whole_day_record}
-\end{figure}
-      
->>>>>>> 27400abbbabe754c12d04d1af4925cd72da334a7
-=======
     \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record}
 \end{figure}
       
->>>>>>> parent of 22c403c... minor typos in tex and README files
-=======
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record}
-\end{figure}
-      
->>>>>>> parent of 22c403c... minor typos in tex and README files
       \subsubsection*{Data density with respect to level of scheduled activity}
       
        
@@ -385,44 +364,34 @@ The time series analysis showing counter-cyclical data density, the strong antic
 \subsubsection*{Tactical validation of individual elements}
 
 
-Coordinates estimated using the Global Position System include some level of noise due to factors such as atmospheric conditions and multi-path effects. However the location elements of the Bus Time data appear to be transformed to adhere to shapelines of the reported bus route, eliminating any variation laterally across the street. Figure \ref{b26} shows an overlay of points from both Bus Time records and GTFS shape file data, for a short stretch of the B26 route in Fort Greene.  While the coordinates of stops are on the sides of the street, no lateral variation is observable in the Bus Time coordinates, even though the vehicles are known to travel along all four lanes of that specific roadway. Some error may remain along the orthogonal plane (the basis for distance calculations), but GPS-assistive equipment installed after the initial launch of Bus Time uses gyroscopes and speedometer readings to reduce this error to an immaterial level.
-
-\begin{figure}[!ht]
-\label{b26}
-  \caption{Sample of B25 route.}
-  \centering
-<<<<<<< HEAD
-    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/trip_coverage_20150106}
-=======
-    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/b25_detail}
->>>>>>> 9c5a61f74777da801678ccac90b1e38ae9bfeefd
-\end{figure}
-
-The only elements reported by the vehicle itself are the time, location and headsign (the route and destination text displayed above the front of the vehicle).  All of the remaining elements are inferred by the Bus Time server.  Because those inferences are made real-time, the software has no opportunity to retrospectively validate and correct errors.  This analysis validates two key features by checking for two metadata properties: that reported trip IDs are unique to each vehicle and that stop distances are unique for each shape.  The first validation failed while the second property was confirmed.  Figure \ref{trip_val} is a sample summary of records records grouped by both trip and vehicle, for a sample date and route; it shows the duplication of trip ID across multiple vehicles, the number of records associate with each duplicate, and the timespan of those records.
+Coordinates estimated using the Global Position System include some level of noise due to factors such as atmospheric conditions and multi-path effects. However the location elements of the Bus Time data appear to be transformed to adhere to shapelines of the reported bus route, eliminating any variation laterally across the street. Figure XXX shows an overlay of points from both Bus Time records and GTFS shape file data, for a short stretch of the B26 route in Fort Greene.  While the coordinates of stops are on the sides of the street, no lateral variation is observable in the Bus Time coordinates, even though the vehicles are known to travel along all four lanes of that specific roadway. Some error may remain along the orthogonal plane (the basis for distance calculations), but GPS-assistive equipment installed after the initial launch of Bus Time uses gyroscopes and speedometer readings to reduce this error to an immaterial level.
 
 
-\begin{figure}[!ht]
-\label{trip_val}
-  \caption{Duplicated records.}
-  \centering
-<<<<<<< HEAD
-    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/trip_coverage_20151101}
-=======
-    \includegraphics[scale=0.9]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_vehicle_validation}
->>>>>>> 9c5a61f74777da801678ccac90b1e38ae9bfeefd
-\end{figure}
+The only elements reported by the vehicle itself are the time, location and headsign (the route and destination text displayed above the front of the vehicle).  All of the remaining elements are inferred by the Bus Time server.  Because those inferences are made real-time, the software has no opportunity to retrospectively validate and correct errors.  This analysis validates two key features by checking for two metadata properties: that reported trip IDs are unique to each vehicle and that stop distances are unique for each shape.  The first validation failed while the second property was confirmed.  Figure XXX is a sample summary of records records grouped by both trip and vehicle, for a sample date and route; it shows the duplication of trip ID across multiple vehicles, the number of records associate with each duplicate, and the timespan of those records.
+
 
 The conclusions are that the Bus Time server sometimes makes errors in inference of the vehicle's trip ID, the inferred trip ID is not persistent for a vehicle (that is, it “flip flops”), but the reported stop distances for the inferred shape are persistent.  The variation in inferred trip ID is an important consideration in subsequent performance measurement because so much of the analysis requires grouping or sorting data (both input and output) by trip.
 
 
-<<<<<<< HEAD
+\begin{figure}[!ht]
+  \caption{Bad: Major gaps without data for most vehicles, over several hours (2015-01-06).}
+  \centering
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20150106}
+\end{figure}
+
+
+\begin{figure}[!ht]
+  \caption{Less Bad: Shorter gap (<1 hour) with no data from some vehicles (2015-11-01).}
+  \centering
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20151101}
+\end{figure}
+
+
 \begin{figure}[!ht]
   \caption{Good: No significant gaps in API performance (2015-12-03)}
   \centering
-    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/trip_coverage_20151203}
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20151203}
 \end{figure}
-=======
->>>>>>> 9c5a61f74777da801678ccac90b1e38ae9bfeefd
 
 
 \subsection{Demonstrations of the methods applied to the dataset}
@@ -438,11 +407,7 @@ The practices of transportation planning and analysis rely heavily on vehicle ar
   \caption{Headway Bunching Rate at Stops for Three Brooklyn Bus Routes.}
   \label{bunch}
   \centering
-<<<<<<< HEAD
-    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/running_time_adherence}
-=======
     \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/bunching_rates}
->>>>>>> 9c5a61f74777da801678ccac90b1e38ae9bfeefd
 \end{figure}
 
 
@@ -459,34 +424,25 @@ One example descriptive analysis is to plot the distribution of normalized runni
   \caption{Running time adherence.}
   \label{adh}
   \centering
-    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/running_time_adherence}
+    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/running_time_adherence}
 \end{figure}
 
 
 \item \textbf{Performance with respect to vehicle distance along route:} It is generally accepted in the theory of urban public transportation that longer routes have worse reliability, as defined by the metrics discussed so far.  Another analytic technique is to plot one of the metrics for a given route (or, more specifically - one shape variation of a route). Figure \ref{ols} is the summary of an ordinary least squares (OLS) regression, taking Wait Assessment as the dependent variable and the vehicle's progression along the shape (in terms of number of stops made) as the independent variable.  The resulting parameter value has strong statistical significance, rejecting the null hypothesis that route length has no relationship to performance.  The example in Figure \ref{wastop} both supports that conclusion and suggests which segments along the route contribute most to the decline.
 
-<<<<<<< HEAD
-%\begin{figure}[!ht]
-%  \caption{Correlation of Wait Assessment and Stop Sequence Number.}
-%  \label{ols}
-%  \centering
-%    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/OLS Regression Results}
-%\end{figure}
-=======
 \begin{figure}[!ht]
   \caption{Correlation of Wait Assessment and Stop Sequence Number.}
   \label{ols}
   \centering
     \includegraphics[scale=1]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/ols_summary}
 \end{figure}
->>>>>>> 9c5a61f74777da801678ccac90b1e38ae9bfeefd
 
 
 \begin{figure}[!ht]
   \caption{Average Wait Assessment by Stop Sequence Number, Route B41.}
   \label{wastop}
   \centering
-    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/wa_by_stop_sequence}
+    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/wa_by_stop_sequence}
 \end{figure}
 
 \item \textbf{Spatial distribution of travel speeds:} Because Bus Time records contain discrete time and location, speed calculations are difference-based averages, not instantaneous (or quasi-instantaneous) samples.  The other challenge in descriptive statistics about speed at fixed location(s) is that the sequential observation points of multiple vehicles are not aligned; for example it is extremely unlikely that multiple vehicles record the "ping" from exactly 100 meters and again at exactly 200 meters along a route-shape.  However re-sampling is possible if mean speeds are treated as continuous curves with respect to distance.  The new distribution at a point is defined as the collection of mean speeds of all vehicles passing that point.  \ref{msd} demonstrates the changing moments of the distribution over the length of a route-shape, along with grid lines indicating the stop locations.
@@ -496,7 +452,7 @@ One example descriptive analysis is to plot the distribution of normalized runni
   \caption{Moving speed distribution.}
   \label{msd}
   \centering
-    \includegraphics[scale=0.45]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/moving_speed_distribution}
+    \includegraphics[scale=0.45]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/moving_speed_distribution}
 \end{figure}
 \end{center}
 
@@ -510,7 +466,7 @@ Figure \ref{adh} shows the estimated percentage of vehicles in slow/stopped cond
   \caption{Moving speed distribution.}
   \label{adh}
   \centering
-    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/percent_vehicles_slow_or_stopped}
+    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/percent_vehicles_slow_or_stopped}
 \end{figure}
 
 
@@ -577,7 +533,7 @@ The subsequent interpolation and performance analysis steps do not require the u
 \begin{figure}[!ht]
   \caption{On time performance aggregated by stop over 2015.}
   \centering
-    \includegraphics[scale=0.8]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/on_time_performance_stops}
+    \includegraphics[scale=0.8]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/on_time_performance_stops}
 \end{figure}
 
 \newpage
