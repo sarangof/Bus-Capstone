@@ -12,6 +12,7 @@ Inline-style:
 
 
 #### Data retrieval modules
+#### siri_repeat
 ##### siri_parser
 *method* siri_parser.**json_to_df**(a)
 
@@ -19,8 +20,15 @@ Single required argument *a* is a single json string received from the siri api.
     
 return a pandas dataframe with the following columns: `Line`, `RecordedAtTime`, `Latitude`, `Longitude`, `Trip`, `TripDate`, `ResponseTimeStamp`
 
+*method* siri_parser.**extract**(inpath,outfile)
+
+*method* siri_parser.**extract_trip_dates**(inpath,outpath,datelist)
 ##### gtfs
 
+### Processing and analysis modules
+#### arrivals
+#### seqtools
+#### ttools
 ### Spark Method
 
 The data processing and manipulating is all done in Spark for the whole dataset in 2015.
