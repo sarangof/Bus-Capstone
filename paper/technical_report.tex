@@ -1326,130 +1326,76 @@ Figure \ref{stopped_slow} shows the estimated percentage of vehicles in slow/sto
 \end{itemize}
 
 
- 
-Result and Limitations(RM only)
-Result:
-According to the analysis above, the bus reliability varies with time and locations. It also differs by the measurement we choose.
-General introduction of bus reliability based on different measurement.
-·      which measurements have similar results
-·      what’s the meaning of each one, are they reasonable?
-General introduction of bus reliability based on different time and location.
-·      Distribution description
-·      The most reliable and unreliable time/location, explain the reasons for unreliability
-Limitation:
-·      Each measurement reflects a part. Lack of a general assessment for bus reliability
-·      The impact of each measurement is different.
-
-
-Time at location
-
-Some time at location exercises (without accounting for time at stops) were performed in one day for all the trips in one route. The following images represent some of the partial results, as there is no validation data to measure accuracy.
-
-%%\includegraphics[scale=1.0]{cuteplot.png}
-
-
-
-
-
-
-Critical review of reliability metrics
-
-
-
 \section{Limitations of the analysis and ways to address these in the future}
+
+\subsection{Data}
+
+
+On the one hand, the huge size of data requires big data techniques.The biggest challenge for our approach to be implemented in practice by cities is that of processing large amounts of raw data into information because it requires big data techniques for anything beyond small samples (i.e. one line, one day, etc.). Even processed datasets being structured can demand more than what can be offered by single/dual core applications. Data supporting higher-level analysis techniques can be managed with any off-the-shelf database system, including sqLite (open source SQL) or even a series of CSVs. What’s more, the large amounts of data require a special environment to deal with. In this project, dealing the raw data cannot process in local machines. In order to make the process more faster, this project use CUSP data facilities to deal with the raw data. 
+On the other hand, the usage of the data may associate with some privacy problems. It is worth noting that, while the MTA does not publish archived Bus Time data (except for a sample in 2014), we are providing the code for anybody to collect it, and this is an important step that must be kept into account when discussing about Privacy.  Besides this, the Vehicle ID field is not anonymized, so the contributions of our project are subject to have unlikely not been feasible implications yet regarding Privacy.
+
+
+\subsection{Accuracy}
+
 Accuracy of the location and time data, when reported, is not in question. However some of the elements are inferred and may cause errors if not handled properly.
-Limitations are generally the result of information gaps - specifically when no data is reported where expected.
-When no data is reported:
-It is unknown if there was actually an operating bus, but a problem arose with hardware or software
-If there was a bus (for example, present in earlier and later data), it is possible that the bus did not follow the scheduled route
-If there was no bus, the cause is unknown
+Limitations are generally the result of information gaps, specifically when no data is reported where expected. When no data is reported, it is unknown if there was actually an operating bus, but a problem arose with hardware or software. Also, if there was a bus (for example, present in earlier and later data), it is possible that the bus did not follow the scheduled route. What’s more, if there was no bus, the cause is unknown
+For the information provided from the data, there also exist some limitations. The first one is that trips with data from more than one vehicles which means trips use combination of reported trip\_id and vehicle. Second, trips with no data which shows sensitivity of metrics by assuming trip operated as scheduled. Also, dwell time, lacks instantaneous speed information, schedule metadata and disappearing and reappearing bus.
 
-Trips with data from more than one vehicles - use combination of reported trip\_id and vehicle
-Trips with no data - show sensitivity of metrics by assuming trip operated as scheduled
-Dwell time
-Lacks instantaneous speed information
-Schedule metadata
-''Disappearing and reappearing bus'' 
+\subsection{Frequency}
 
-60-90 second frequency is insufficient for analysis of vehicle behavior on individual street segments and intersections.
-30 second frequency is insufficient for measurement of dwell time.
-Frequent, long gaps in the data make unbiased performance analysis impossible over full days or date ranges.  Because the gaps tend to arise at the same times each day, any statistical measurement involve time-of-day as an input variable will be biased.  Some analysis may leave time-of-day as an unobserved component of the error term and still show significance in other variables, such as distance-along-trip or street features.
-Incomplete reporting of trips may cause bias in calculation of trip-based measurements, such as running time and On Time Performance, if not normalized.
-Inferences of points beyond the range of data need to be need to be flagged specially given the possibility that the vehicle did not operate the trip as planned.
-If better density is useful, DOT should request the additional elements in the static files provided by MTA
+In this project, the ideal interval for every continuous collected timestamp is 30 seconds. But by analysing the data quality, there exist a large amount of data points that with an interval over 30 seconds even over an hour. That may because of the delay of signal collecting. This project is trying to analyze both the vehicle behavior on individual street segments and intersections and the measurement of bus dwell time. If the project want to make a more accurate analysis, 60-90 second frequency is insufficient for analysis of vehicle behavior on individual street segments and intersections and also 30 second frequency is insufficient for measurement of dwell time.
+As the interval can not be change or fix in the dataset, this project reported this situation. Alos, as the dataset contain a whole year information, the trend and regularity can be obvious even though the interval is not within 30 seconds. In the future analysis, if GPS can get a more accurate data collecting, that will make the project analysis more accurate. Bus travelling data is necessary for future DOT planning decisions and bus behaviors analyzing.In order to improve the data collecting process, it could improve the sensibility of sensors. 
+\subsection{Gaps}
+Frequent, long gaps in the data make unbiased performance analysis impossible over full days or date ranges, because the gaps tend to arise at the same times each day. Any statistical measurement involve time-of-day as an input variable will be biased. Some analysis may leave time-of-day as an unobserved component of the error term and still show significance in other variables, such as distance-along-trip or street features.
+Incomplete reporting of trips may cause bias in calculation of trip-based measurements, such as running time and On Time Performance, if not normalized. Just as mentioned in Accuracy sections, over-30-second interval may affect the accuracy of the analysis.
+Inferences of points beyond the range of data need to be flagged specially given the possibility that the vehicle did not operate the trip as planned. If better density is useful, DOT should request the additional elements in the static files provided by MTA
+
+\subsection{Tecnology}
+
+As the dataset for this project is extremely huge, the only way to make the process more faster is using big data technology. That would need the help of CUSP data facilities.So the main advantages of our approach rely on the fact that it is based on open source software (such as Python, HDFS and Spark) with a wide and increasing support community around them, but also on the fact that our code is simple to share and reproduce. Since Big Data software is relatively new, we kept most of the data manipulation in simple SQL or Python scripts, which is specially convenient for the client.
+
+
+\subsection{Reproducibility}
+
+The main risk identified by our approach is reproducibility in terms of data fetching and of framework dependency. Our data feed depends on a public API that is always subject to interruptions, and the Big Data processing requires the HDFS management system and Spark. It may take time and computational and technical resources to handle them, and deprecation is always a hazard. Despite of this, those potential sources of failure have been proven to be increasing in robustness and trustworthiness during the last years.
+
 
 
 \section{Conclusions and future research}
 
-7.1 Conclusions
+\subsection{Conclusions}
 
-7.1.1 Conclusion for the model this project used. (Introduction, Pros and Cons, Bias)
-Model for time estimation
-Bus time data which is collected by GPS was offered by MTA. The MTA bus GPS database collects the location of each bus every 30 seconds. This project used these data to estimating the departure and arrival time for each stop.
-Taking one-year data as this project’s object of study, the data is extremely huge so that big data technology like Spark is widely used in time estimation.
-After using spark to deal with the bus time data, this project got a new dataset contained all the information such as the coordinates and timestamp which is more clear and easy for future analyzing.
-Measurement for bus performance
-After estimating the departure and arrival time for each stop, this project used headways and wait assessment as the measurement to figure out the bus performance and reliability. This will help DOT in future improvement in bus performance and traffic planning.
- In order to make the work easy to share and reproduce, this project choose to use SQL API to manipulate the data, which enable DOT to easily make change by editing the SQL script. 
-Method for feature selection
-
-7.1.2 Conclusion for the results this project got. (How the result influence the future operation)
-7.1.3 Conclusion for the whole analysis process. (Pros and Cons, Bias, Influence)
-Pro:
-1. Focus on the viewpoint of DOT, the correlation elements this project chose not only focus on the bus operation, but also other traffic elements.
-2. With such large dataset and big data technique, the result of this project’s analysis is more persuasive compared to traditional sample study.
-3. Comparison among models(different models to estimate time as well as to measure performance)
-Cons:
-1. The choice of elements based on formal studies, the objective of which are not all NYC.
-2. Too much assumptions.
-3. The departure and arrival time for each bus at each stop comes from indirect approximate methods, it is better for MTA to collect the accurate data to help the model works better.
-Influence：
-The main goal for this project is to figure out the other potential influence factor besides operation to help DOT control and improve bus performance on planning level. Similar methodology and concept could be used in other cities and traffic mode. The big data technology applied in not only traffic analysis but also city wide urban issue offers more reliable result compared with traditional sample studies. 
-7.2 Future work
-Feature Selection optimization: Pre study and investigation for NYC
-Visualization: Use Javascript to create interactive heat map that predicts the chance of delay of specific bus line or stops
-Algorithm optimization: Many analyses right now are not computed using big data technique, which means those analyses are hard to applied in large scale such as one year data. In order to analyse quickly in large scale, we must optimize our algorithms to ensure compatibility with big data techniques such as Spark.
-Interpolation:
-1. Extend sample analysis to all the trips for all the routes in one day.
-2. Include the waiting time at stops. Explore previous MTA analysis on Bus Time data to see if   they can provide with a reasonable guess for the dwell time.
-3. Compare with the GTFS schedule data to actually implement one of the reliability metrics. It is still unclear if the distance along the route feature is equivalent among both Bus Time and GTF representations.
-4. Manage exceptions where there was missing or defectuous data.
-5. Apply this analysis for the entire year of Bus Time feed (2015).
-6. Consider alternatives for treating deceiving data points at the beginning and end of each trip (''tail'' and ''head'').
-7.3 Further Application
-Other cities (need to pay attention to data structure, bus GPS data in some cities collect departure and arrival time instead of location)
-Other traffic mode (eg. Subway, city bike. Need to pay attention to the different features of each kinds of traffic mode)
+This project studies the possibility of calculating performance metrics for bus performance in New York City based on the GPS data offered by MTA. The MTA bus GPS database collects the location of each bus every 30 seconds. After estimating the departure and arrival time for each bus at each stop, we use measurement like headways and wait assessment to assess bus performance and reliability. Taking one-year data as our object of study, the data is extremely huge so that big data techniques (mainly Spark) are widely used in this project. In order to make our work easy to share and reproduce, we choose to use the SQL API to decide on the parsing of the data, which enables the DOT to easily make changes by editing the SQL script.
+Positive aspects of our approach include the fact that we focused this analysis on the viewpoint of the DOT; the fact that we were able to successfully process large volumes of data; the fact that we identified pitfalls and challenges of using the MTA Bus Time data for the purposes of the sponsor agency and the fact that we enable a flexible implementation of different methods to estimate times and locations, as well as to measure schedule-reliability performance.
+Potential pitfalls and areas of improvement are the fact that we used formal metrics that were not tailored for the DOT nor New York City, and the abundance of assumptions that inevitably scale up, both with and without bias, in the form of measurement errors.
+Similar methodologies and concepts could be used in other cities and traffic models. The big data technology applied in not only traffic analysis but also city wide urban issue offers more reliable results compared with traditional sample studies.
 
 
+\subsection{Recommendations to DOT}
+
+Use of the public API for real-time archiving of Bus Time data mimics an ongoing process already performed internally at MTA, and can result in an incomplete view of the same data.  Moreover, the static file currently used by DOT, presumably provided by MTA, contains both greater temporal density and some additional, potentially useful elements that are not available through the Bus Time API.  The results of this project suggest that combining the advantages of both data acquisition processes would yield the ideal dataset needed for these analyses.  The DOT may request that MTA include the additional, useful vehicle monitoring elements in the file provided directly to DOT and therefore eliminate temporal gaps that arise due to problems with the public API.
+The subsequent interpolation and performance analysis steps do not require the user to implement a so-called big data platform if Bus Time data is processed in smaller batches (for example, one full day) as it accumulates.  Once headway, running time, and vehicle speed calculations are performed and output stored with proper indexing, the performance metrics can be dynamically analyzed using a typical personal computer.
+
+\subsection{Suggestions for future work}
+
+\begin{itemize}
+\item Inference study of the effect of several traffic or design conditions on reliability.
+\item Autocorrelation to identify recurring patterns in reliability with respect to time (for example, every Monday morning)
+\item  Integrate and Improve the current visualization tool developed by NYU CUSP, and adapt it to be responsive and interactive to different queries.
+
+\item Further optimize the algorithms hereby used for the Big Data portion of the work.
+\item Generalization of code for further applications
+\begin{itemize}
+\item Other transit system data feeds may use a different interface standard and as a result a different data structure-   AVL systems in some cities collect stop departure and arrival time directly, instead of location at fixed time intervals).
+\item Other transit modes, for example subway or bike-share,  may contain different features specific to that mode.
+\end{itemize}
+\end{itemize}
 
 
+\section*{Author contributions}
 
-% if have a single appendix:
-%\appendix[Proof of the Zonklar Equations]
-% or
-%\appendix  % for no appendix heading
-% do not use \section anymore after \appendix, only \section*
-% is possibly needed
-
-% use appendices with more than one appendix
-% then use \section to start each appendix
-% you must declare a \section before using any
-% \subsection or using \label (\appendices by itself
-% starts a section numbered zero.)
-%
-
-
-\appendices
-\section{Sample results table}
-Appendix one text goes here.
-
-% you can choose not to have a title for an appendix
-% if you want by leaving the argument blank
-\section{Visualization of a single line}
-Appendix two text goes here.
-
-
-
+With discussions and communications with mentors and sponsor, all authors work contributed extensively to the work presented in this paper.
+Matthew P Urbanek extracted the data using MTA BusTime API and did the data quality analysis for the whole year data with Bonan Yuan. Sara Arango is responsible for the arrival time interpolation. Bonan Yuan parsed all the extracted data from the whole year json files and processed the analysis on the large dataset by Spark. Yuqiao Cen did the gap record analysis. Jiaxu Zhou developed the performance assessment metrics. 
 
 
 % Can use something like this to put references on a page
