@@ -1,3 +1,9 @@
 *.pyc
 .ipynb_checkpoints/
+.out	
+.bib
+.bcf
+.log
+.synctex.gz
+.toc
 nohup.out
