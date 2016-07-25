@@ -237,9 +237,9 @@ We implement three general approaches to assessing the completeness and validity
 
 \subsection{Arrival time estimation techniques}
 
-Three methods are investigated for estimating a vehicle’s arrival time at a certain location, such as a bus stop. Arrival time estimates are the basis for most measurement and identification related to bus reliability, such as running times and headway.  Calculation of headway, which is in turn the basis for many performance metrics, also requires estimates of all vehicles’ arrival times at a certain location. Missing estimates (whether due to the data generating process or the chosen estimation algorithm) must be identified; without them, the resulting headway will be the difference in arrival times of non-sequential vehicles.
+Three methods are investigated for estimating a vehicle's arrival time at a certain location, such as a bus stop. Arrival time estimates are the basis for most measurement and identification related to bus reliability, such as running times and headway.  Calculation of headway, which is in turn the basis for many performance metrics, also requires estimates of all vehicles' arrival times at a certain location. Missing estimates (whether due to the data generating process or the chosen estimation algorithm) must be identified; without them, the resulting headway will be the difference in arrival times of non-sequential vehicles.
 
-The first method is use to use a spatial algorithm to identify any data points within a certain radius of the location, and make an estimation from within that subset. Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location. The second method is to apply an interpolation algorithm to all observations reported for a given vehicle’s trip. The tradeoff is that this may be more computation than required if few points along the trip are to be estimated.  The risk Interpolation is that it assumes the bus traveling at uniform speed while in reality the bus speed changes a lot due the complicated traffic condition and traffic lights, especially in New York.
+The first method is use to use a spatial algorithm to identify any data points within a certain radius of the location, and make an estimation from within that subset. Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location. The second method is to apply an interpolation algorithm to all observations reported for a given vehicle's trip. The tradeoff is that this may be more computation than required if few points along the trip are to be estimated.  The risk Interpolation is that it assumes the bus traveling at uniform speed while in reality the bus speed changes a lot due the complicated traffic condition and traffic lights, especially in New York.
 
 The third method is to apply the interpolation only for stops that are reported in Bus Time as a ''Monitored Call,'' that is, the upcoming stop. The advantage of only interpolating the reported stops is that it avoids the risk of reporting stops that the bus never made (for example, due to a detour) and the risk of high inaccuracy in the event the bus did make the stop (due to the long distance over which times must be interpolated).The tradeoff for the third method is that since many trips are not completely recorded, we may lose a lot of information for the missing part.
 
@@ -342,7 +342,7 @@ From the plot, it can find that weekdays have the same trend and weekends have t
        
    As the bus is transmitting every 30 seconds, the interval between Bus Time records is expected to also be 30 seconds so long as the vehicle is operating with the AVL equipment activated.  Figure XXX shows the actual intervals from the dataset collected.  In fact the typical interval turns out to be 60 seconds, with a significant portion of even longer intervals.  We examine these long intervals by comparing a measurement of total vehicle activity between the Bus Time data (in terms of record count) and the schedule data (in terms of aggregate running time of all scheduled trips). The measured activity from the two sources turn out to be strongly anticorrelated in the months analyzed (Table XXX), whenever materially non-zero.  In other words, generally when scheduled activity increases, the density of data available in our dataset decreases.
    
-To further diagnose the issue, the comparison is made on a finer temporal scale (6-minute timesteps) for a few random dates.  Figure XXX, XXX and XXX show very different patterns when overlaying the level of scheduled activity onto the level of reported activity derived from the Bus Time data.  On one of the two weekdays examined, two large gaps are clearly visible and span the entirety of the two daily “rush-hour” peaks in the schedule.  On the weekend date examined, a short gap is visible in the late evening.
+To further diagnose the issue, the comparison is made on a finer temporal scale (6-minute timesteps) for a few random dates.  Figure \ref{trio} shows very different patterns when overlaying the level of scheduled activity onto the level of reported activity derived from the Bus Time data.  On one of the two weekdays examined  (the first and third), two large gaps are clearly visible and span the entirety of the two daily “rush-hour” peaks in the schedule.  On the weekend date examined, a short gap is visible in the late evening.
 
 The time series analysis showing counter-cyclical data density, the strong anticorrelation, and the tactical examination of a few dates all lead to the conclusion that the dataset collected by NYU CUSP cannot be used for performance analysis of an entire year without major risks to accuracy, in the form of both bias (as discussed in section 0.3.5 “Arrival time estimation techniques”) and variance (due to the most typical interval being twice as long as specified by MTA).  To continue with the demonstration of applying the data for performance metrics, we identified a week with the best density and limited gaps during rush hours (2015-12-01 to 2015-12-07).     
         
@@ -350,7 +350,14 @@ The time series analysis showing counter-cyclical data density, the strong antic
 \label{week_day}
   \caption{Distribution of intervals between SIRI response records.}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/interva_distribution}
+    \includegraphics[scale=0.8]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/interva_distribution}
+\end{figure}
+
+\begin{figure}[!ht]
+\label{trio}
+  \caption{Comparison of active vehicle count for three example dates.}
+  \centering
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_trio}
 \end{figure}
 
 
@@ -363,7 +370,7 @@ Coordinates estimated using the Global Position System include some level of noi
 The only elements reported by the vehicle itself are the time, location and headsign (the route and destination text displayed above the front of the vehicle).  All of the remaining elements are inferred by the Bus Time server.  Because those inferences are made real-time, the software has no opportunity to retrospectively validate and correct errors.  This analysis validates two key features by checking for two metadata properties: that reported trip IDs are unique to each vehicle and that stop distances are unique for each shape.  The first validation failed while the second property was confirmed.  Figure XXX is a sample summary of records records grouped by both trip and vehicle, for a sample date and route; it shows the duplication of trip ID across multiple vehicles, the number of records associate with each duplicate, and the timespan of those records.
 
 
-The conclusions are that the Bus Time server sometimes makes errors in inference of the vehicle’s trip ID, the inferred trip ID is not persistent for a vehicle (that is, it “flip flops”), but the reported stop distances for the inferred shape are persistent.  The variation in inferred trip ID is an important consideration in subsequent performance measurement because so much of the analysis requires grouping or sorting data (both input and output) by trip.
+The conclusions are that the Bus Time server sometimes makes errors in inference of the vehicle's trip ID, the inferred trip ID is not persistent for a vehicle (that is, it “flip flops”), but the reported stop distances for the inferred shape are persistent.  The variation in inferred trip ID is an important consideration in subsequent performance measurement because so much of the analysis requires grouping or sorting data (both input and output) by trip.
 
 
 \begin{figure}[!ht]
@@ -405,7 +412,7 @@ The practices of transportation planning and analysis rely heavily on vehicle ar
 
 
 
-\item \textbf{Distribution of running time adherence:} Best practice in schedule planning is to forecast running time using historical data, but exclude outliers. An outlier often represents an occurrence of some enroute incident (such as a police action or a parade) and should not influence planning a typical-day bus schedule. Outliers skew upward the distribution of actual running times, since there is a physical upper limit to the vehicle’s speed, but no limit to the number and severity of enroute incidents. Because the schedules are created based on historical distributions excluding outliers, the resulting error, defined as running time variance, will tend to be positive. The error can be mitigated by artificially increasing the planned running time (for example, by including the outliers, or adding some arbitrary value), but it is generally not cost- effective to do so, or impacts the reliability of subsequent trips operated by the same vehicle or operator.
+\item \textbf{Distribution of running time adherence:} Best practice in schedule planning is to forecast running time using historical data, but exclude outliers. An outlier often represents an occurrence of some enroute incident (such as a police action or a parade) and should not influence planning a typical-day bus schedule. Outliers skew upward the distribution of actual running times, since there is a physical upper limit to the vehicle's speed, but no limit to the number and severity of enroute incidents. Because the schedules are created based on historical distributions excluding outliers, the resulting error, defined as running time variance, will tend to be positive. The error can be mitigated by artificially increasing the planned running time (for example, by including the outliers, or adding some arbitrary value), but it is generally not cost- effective to do so, or impacts the reliability of subsequent trips operated by the same vehicle or operator.
 
 
 One example descriptive analysis is to plot the distribution of normalized running time variances. Visible in this example, Figure \ref{adh}, is both the central tendency -- slightly positive -- and the wide spread of the distribution, indicating very inconsistent running time adherence.  Strategies to reduce the inconsistency are not in the scope of this project.
@@ -569,7 +576,7 @@ LI Fazhi, Yang Dongyuan, and Ma Kai, ''Bus Rapid Transit (BRT) Bunching Analysis
 Brian Levine, Alex Lu, and Alla Reddy, ''Measuring Subway Service Performance at New York City Transit: A Case Study Using Automated Train Supervision (ATS) Track-Occupancy Data,'' TRB 2013 Annual Meeting, 2013.
 
 \bibitem{DanWan}
-Dan Wan, Camille Kamga, Jun Liu, Aaron Sugiura, and Eric B. Beaton, ''Rider perception of a ‘light’ Bus Rapid Transit system - The New York City Select Bus Service,'' Transport Policy 49 (2016) 41–55, Apr. 2016.
+Dan Wan, Camille Kamga, Jun Liu, Aaron Sugiura, and Eric B. Beaton, ''Rider perception of a ‘light' Bus Rapid Transit system - The New York City Select Bus Service,'' Transport Policy 49 (2016) 41–55, Apr. 2016.
 
 \bibitem{Bie}
 
