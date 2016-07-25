@@ -8,28 +8,28 @@
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {0.1.2}Goals}{3}{subsection.0.1.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {0.2}Project offerings}{5}{section.0.2}
+\contentsline {section}{\numberline {0.2}Project offerings}{4}{section.0.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {0.3}Approach}{6}{section.0.3}
+\contentsline {section}{\numberline {0.3}Approach}{5}{section.0.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {0.3.1}Data techniques}{6}{subsection.0.3.1}
+\contentsline {subsection}{\numberline {0.3.1}Bus time data extraction}{5}{subsection.0.3.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {0.3.2}Big Data Techniques}{7}{subsection.0.3.2}
+\contentsline {subsection}{\numberline {0.3.2}Big Data Techniques}{6}{subsection.0.3.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {0.3.3}Measurement techniques}{8}{subsection.0.3.3}
+\contentsline {subsection}{\numberline {0.3.3}Schedule data extraction}{6}{subsection.0.3.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {0.3.4}}{8}{subsection.0.3.4}
+\contentsline {subsection}{\numberline {0.3.4}Data quality assessment}{7}{subsection.0.3.4}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.3.5}Arrival time estimation techniques}{7}{subsection.0.3.5}
+\defcounter {refsection}{0}\relax 
+\contentsline {subsection}{\numberline {0.3.6}Reliability metrics}{8}{subsection.0.3.6}
 \defcounter {refsection}{0}\relax 
 \contentsline {section}{\numberline {0.4}Results and implications for practice}{9}{section.0.4}
 \defcounter {refsection}{0}\relax 
 \contentsline {subsection}{\numberline {0.4.1}Data quality assessment}{9}{subsection.0.4.1}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {0.4.2}Discussion about the theory}{9}{subsection.0.4.2}
+\contentsline {subsection}{\numberline {0.4.2}Demonstrations of the methods applied to the dataset}{12}{subsection.0.4.2}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {0.4.3}Samples of the deliverables}{10}{subsection.0.4.3}
+\contentsline {subsection}{\numberline {0.4.3}More discussion on the approach}{18}{subsection.0.4.3}
 \defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {0.4.4}Risks and advantages of the approach}{10}{subsection.0.4.4}
-\defcounter {refsection}{0}\relax 
-\contentsline {subsection}{\numberline {0.4.5}Conclusions and future work}{10}{subsection.0.4.5}
-\defcounter {refsection}{0}\relax 
-\contentsline {section}{\numberline {.1}\\Sample visualizations}{12}{section.Alph0.1}
+\contentsline {subsection}{\numberline {0.4.4}Conclusions and future work}{19}{subsection.0.4.4}

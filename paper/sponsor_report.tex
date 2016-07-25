@@ -183,7 +183,7 @@ Our data extraction step picks the useful information from the original json and
 %\begin{figure}[!ht]
 %  \caption{Original sample extraction from DOT.}
 %  \centering
-%    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/DOT}
+%    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/DOT}
 %\end{figure}
 
 However, due to the time required to process and parse each JSON, we decided to apply big data techniques for the data. Each JSON file is originally between one and three megabytes, before parsing; the entire set of collected data is about 3 terabytes..We apply Apache Spark along with some Spark SQL techniques for manipulating the data in large scale. It takes around 30 to 45 minutes for the processing the entire year data depending on the performance of the server.  Without the use of this technique, processing only one day of data takes 10 to 15 minutes.
@@ -191,7 +191,7 @@ However, due to the time required to process and parse each JSON, we decided to 
 %\begin{figure}[!ht]
 %  \caption{Our data extraction using Spark.}
 %  \centering
-%    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/Spark}
+%    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/Spark}
 %\end{figure}
 
 
@@ -297,7 +297,7 @@ Trip elements & Route and status only & Includes inferred elements, like Next St
   \caption{Missing days in the dataset.}
   \label{m_days}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/missing_days}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/missing_days}
 \end{figure}
 
       From the list of missing days , it can find that December is a month with the most missing data, which contains 21 days without data. So it is necessary to find out what factors cause this problem. If it is caused by some uncontrollable factors such as weather, some mitigation plan could come out. But if it is caused by some human factors of systems factors, it should be avoided in the future.
@@ -312,7 +312,7 @@ Trip elements & Route and status only & Includes inferred elements, like Next St
   \caption{Bus records count for all days in 2015.}
   \label{m_alldays}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_year_record}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/whole_year_record}
 \end{figure}
 
    From the plot, it can find that there are some regularities existing. Normally, seven days is a cycle, and weekdays have less record count than weekends. But January, February and May are not that obvious. And as there are some missing data in December, the regularity in December is not obvious. 
@@ -327,7 +327,7 @@ Trip elements & Route and status only & Includes inferred elements, like Next St
 	\label{week}
   \caption{Bus records count for day of the week in 2015.}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/whole_day_record}
 \end{figure}
 
    From the plot, it can find that weekdays have the same trend and weekends has the same trend. In weekdays, 9am to 11am would exist another peak in a day. And after 5pm, bus records declines regularly. It is reasonable because 9am to 11am and 5pm are the rush hours in a day. And in weekends, after 8am, bus records increase regularly.
@@ -341,7 +341,7 @@ Trip elements & Route and status only & Includes inferred elements, like Next St
 \label{week_day}
   \caption{Bus records count for day of the week in 2015.}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/whole_day_record}
 \end{figure}
 
 
@@ -353,21 +353,21 @@ Trip elements & Route and status only & Includes inferred elements, like Next St
 \begin{figure}[!ht]
   \caption{Bad: Major gaps without data for most vehicles, over several hours (2015-01-06).}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20150106}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/trip_coverage_20150106}
 \end{figure}
 
 
 \begin{figure}[!ht]
   \caption{Less Bad: Shorter gap (<1 hour) with no data from some vehicles (2015-11-01).}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20151101}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/trip_coverage_20151101}
 \end{figure}
 
 
 \begin{figure}[!ht]
   \caption{Good: No significant gaps in API performance (2015-12-03)}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20151203}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/trip_coverage_20151203}
 \end{figure}
 
 
@@ -384,7 +384,7 @@ The practices of transportation planning and analysis rely heavily on vehicle ar
   \caption{Headway Bunching Rate at Stops for Three Brooklyn Bus Routes.}
   \label{bunch}
   \centering
-    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/running_time_adherence}
+    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/running_time_adherence}
 \end{figure}
 
 
@@ -401,7 +401,7 @@ One example descriptive analysis is to plot the distribution of normalized runni
   \caption{Running time adherence.}
   \label{adh}
   \centering
-    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/running_time_adherence}
+    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/running_time_adherence}
 \end{figure}
 
 
@@ -411,7 +411,7 @@ One example descriptive analysis is to plot the distribution of normalized runni
 %  \caption{Correlation of Wait Assessment and Stop Sequence Number.}
 %  \label{ols}
 %  \centering
-%    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/OLS Regression Results}
+%    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/OLS Regression Results}
 %\end{figure}
 
 
@@ -419,7 +419,7 @@ One example descriptive analysis is to plot the distribution of normalized runni
   \caption{Average Wait Assessment by Stop Sequence Number, Route B41.}
   \label{wastop}
   \centering
-    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/wa_by_stop_sequence}
+    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/wa_by_stop_sequence}
 \end{figure}
 
 \item \textbf{Spatial distribution of travel speeds:} Because Bus Time records contain discrete time and location, speed calculations are difference-based averages, not instantaneous (or quasi-instantaneous) samples.  The other challenge in descriptive statistics about speed at fixed location(s) is that the sequential observation points of multiple vehicles are not aligned; for example it is extremely unlikely that multiple vehicles record the "ping" from exactly 100 meters and again at exactly 200 meters along a route-shape.  However re-sampling is possible if mean speeds are treated as continuous curves with respect to distance.  The new distribution at a point is defined as the collection of mean speeds of all vehicles passing that point.  \ref{msd} demonstrates the changing moments of the distribution over the length of a route-shape, along with grid lines indicating the stop locations.
@@ -429,7 +429,7 @@ One example descriptive analysis is to plot the distribution of normalized runni
   \caption{Moving speed distribution.}
   \label{msd}
   \centering
-    \includegraphics[scale=0.45]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/moving_speed_distribution}
+    \includegraphics[scale=0.45]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/moving_speed_distribution}
 \end{figure}
 \end{center}
 
@@ -443,7 +443,7 @@ Figure \ref{adh} shows the estimated percentage of vehicles in slow/stopped cond
   \caption{Moving speed distribution.}
   \label{adh}
   \centering
-    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/percent_vehicles_slow_or_stopped}
+    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/percent_vehicles_slow_or_stopped}
 \end{figure}
 
 
@@ -500,7 +500,7 @@ Influence: Similar methodologies and concepts could be used in other cities and 
 \begin{figure}[!ht]
   \caption{On time performance aggregated by stop over 2015.}
   \centering
-    \includegraphics[scale=0.8]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/on_time_performance_stops}
+    \includegraphics[scale=0.8]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/on_time_performance_stops}
 \end{figure}
 
 \newpage
