@@ -22,10 +22,18 @@ sqlContext.read.json()
 
   * use `groupBykey` to cast interpolation of time&distance to all trips.
 
+<<<<<<< HEAD
   * use Scipy Interpolate Tool to interpolate all stop times.
+=======
+#### Data retrieval modules
+#### siri_repeat
+##### siri_parser
+*method* siri_parser.**json_to_df**(a)
+>>>>>>> 27400abbbabe754c12d04d1af4925cd72da334a7
 
   For more information:[Scipy Interpolate1D](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html#scipy.interpolate.interp1d)
 
+<<<<<<< HEAD
 - __Read CSV using Spark_CSV tool__
     ```
     sqlContext.read.format('com.databricks.spark.csv').options(header='true').load()
@@ -33,6 +41,18 @@ sqlContext.read.json()
 for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 
 - __SparkSQL manipulation__
+=======
+*method* siri_parser.**extract**(inpath,outfile)
+
+*method* siri_parser.**extract_trip_dates**(inpath,outpath,datelist)
+##### gtfs
+
+### Processing and analysis modules
+#### arrivals
+#### seqtools
+#### ttools
+### Spark Method
+>>>>>>> 27400abbbabe754c12d04d1af4925cd72da334a7
 
    * `Inner join`  to join the interpolated data with GTFS schedule
 

@@ -110,7 +110,7 @@ We would like to express our sincere appreciation to all who have lent us hands 
 
 
 \subsection{	Statement and Description}
-Although demand for public transportation in New York City is growing, bus ridership levels are declining.  Many reasons can explain this, including drops in vehicle speeds and customer perceptions of dependability.  This project focuses on identifying these two factors along the city's MTA operated bus routes, in the form of reliability metrics that are relevant to the DOT as the municipal traffic authority.
+This project focuses on identifying these two factors along the city's MTA operated bus routes, in the form of reliability metrics that are relevant to the DOT as the municipal traffic authority.
 
 The DOT receives batch files from MTA containing archived basic AVL data, but the agency lacks a formal process for compiling and analysing it according to their decision making capabilities (such as those related with road design and traffic management), which substantially differ from the MTA's purposes and reach.  Additionally, the basic AVL data differs significantly in density and reported elements compared to those from the Bus Time API.  Although the MTA, being the agency in charge of operations, has internally defined metrics used for scheduling, planning and analysis of the bus service, this their attention is on the bus level instead of the whole system level, which is more of the interest of the DOT.
  
@@ -183,7 +183,7 @@ Our data extraction step picks the useful information from the original json and
 %\begin{figure}[!ht]
 %  \caption{Original sample extraction from DOT.}
 %  \centering
-%    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/DOT}
+%    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/DOT}
 %\end{figure}
 
 However, due to the time required to process and parse each JSON, we decided to apply big data techniques for the data. Each JSON file is originally between one and three megabytes, before parsing; the entire set of collected data is about 3 terabytes..We apply Apache Spark along with some Spark SQL techniques for manipulating the data in large scale. It takes around 30 to 45 minutes for the processing the entire year data depending on the performance of the server.  Without the use of this technique, processing only one day of data takes 10 to 15 minutes.
@@ -191,7 +191,7 @@ However, due to the time required to process and parse each JSON, we decided to 
 %\begin{figure}[!ht]
 %  \caption{Our data extraction using Spark.}
 %  \centering
-%    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/Spark}
+%    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/Spark}
 %\end{figure}
 
 
@@ -237,9 +237,9 @@ We implement three general approaches to assessing the completeness and validity
 
 \subsection{Arrival time estimation techniques}
 
-Three methods are investigated for estimating a vehicle’s arrival time at a certain location, such as a bus stop. Arrival time estimates are the basis for most measurement and identification related to bus reliability, such as running times and headway.  Calculation of headway, which is in turn the basis for many performance metrics, also requires estimates of all vehicles’ arrival times at a certain location. Missing estimates (whether due to the data generating process or the chosen estimation algorithm) must be identified; without them, the resulting headway will be the difference in arrival times of non-sequential vehicles.
+Three methods are investigated for estimating a vehicle's arrival time at a certain location, such as a bus stop. Arrival time estimates are the basis for most measurement and identification related to bus reliability, such as running times and headway.  Calculation of headway, which is in turn the basis for many performance metrics, also requires estimates of all vehicles' arrival times at a certain location. Missing estimates (whether due to the data generating process or the chosen estimation algorithm) must be identified; without them, the resulting headway will be the difference in arrival times of non-sequential vehicles.
 
-The first method is use to use a spatial algorithm to identify any data points within a certain radius of the location, and make an estimation from within that subset. Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location. The second method is to apply an interpolation algorithm to all observations reported for a given vehicle’s trip. The tradeoff is that this may be more computation than required if few points along the trip are to be estimated.  The risk Interpolation is that it assumes the bus traveling at uniform speed while in reality the bus speed changes a lot due the complicated traffic condition and traffic lights, especially in New York.
+The first method is use to use a spatial algorithm to identify any data points within a certain radius of the location, and make an estimation from within that subset. Possible calculations on that subset are to take earliest or latest time recorded, the median time recorded, or apply an interpolation to generate a point-estimate at the exact location. The second method is to apply an interpolation algorithm to all observations reported for a given vehicle's trip. The tradeoff is that this may be more computation than required if few points along the trip are to be estimated.  The risk Interpolation is that it assumes the bus traveling at uniform speed while in reality the bus speed changes a lot due the complicated traffic condition and traffic lights, especially in New York.
 
 The third method is to apply the interpolation only for stops that are reported in Bus Time as a ''Monitored Call,'' that is, the upcoming stop. The advantage of only interpolating the reported stops is that it avoids the risk of reporting stops that the bus never made (for example, due to a detour) and the risk of high inaccuracy in the event the bus did make the stop (due to the long distance over which times must be interpolated).The tradeoff for the third method is that since many trips are not completely recorded, we may lose a lot of information for the missing part.
 
@@ -249,7 +249,9 @@ Wait Assessment is a metric used by New York City Transit, defined in the Transi
 
 \textit{Wait Assessment} is a simple calculation that can be performed after all headway calculations have been performed for a given location.
 
-\textit{OTP (On Time Performance)} is defined as the positive difference between actual arrival time and schedule arrival time. Different from the measurement of on-time performance percentage by MTA, which is the percentage reflects the number of buses that arrive within a certain time before or after the published schedule, we use the distribution of a group of data to describe the on-time performance for a single trip. The main reason is the criteria is not provided by MTA for buses. However, During low-frequency period, on-time performance is more important while during the high frequency period, the headways matter more. Running Time Adherence (measured in \%) is defined as the average difference between the actual and the scheduled running times relative to the scheduled running time. When the actual running time is shorter than the schedule, the measure is called shorter running time and otherwise longer running time.
+\textit{OTP (On Time Performance)} is defined as the positive difference between actual arrival time and schedule arrival time. Different from the measurement of on-time performance percentage by MTA, which is the percentage reflects the number of buses that arrive within a certain time before or after the published schedule, we use the distribution of a group of data to describe the on-time performance for a single trip. The main reason is the criteria is not provided by MTA for buses. However, During low-frequency period, on-time performance is more important while during the high frequency period, the headways matter more. 
+
+Running Time Adherence (measured in \%) is defined as the average difference between the actual and the scheduled running times relative to the scheduled running time. When the actual running time is shorter than the schedule, the measure is called shorter running time and otherwise longer running time.
 
 Similarly, headway regularity (measured in \%) is defined as the average difference between the actual and the scheduled headways relative to the scheduled headway. The Headway Regularity describes how evenly distributed actual bus is in relation to scheduled service. If two consecutive buses are further from (or closer to) each other than the scheduled headway, the difference is called a longer (or shorter) headway difference. Bus bunching is an extreme example of short headway.
 
@@ -257,7 +259,10 @@ Similarly, headway regularity (measured in \%) is defined as the average differe
 
 \section{Results and implications for practice}
 
-Differences worth noting between the compilation of Bus Time data and DOT's files are listed in Table \ref{diff}. \footnote{Unclear if reported speed is instantaneous or averaged since last transmission.}
+
+\subsection{Data extraction and comparison to current DOT process} 
+
+Daily files of stored response content from the Bus Time API, totalling approximately 3 terabytes, were successfully parsed and converted into one table containing only the useful elements, totalling approximately 63 gigabytes.  It is important to highlight that data extracted from Bus Time is different than the data contained in flat files used by DOT, and not purely supplemental. Table \ref{diff} lists the differences along several metadata dimensions \footnote{Unclear if reported speed is instantaneous or averaged since last transmission.}.
 
 \vspace{0.5cm}
 
@@ -277,49 +282,40 @@ Trip elements & Route and status only & Includes inferred elements, like Next St
 
 
 
-
-
-
-
-
- 
-
 \subsection{Data quality assessment}
 
 
- In this part, it is trying to find out whether the data are reliable or not. It is a overview of the whole dataset. By visualizing the date, it can find out that whether it is reasonable or not.
- 
- \subsubsection*{Missing data}
- 
-  The first step to figure out the data quality is to know the information that the data contain. By summarizing the data get from all the jsons files by using Spark, it can find that the data cover a total number of 318 different bus lines and 340 days in a year. So though this project tried to focus on the whole year data (from 2015-1-1 to 2015-12-31), there still existed missing data for some days. Here shows all the missing days in \ref{m_days}.
+The following is an overview of the reliability of the whole dataset. By visualizing the size of the data (for example, in terms of JSON length or number of vehicle records) as a time series and correlating with data from the schedule, we can identify unreasonable variations.  Finally, some tactical examination of data elements reveals irregularities that must be considered during the performance measurement phase.
+
+\subsubsection*{Missing data}
+
+The data covers a total number of 318 different bus lines and 340 days in a year. So, although this project tried to focus on the whole year data (from 2015-01-01 to 2015-12-31), some days (listed in Figure \ref{m_days}) are entirely missing.
   
   \begin{figure}[!ht]
   \caption{Missing days in the dataset.}
   \label{m_days}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/missing_days}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/missing_days}
 \end{figure}
 
-      From the list of missing days , it can find that December is a month with the most missing data, which contains 21 days without data. So it is necessary to find out what factors cause this problem. If it is caused by some uncontrollable factors such as weather, some mitigation plan could come out. But if it is caused by some human factors of systems factors, it should be avoided in the future.
+From the list of missing days, December is the month with the most missing data, which contains 21 days without data. It is necessary to find out what factors cause this problem. If it is caused by some uncontrollable factors such as weather, some mitigation plan may be devised. But if it is caused by some human factors of systems factors, it should be avoided in the future.
       
-      \subsubsection*{Visualization of records throughout the year}
+\subsubsection*{Visualization of records throughout the year}
       
-        Here shows the whole year respond record in \ref{m_alldays}.
+The total number of bus records by date are shown in Figure \ref{m_alldays}.
 
 
 
 \begin{figure}[!ht]
-  \caption{Bus records count for all days in 2015.}
+  \caption{Visualization of records throughout the year.}
   \label{m_alldays}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_year_record}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/whole_year_record}
 \end{figure}
 
-   From the plot, it can find that there are some regularities existing. Normally, seven days is a cycle, and weekdays have less record count than weekends. But January, February and May are not that obvious. And as there are some missing data in December, the regularity in December is not obvious. 
-      There exist four obvious change in this plot. The first one is in February, second in May, third in June, and the last one in December. It may exist some factors that affect these change. Further analysis is needed to find out these factors and could help with the bus schedule planning.
-      Also, it can find that March 7th has an extremely high record but March 8th is a day without data which do not exist in other missing days. It can infer that there exist some possibility that data for March 8th may merge with March 7th.
+From the plot, some regularities are immediately apparent, including the seven-day cycle. However there are four obvious changes throughout the year. The first one is in February, second in May, third in June, and the last one in December. Further analysis is needed to find out these factors affecting the changes and could help with the bus schedule planning. Also, it can find that March 7th has an extremely high record but March 8th is a day without data which do not exist in other missing days. One can infer that there exist some possibility that data for March 8th were merged with March 7th.
       
-      \subsubsection*{Daily response records}
+      \subsubsection*{Daily record counts by hour}
       
        Here shows the everyday respond record in \ref{week}.
 
@@ -327,53 +323,90 @@ Trip elements & Route and status only & Includes inferred elements, like Next St
 	\label{week}
   \caption{Bus records count for day of the week in 2015.}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/whole_day_record}
 \end{figure}
 
-   From the plot, it can find that weekdays have the same trend and weekends has the same trend. In weekdays, 9am to 11am would exist another peak in a day. And after 5pm, bus records declines regularly. It is reasonable because 9am to 11am and 5pm are the rush hours in a day. And in weekends, after 8am, bus records increase regularly.
-      Based on the visualization of the bus records for everyday and for every hour in a day, it can find that the data are quite reasonable and the further analysis based on these data would be reliable. 
-      
-      \subsubsection*{Gaps (time dimension)}
-      
-        As the bus is transmitting every 30 seconds, for the first part of gaps analysis, it find out which hour in a day has the least 30-second interval. Here shows the 30-second interval distribution for a day in \ref{week_day}.
+From the plot, it can find that weekdays have the same trend and weekends have the same trend.   On weekdays, the record count regularly decreases as the morning progresses before peaking twice in the middle of the day.  In fact, one would expect the opposite based on typical characteristics of urban mobility: one peak during the morning rush-hour and one during the evening rush-hour.
+
+        \ref{week_day}.
 
 \begin{figure}[!ht]
 \label{week_day}
   \caption{Bus records count for day of the week in 2015.}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/whole_day_record}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/whole_day_record}
+\end{figure}
+      
+      \subsubsection*{Data density with respect to level of scheduled activity}
+      
+       
+   As the bus is transmitting every 30 seconds, the interval between Bus Time records is expected to also be 30 seconds so long as the vehicle is operating with the AVL equipment activated.  Figure XXX shows the actual intervals from the dataset collected.  In fact the typical interval turns out to be 60 seconds, with a significant portion of even longer intervals.  We examine these long intervals by comparing a measurement of total vehicle activity between the Bus Time data (in terms of record count) and the schedule data (in terms of aggregate running time of all scheduled trips). The measured activity from the two sources turn out to be strongly anticorrelated in the months analyzed (Table XXX), whenever materially non-zero.  In other words, generally when scheduled activity increases, the density of data available in our dataset decreases.
+   
+To further diagnose the issue, the comparison is made on a finer temporal scale (6-minute timesteps) for a few random dates.  Figure \ref{trio} shows very different patterns when overlaying the level of scheduled activity onto the level of reported activity derived from the Bus Time data.  On one of the two weekdays examined  (the first and third), two large gaps are clearly visible and span the entirety of the two daily “rush-hour” peaks in the schedule.  On the weekend date examined, a short gap is visible in the late evening.
+
+The time series analysis showing counter-cyclical data density, the strong anticorrelation, and the tactical examination of a few dates all lead to the conclusion that the dataset collected by NYU CUSP cannot be used for performance analysis of an entire year without major risks to accuracy, in the form of both bias (as discussed in section 0.3.5 “Arrival time estimation techniques”) and variance (due to the most typical interval being twice as long as specified by MTA).  To continue with the demonstration of applying the data for performance metrics, we identified a week with the best density and limited gaps during rush hours (2015-12-01 to 2015-12-07).     
+        
+\begin{figure}[!ht]
+\label{week_day}
+  \caption{Distribution of intervals between SIRI response records.}
+  \centering
+    \includegraphics[scale=0.8]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/interva_distribution}
+\end{figure}
+
+\begin{figure}[!ht]
+\label{trio}
+  \caption{Comparison of active vehicle count for three example dates.}
+  \centering
+    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_trio}
 \end{figure}
 
 
- From the plots, it can found that 9 a.m. is the time that has the least bus respond record  interval within 30 seconds. That may exist some gap in 9 a.m. So for further analysis, it may be valuable to compare the data with GTFS data. This shows the focuses of future gap analysis and an example of the comparison between AVL data and GTFS data.
+\subsubsection*{Tactical validation of individual elements}
 
 
+Coordinates estimated using the Global Position System include some level of noise due to factors such as atmospheric conditions and multi-path effects. However the location elements of the Bus Time data appear to be transformed to adhere to shapelines of the reported bus route, eliminating any variation laterally across the street. Figure \ref{b26} shows an overlay of points from both Bus Time records and GTFS shape file data, for a short stretch of the B26 route in Fort Greene.  While the coordinates of stops are on the sides of the street, no lateral variation is observable in the Bus Time coordinates, even though the vehicles are known to travel along all four lanes of that specific roadway. Some error may remain along the orthogonal plane (the basis for distance calculations), but GPS-assistive equipment installed after the initial launch of Bus Time uses gyroscopes and speedometer readings to reduce this error to an immaterial level.
+
+\begin{figure}[!ht]
+\label{b26}
+  \caption{Sample of B25 route.}
+  \centering
+<<<<<<< HEAD
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/trip_coverage_20150106}
+=======
+    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/b25_detail}
+>>>>>>> 9c5a61f74777da801678ccac90b1e38ae9bfeefd
+\end{figure}
+
+The only elements reported by the vehicle itself are the time, location and headsign (the route and destination text displayed above the front of the vehicle).  All of the remaining elements are inferred by the Bus Time server.  Because those inferences are made real-time, the software has no opportunity to retrospectively validate and correct errors.  This analysis validates two key features by checking for two metadata properties: that reported trip IDs are unique to each vehicle and that stop distances are unique for each shape.  The first validation failed while the second property was confirmed.  Figure \ref{trip_val} is a sample summary of records records grouped by both trip and vehicle, for a sample date and route; it shows the duplication of trip ID across multiple vehicles, the number of records associate with each duplicate, and the timespan of those records.
 
 
 \begin{figure}[!ht]
-  \caption{Bad: Major gaps without data for most vehicles, over several hours (2015-01-06).}
+\label{trip_val}
+  \caption{Duplicated records.}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20150106}
+<<<<<<< HEAD
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/trip_coverage_20151101}
+=======
+    \includegraphics[scale=0.9]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_vehicle_validation}
+>>>>>>> 9c5a61f74777da801678ccac90b1e38ae9bfeefd
 \end{figure}
 
-
-\begin{figure}[!ht]
-  \caption{Less Bad: Shorter gap (<1 hour) with no data from some vehicles (2015-11-01).}
-  \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20151101}
-\end{figure}
+The conclusions are that the Bus Time server sometimes makes errors in inference of the vehicle's trip ID, the inferred trip ID is not persistent for a vehicle (that is, it “flip flops”), but the reported stop distances for the inferred shape are persistent.  The variation in inferred trip ID is an important consideration in subsequent performance measurement because so much of the analysis requires grouping or sorting data (both input and output) by trip.
 
 
+<<<<<<< HEAD
 \begin{figure}[!ht]
   \caption{Good: No significant gaps in API performance (2015-12-03)}
   \centering
-    \includegraphics[scale=0.6]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/trip_coverage_20151203}
+    \includegraphics[scale=0.6]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/trip_coverage_20151203}
 \end{figure}
+=======
+>>>>>>> 9c5a61f74777da801678ccac90b1e38ae9bfeefd
 
 
 \subsection{Demonstrations of the methods applied to the dataset}
 
-The practices of transportation planning and analysis rely heavily on vehicle arrival-time data.  The first phase of this report explained the retrieval of real-time Automated Vehicle Location data and application of methods for estimating those arrival times in actual operations.  The following list demonstrates some typical analytic techniques and discusses their validity when applying these data, given the known limitations to its density and accuracy.  Included are data of arrival times from the schedule, published in the widely-adopted General Transit Feed Specification, but discussion of its data generation process is not in scope.  Generally, many high-level performance metrics are simple ratios expressing the proportion of events (such as a vehicle arrival, or completed trip) that meet some criteria (such as arriving within 5 minutes of its scheduled time).  The problem with these binary measurements is that the methods ignore the shape (defined in mathematics as higher moments) of a distribution - for example, a "long tail," or if the distribution is multi-modal.
+The practices of transportation planning and analysis rely heavily on vehicle arrival-time data. The first phase of this report explained the retrieval of real-time Automated Vehicle Location data and application of methods for estimating those arrival times in actual operations. The following list demonstrates some typical analytic techniques and discusses their validity when applying these data, given the known limitations to its density and accuracy. Included in the input data are arrival times from the schedule, published in the widely-adopted General Transit Feed Specification, but discussion of its data generation process is not in scope. Generally, many high-level performance metrics are simple ratios expressing the proportion of events (such as a vehicle arrival, or completed trip) that meet some criteria (such as arriving within 5 minutes of its scheduled time). The problem with these binary measurements is that the methods ignore the shape (referred to in mathematics as higher moments) of a distribution - for example, a "long tail," or if the distribution is multi-modal.
 
 \begin{itemize}
 \item \textbf{Distribution of headway}: In higher-frequency transit routes, arrivals are considered reliable when the headway is more consistent and closer to customers' expectation.  (The ideal distribution is 100\% density at the expected value, that is, no deviation.  Our definition of Headway Adherence is binary and allows for some deviation).  The distribution of headway for a less-than-reliable service is not always a normal bell-curve.  This is because of the tendency for delayed buses to become even more delayed, as the larger number of waiting passengers increases dwell times, which in turn reduces overall travel speed.  When bunching occurs, the headways of the "bunched" buses (i.e., those that closely follow a preceding delayed bus) approach zero, while there is no theoretical upper limit for the headway of the delayed bus.
@@ -384,15 +417,19 @@ The practices of transportation planning and analysis rely heavily on vehicle ar
   \caption{Headway Bunching Rate at Stops for Three Brooklyn Bus Routes.}
   \label{bunch}
   \centering
-    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/running_time_adherence}
+<<<<<<< HEAD
+    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/running_time_adherence}
+=======
+    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/bunching_rates}
+>>>>>>> 9c5a61f74777da801678ccac90b1e38ae9bfeefd
 \end{figure}
 
 
 
-\item \textbf{Distribution of running time adherence:} Best practice in schedule planning is to forecast running time using historical data, but exclude outliers.  An outlier often represents an occurrence of some enroute incident (such as a police action or a parade) and should not be factored into planning a typical-day bus schedule. Outliers skew upward the distribution of actual running times, since there is a physical upper limit to the vehicle's speed, but no limit to the number and severity of enroute incidents. Because the schedules are created based on historical distributions excluding outliers, the resulting error, defined as running time variance, will tend to be positive. The error can be mitigated by artificially increasing the planned running time (for example, by including the outliers, or adding some arbitrary value), but it is generally not cost-effective to do so, or impacts the reliability of subsequent trips operated by the same vehicle or operator. 
+\item \textbf{Distribution of running time adherence:} Best practice in schedule planning is to forecast running time using historical data, but exclude outliers. An outlier often represents an occurrence of some enroute incident (such as a police action or a parade) and should not influence planning a typical-day bus schedule. Outliers skew upward the distribution of actual running times, since there is a physical upper limit to the vehicle's speed, but no limit to the number and severity of enroute incidents. Because the schedules are created based on historical distributions excluding outliers, the resulting error, defined as running time variance, will tend to be positive. The error can be mitigated by artificially increasing the planned running time (for example, by including the outliers, or adding some arbitrary value), but it is generally not cost- effective to do so, or impacts the reliability of subsequent trips operated by the same vehicle or operator.
 
 
-One example descriptive analysis is to plot the distribution of normalized running time variances. Visible in this example, \ref{adh}, is both the central tendency -- slightly positive -- and the wide spread of the distribution, indicating very inconsistent running time adherence.  Strategies to reduce the inconsistency are not in the scope of this project.
+One example descriptive analysis is to plot the distribution of normalized running time variances. Visible in this example, Figure \ref{adh}, is both the central tendency -- slightly positive -- and the wide spread of the distribution, indicating very inconsistent running time adherence.  Strategies to reduce the inconsistency are not in the scope of this project.
 
 
 
@@ -401,25 +438,34 @@ One example descriptive analysis is to plot the distribution of normalized runni
   \caption{Running time adherence.}
   \label{adh}
   \centering
-    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/running_time_adherence}
+    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/running_time_adherence}
 \end{figure}
 
 
-\item \textbf{Performance with respect to vehicle distance along route:} It is generally accepted in the theory of urban public transportation that longer routes have worse reliability, as defined by the metrics discussed so far.  Another analytic technique is to plot one of the metrics for a given route (or, more specifically - one shape variation of a route).  \ref{ols} is the summary of an ordinary least squares (OLS) regression, taking Wait Assessment as the dependent variable and the vehicle's progression along the shape (in terms of number of stops made) as the independent variable.  The resulting parameter value has strong statistical significance, rejecting the null hypothesis that route length has no relationship to performance.  The example in \ref{wastop} both supports that conclusion and suggests which segments along the route contribute most to the decline.
+\item \textbf{Performance with respect to vehicle distance along route:} It is generally accepted in the theory of urban public transportation that longer routes have worse reliability, as defined by the metrics discussed so far.  Another analytic technique is to plot one of the metrics for a given route (or, more specifically - one shape variation of a route). Figure \ref{ols} is the summary of an ordinary least squares (OLS) regression, taking Wait Assessment as the dependent variable and the vehicle's progression along the shape (in terms of number of stops made) as the independent variable.  The resulting parameter value has strong statistical significance, rejecting the null hypothesis that route length has no relationship to performance.  The example in Figure \ref{wastop} both supports that conclusion and suggests which segments along the route contribute most to the decline.
 
+<<<<<<< HEAD
 %\begin{figure}[!ht]
 %  \caption{Correlation of Wait Assessment and Stop Sequence Number.}
 %  \label{ols}
 %  \centering
-%    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/OLS Regression Results}
+%    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/OLS Regression Results}
 %\end{figure}
+=======
+\begin{figure}[!ht]
+  \caption{Correlation of Wait Assessment and Stop Sequence Number.}
+  \label{ols}
+  \centering
+    \includegraphics[scale=1]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/ols_summary}
+\end{figure}
+>>>>>>> 9c5a61f74777da801678ccac90b1e38ae9bfeefd
 
 
 \begin{figure}[!ht]
   \caption{Average Wait Assessment by Stop Sequence Number, Route B41.}
   \label{wastop}
   \centering
-    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/wa_by_stop_sequence}
+    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/wa_by_stop_sequence}
 \end{figure}
 
 \item \textbf{Spatial distribution of travel speeds:} Because Bus Time records contain discrete time and location, speed calculations are difference-based averages, not instantaneous (or quasi-instantaneous) samples.  The other challenge in descriptive statistics about speed at fixed location(s) is that the sequential observation points of multiple vehicles are not aligned; for example it is extremely unlikely that multiple vehicles record the "ping" from exactly 100 meters and again at exactly 200 meters along a route-shape.  However re-sampling is possible if mean speeds are treated as continuous curves with respect to distance.  The new distribution at a point is defined as the collection of mean speeds of all vehicles passing that point.  \ref{msd} demonstrates the changing moments of the distribution over the length of a route-shape, along with grid lines indicating the stop locations.
@@ -429,13 +475,13 @@ One example descriptive analysis is to plot the distribution of normalized runni
   \caption{Moving speed distribution.}
   \label{msd}
   \centering
-    \includegraphics[scale=0.45]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/moving_speed_distribution}
+    \includegraphics[scale=0.45]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/moving_speed_distribution}
 \end{figure}
 \end{center}
 
 \item \textbf{Spatial distribution of slow/stopped condition} - A list of slow/stopped events can be created by identifying the beginning and end location and times for each occurrence of the condition.  Naturally, many of these events will be at stop locations.   That subset of the slow/stopped events may theoretically support analysis of dwell time, however even when using data having the maximum density possible according the data generation process (every 30 seconds), analysis of dwell time at individual stops is not possible; previous research suggests that the majority of stops have dwell time of less than 30 seconds (Pangilinan 2011).  The remaining subset are slow/stopped events not occurring at stop locations.  High spatial density of these events indicates a recurring problem with traffic flow, which in turn increases travel time and contributes to occurrence of bunching condition.  (In order to exclude the normal interaction with traffic signals, the events can be filtered to only include those above some minimum, related to traffic signal cycle lengths).
 
-Figure \ref{adh} shows the estimated percentage of vehicles in slow/stopped condition and many points along a route-shape.  While some extreme values are apparent, they are generally at stop locations and the variance of the remaining points is minimal, even at other stop locations.  This suggests that the density of the data may be insufficient to identify .
+Figure \ref{adh} shows the estimated percentage of vehicles in slow/stopped condition and many points along a route-shape.  While some extreme values are apparent, they are generally at stop locations and the variance of the remaining points is minimal, even at other stop locations.  This suggests that the density of the data may be insufficient to identify interruptions without a high rate of false negatives.
 
 
 
@@ -443,7 +489,7 @@ Figure \ref{adh} shows the estimated percentage of vehicles in slow/stopped cond
   \caption{Moving speed distribution.}
   \label{adh}
   \centering
-    \includegraphics[scale=0.4]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/percent_vehicles_slow_or_stopped}
+    \includegraphics[scale=0.4]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/percent_vehicles_slow_or_stopped}
 \end{figure}
 
 
@@ -460,33 +506,43 @@ The main advantages of our approach rely on the fact that it is based on open so
 
 The biggest challenge for our approach to be implemented in practice by cities is that of processing large amounts of raw data into information because it requires big data techniques for anything beyond small samples (i.e. one line, one day, etc.). Even processed datasets being structured can demand more than what can be offered by single/dual core applications. Data supporting higher-level analysis techniques can be managed with any off-the-shelf database system, including sqLite (open source SQL) or even a series of CSVs.
 
-It is worth noting that, while the MTA does not publish archived Bus Time data (except for a sample in 2014), we are providing the code for anybody to collect it, and this is an important step that must be kept into account when discussing about Privacy.  Besides this, the Vehicle ID field is not anonymized, so the contributions of our project are subject to have unlikely yet feasible implications regarding Privacy.
+It is worth noting that, while the MTA does not publish archived Bus Time data (except for a sample in 2014), we are providing the code for anybody to collect it, and this is an important step that must be kept into account when discussing about privacy.  Besides this, the Vehicle ID field is not anonymized, so the contributions of our project are subject to have unlikely yet feasible implications regarding tracking of individuals, to the extent they can be identified in a relatable data source.
 
-\subsection{Conclusions and future work}
+\subsection{Conclusions, recommendations and future work}
 
 \subsubsection*{Conclusions}
 
 
-This project studies the bus performance in New York City and its correlation metrics based on the GPS data offered by MTA. The MTA bus GPS database collects the location of each bus every 30 seconds. After estimating the departure and arrival time for each bus at each stop, we use measurement like headways and wait assessment to figure out the bus performance and reliability. Taking one-year data as our object of study, the data is extremely huge so that big data techniques (mainly Spark) are widely used in this project. In order to make our work easy to share and reproduce, we choose to use the SQL API to decide on the parsing of the data, which enables the DOT to easily make changes by editing the SQL script. 
+This project studies the bus performance in New York City and its correlation metrics based on the GPS data offered by MTA. The MTA bus GPS database collects the location of each bus every 30 seconds. After estimating the departure and arrival time for each bus at each stop, we use measurement like headways and wait assessment to assess the bus performance and reliability. Taking one-year data as our object of study, the data is extremely huge so that big data techniques (mainly Spark) are widely used in this project. In order to make our work easy to share and reproduce, we choose to use the SQL API to decide on the parsing of the data, which enables the DOT to easily make changes by editing the SQL script. 
 
-Positive aspects of our approach include the fact that we focused this analysis on the viewpoint of the DOT; the fact that we were able to successfully process large volumes of data; the fact that we identified pitfalls and challenges of using the MTA Bus Time data for the purposes of the agency (as it was requested from us) and the fact that we enable a flexible implementation of different methods to estimate times and locations, as well as to measure schedule-reliability performance.
+
+Positive aspects of our approach include the fact that we focused this analysis on the viewpoint of the DOT; the fact that we were able to successfully process large volumes of data; the fact that we identified pitfalls and challenges of using the MTA Bus Time data for the purposes of the agency and the fact that we enable a flexible implementation of different methods to estimate times and locations, as well as to measure schedule-reliability performance.
+
 
 Potential pitfalls and areas of improvement are the fact that we used formal metrics that were not tailored for the DOT nor New York City, and the abundance of assumptions that inevitably scale up in the form of measurement errors.
 
-Influence: Similar methodologies and concepts could be used in other cities and traffic models. The big data technology applied in not only traffic analysis but also city wide urban issue offers more reliable results compared with traditional sample studies.  
+
+The influence of our approach relies on the fact that similar methodologies and concepts could be used in other cities and traffic models. The big data technology applied in not only traffic analysis but also city wide urban issue offers more reliable results compared with traditional sample studies.  
+
+\subsubsection*{Recommendations to DOT}
+
+Use of the public API for real-time archiving of Bus Time data mimics an ongoing process already performed internally at MTA, and can result in an incomplete view of the same data.  Moreover, the static file currently used by DOT, presumably provided by MTA, contains both greater temporal density and some additional, potentially useful elements that are not available through the Bus Time API.  The results of this project suggest that combining the advantages of both data acquisition processes would yield the ideal dataset needed for these analyses.  The DOT may request that MTA include the additional, useful vehicle monitoring elements in the file provided directly to DOT and therefore eliminate temporal gaps that arise due to problems with the public API.
 
 
-\subsubsection*{Future work}
+The subsequent interpolation and performance analysis steps do not require the user to implement a so-called big data platform if Bus Time data is processed in smaller batches (for example, one full day) as it accumulates.  Once headway, running time, and vehicle speed calculations are performed and output stored with proper indexing, the performance metrics can be dynamically analyzed using a typical personal computer.
+
+
+\subsubsection*{Suggestions for future work}
 
 \begin{itemize}
 \item Inference study of the effect of several traffic or design conditions on reliability.
-\item Improve the current visualization tool, and adapt it to be responsive and interactive to different queries.
-\item Have a more detailed work flow including our code, to be easily implemented into every day tasks in the DOT.
+\item  Autocorrelation to identify recurring patterns in reliability with respect to time (for example, every Monday morning).
+\item Integrate and Improve the current visualization tool developed by NYU CUSP, and adapt it to be responsive and interactive to different queries.
 \item Further optimize the algorithms hereby used for the Big Data portion of the work.
-\item Further Applications
+\item Generalization of code for further applications.
 \begin{itemize}
-\item Other cities (need to pay attention to data structure, bus GPS data in some cities collect departure and arrival time instead of location).
-\item Other traffic modes (eg. Subway, city bike. Need to pay attention to the different features of each kinds of traffic mode).
+\item Other transit system data feeds may use a different interface standard and as a result a different data structure-   AVL systems in some cities collect stop departure and arrival time directly, instead of location at fixed time intervals).
+\item Other transit modes, for example ubway or bike-share,  may contain different features specific to that mode.
 \end{itemize}
 \end{itemize}
 
@@ -500,7 +556,7 @@ Influence: Similar methodologies and concepts could be used in other cities and 
 \begin{figure}[!ht]
   \caption{On time performance aggregated by stop over 2015.}
   \centering
-    \includegraphics[scale=0.8]{/home/saf537/Documents/CUSP/Capstone/Bus-Capstone/plots/on_time_performance_stops}
+    \includegraphics[scale=0.8]{/Users/MISSZHOU/Documents/Bus-Capstone/plots/on_time_performance_stops}
 \end{figure}
 
 \newpage
@@ -543,7 +599,7 @@ LI Fazhi, Yang Dongyuan, and Ma Kai, ''Bus Rapid Transit (BRT) Bunching Analysis
 Brian Levine, Alex Lu, and Alla Reddy, ''Measuring Subway Service Performance at New York City Transit: A Case Study Using Automated Train Supervision (ATS) Track-Occupancy Data,'' TRB 2013 Annual Meeting, 2013.
 
 \bibitem{DanWan}
-Dan Wan, Camille Kamga, Jun Liu, Aaron Sugiura, and Eric B. Beaton, ''Rider perception of a ‘light’ Bus Rapid Transit system - The New York City Select Bus Service,'' Transport Policy 49 (2016) 41–55, Apr. 2016.
+Dan Wan, Camille Kamga, Jun Liu, Aaron Sugiura, and Eric B. Beaton, ''Rider perception of a ‘light' Bus Rapid Transit system - The New York City Select Bus Service,'' Transport Policy 49 (2016) 41–55, Apr. 2016.
 
 \bibitem{Bie}
 
