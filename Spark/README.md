@@ -1,4 +1,4 @@
-# Parsing and Manipulate Bus Time Data using PySpark
+﻿# Parsing and Manipulate Bus Time Data using PySpark
 
 ##### This project reads 3 TB of nested JSON data and apply bunch of spark techniques to analysis the bus delays and headways
 Original [Sample Data](https://raw.githubusercontent.com/sarangof/Bus-Capstone/master/Spark/test.jsons) and [Schema](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/schema.txt)
@@ -41,6 +41,15 @@ for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 
     For more info.check [ontime_ratio.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql)
 
+- __SparkSQL:UDF__
+
+    ` from pyspark.sql.functions import udf `
+
+    `sqlContext.registerFunction(function)`
+
+    * For more info, check[SparkSQL:UDF](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#module-pyspark.sql.functions)
+
+
 ## Data Schema
 | JSON ELEMENT(schema)                           | Column NAME    | explanation                                   |
 |------------------------------------------------|----------------|-----------------------------------------------|
@@ -57,4 +66,3 @@ for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 | Extensions. Distances.CallDistanceAlongRoute   | distance_shape | Stop_s total distance along the shape         |
 | Extensions. Distances.PresentableDistance      | status         | Report the current status of bus to next stop |
 | DestinationRef                                 | destination    | Headsign of bus                               |
-
