@@ -1,16 +1,23 @@
 # Bus-Capstone
 Capstone project for NYC Department of Transportation.
 
-###Important documentation:
+### Important documentation:
 
-*[Documentation of data processing and Spark](https://github.com/sarangof/Bus-Capstone/tree/master/Spark)
+*   Documentation of data processing and Spark
+    * __Python Data Processing__
+        * [Demostration](https://github.com/sarangof/Bus-Capstone/tree/master/demonstration): Ipython Notebook that demonstrates all the process
+        
+        * Modules created
+        
+            1. [siri_parser](https://github.com/sarangof/Bus-Capstone/blob/master/siri_parser.py): Parse original JSON file
+            2. [ttools.py](https://github.com/sarangof/Bus-Capstone/blob/master/ttools.py): Homemade Timedelta Converter
+            3. add here
+ 
+    * __[Processing using SPARK](https://github.com/sarangof/Bus-Capstone/tree/master/Spark)__
 
-*[Sponsor report](https://github.com/sarangof/Bus-Capstone/blob/master/paper/sponsor_report_final.pdf)
+*   [Sponsor report](https://github.com/sarangof/Bus-Capstone/blob/master/paper/sponsor_report_final.pdf)
 
-*[Technical report](https://github.com/sarangof/Bus-Capstone/blob/master/paper/technical_report.pdf)
-
-<iframe width="100%" height="520" frameborder="0" src="https://saf537.carto.com/viz/c41053fa-5027-11e6-a073-0ecd1babdde5/embed_map" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
-
+*   [Technical report](https://github.com/sarangof/Bus-Capstone/blob/master/paper/technical_report.pdf)
 
 ## Final Product Sample
 Darker means poorer on time performance for the buses
