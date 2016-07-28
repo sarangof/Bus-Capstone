@@ -12,7 +12,7 @@ Capstone project for NYC Department of Transportation.
             1. [Siri Tools](https://github.com/sarangof/Bus-Capstone/blob/master/siri_parser.py): Modules to parse the original JSON files
             2. [Time Tools](https://github.com/sarangof/Bus-Capstone/blob/master/ttools.py): Homemade Timedelta Converter
             3. [GTFS](https://github.com/sarangof/Bus-Capstone/blob/master/gtfs.py): Extract the Schedule Data from GTFS Schedules(originally in ZIP)
-            4. [Estimated Arrival Time](https://github.com/sarangof/Bus-Capstone/blob/master/arrivals.py):Estimated the arrival time for each stop using Scipy [KD-Tree](http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.spatial.KDTree.html) and [Interpolate](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html)
+            4. [Arrival Time](https://github.com/sarangof/Bus-Capstone/blob/master/arrivals.py):Estimated the arrival time for each stop using Scipy [KD-Tree](http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.spatial.KDTree.html) and [Interpolate](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html)
 
     * __[Processing using SPARK](https://github.com/sarangof/Bus-Capstone/tree/master/Spark)__
 
