@@ -50,7 +50,7 @@ for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 
     * [On_Time Performance](https://github.com/sarangof/Bus-Capstone/tree/master/Spark/ontime_ratio)
 
-    * submit to server by typing in bash: `./submit.sh xxx.py xxx.sql output xxxx.csv [numofexecutors]`
+    * submit to server by typing in bash: `./submit.sh xxx.py xxx.sql output xxx.csv [num of executors]`
 ## Data Schema
 | JSON ELEMENT(schema)                           | Column NAME    | explanation                                   |
 |------------------------------------------------|----------------|-----------------------------------------------|
