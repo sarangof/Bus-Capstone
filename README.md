@@ -6,13 +6,14 @@ Capstone project for NYC Department of Transportation.
 *   Documentation of data processing and Spark
     * __Python Data Processing__
         * [Demostration](https://github.com/sarangof/Bus-Capstone/tree/master/demonstration): Ipython Notebook that demonstrates all the process
-        
+
         * Modules created
-        
-            1. [siri_parser](https://github.com/sarangof/Bus-Capstone/blob/master/siri_parser.py): Parse original JSON file
-            2. [ttools.py](https://github.com/sarangof/Bus-Capstone/blob/master/ttools.py): Homemade Timedelta Converter
-            3. add here
- 
+
+            1. [Siri Tools](https://github.com/sarangof/Bus-Capstone/blob/master/siri_parser.py): Modules to parse the original JSON files
+            2. [Time Tools](https://github.com/sarangof/Bus-Capstone/blob/master/ttools.py): Homemade Timedelta Converter
+            3. [GTFS](https://github.com/sarangof/Bus-Capstone/blob/master/gtfs.py): Extract the Schedule Data from GTFS Schedules(originally in ZIP)
+            4. [Estimated Arrival Time](https://github.com/sarangof/Bus-Capstone/blob/master/arrivals.py):Estimated the arrival time for each stop using Scipy [KD-Tree(http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.spatial.KDTree.html)] and [Interpolate](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html)
+
     * __[Processing using SPARK](https://github.com/sarangof/Bus-Capstone/tree/master/Spark)__
 
 *   [Sponsor report](https://github.com/sarangof/Bus-Capstone/blob/master/paper/sponsor_report_final.pdf)
