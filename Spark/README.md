@@ -42,6 +42,15 @@ for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 
     For more info.check [ontime_ratio.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql)
 
+- __Main script__:
+
+    * [Extract&Interpolate](https://github.com/sarangof/Bus-Capstone/tree/master/Spark/extraction%26interpolation)
+
+    * [Gap Count](https://github.com/sarangof/Bus-Capstone/tree/master/Spark/gapcount)
+
+    * [On_Time Performance](https://github.com/sarangof/Bus-Capstone/tree/master/Spark/ontime_ratio)
+
+    * submit to server by typing in bash: `./submit.sh xxx.py xxx.sql output xxxx.csv [numofexecutors]`
 ## Data Schema
 | JSON ELEMENT(schema)                           | Column NAME    | explanation                                   |
 |------------------------------------------------|----------------|-----------------------------------------------|
