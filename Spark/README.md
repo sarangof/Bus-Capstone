@@ -1,6 +1,6 @@
-﻿# Parsing and Manipulate Bus Time Data using PySpark
+# Parse and Manipulate Bus Time Data using PySpark
 
-##### This project reads 3 TB of nested JSON data and apply bunch of spark techniques to analysis the bus delays and headways
+##### This project reads 3 TB of nested JSON data and apply bunch of spark techniques to analyze the bus delays and headways
 Original [Sample Data](https://raw.githubusercontent.com/sarangof/Bus-Capstone/master/Spark/test.jsons) and [Schema](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/schema.txt)
 ## Techniques Included
 
@@ -8,10 +8,11 @@ Original [Sample Data](https://raw.githubusercontent.com/sarangof/Bus-Capstone/m
 ```
 sqlContext.read.json()
 ```
-- __Extract elements from JSON using Spark Query__
+- __Extract elements from JSON using Spark SQL Query__
 
-[spark_extract.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/spark_extract.sql)
-`SELECT XXX FROM table`
+    `SELECT XXX FROM table`. Check [spark_extract.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/spark_extract.sql) for details
+
+    Check [Constructed Schema](https://github.com/bonanyuan/Spark_project#data-schema)
 
 - __Flatten Arrays__ using `flatMap(zip([columns]))`
 ```
@@ -19,16 +20,16 @@ sqlContext.read.json()
 ```
 - __groupByKey & Interpolate__
 
-⋅⋅⋅use `groupBykey` to cast interpolation of time&distance to all trips.
+  * use `groupBykey` to cast interpolation of time&distance to all trips.
 
-⋅⋅⋅use Scipy Interpolte Tool to interpolate all stop times.
+  * use Scipy Interpolate Tool to interpolate all stop times.
 
-For more information:[Scipy Interpolate1D](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html#scipy.interpolate.interp1d)
+  For more information:[Scipy Interpolate1D](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html#scipy.interpolate.interp1d)
 
 - __Read CSV using Spark_CSV tool__
-```
-sqlContext.read.format('com.databricks.spark.csv').options(header='true').load()
-```
+    ```
+    sqlContext.read.format('com.databricks.spark.csv').options(header='true').load()
+    ```
 for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 
 - __SparkSQL manipulation__
@@ -37,18 +38,9 @@ for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 
    * `IF` & `COUNT` to calculate the time performance by comparing with GTFS Schedule Data.
 
-    * __if__ clause in spark is same as __case__ in regular SQL
+    *   `IF` clause in spark is same as `CASE` in regular SQL
 
     For more info.check [ontime_ratio.sql](https://github.com/sarangof/Bus-Capstone/blob/master/Spark/ontime_ratio/ontime_ratio.sql)
-
-- __SparkSQL:UDF__
-
-    ` from pyspark.sql.functions import udf `
-
-    `sqlContext.registerFunction(function)`
-
-    * For more info, check[SparkSQL:UDF](https://spark.apache.org/docs/latest/api/python/pyspark.sql.html#module-pyspark.sql.functions)
-
 
 ## Data Schema
 | JSON ELEMENT(schema)                           | Column NAME    | explanation                                   |
@@ -66,3 +58,9 @@ for more info,check [Spark_CSV_package](https://github.com/databricks/spark-csv)
 | Extensions. Distances.CallDistanceAlongRoute   | distance_shape | Stop_s total distance along the shape         |
 | Extensions. Distances.PresentableDistance      | status         | Report the current status of bus to next stop |
 | DestinationRef                                 | destination    | Headsign of bus                               |
+## Final Product
+Darker means poorer on time performance for the buses
+
+![alt text](https://github.com/sarangof/Bus-Capstone/blob/master/plots/on_time_performance_stops.png "Sample of on time performance")
+
+Open Interactive Map in [Carto Map](https://saf537.carto.com/viz/c21efdeb-ec45-45f2-b2d3-c47993bb89ff/public_map)
