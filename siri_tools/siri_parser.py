@@ -72,27 +72,27 @@ def json_to_df(a):
         DistFromCalllist.append(DistFromCall)
         CallDistRoutelist.append(CallDistAlongRoute)
         PresentableDistlist.append(PresentableDistance)    
-    df = pd.DataFrame(data=Linelist,index=vehicleIDlist,columns=['Line'])
-    df['RecordedAtTime']=RecordTimelist
-    df['Latitude']=Latitudelist
-    df['Longitude']=Longitudelist
-    df['Trip']=Triplist
-    df['TripDate']=TripDatelist
-    df['DestinationRef']=DestinationReflist
-    df['DestinationName']=DestinationNamelist
-    df['TripPattern']=Patternlist
-    df['MonitoredCallRef']=CallReflist
+    df = pd.DataFrame(data=Linelist,index=vehicleIDlist,columns=['ROUTE_ID'])
+    df['recorded_time']=RecordTimelist
+    df['latitude']=Latitudelist
+    df['longitude']=Longitudelist
+    df['TRIP_ID']=Triplist
+    df['trip_date']=TripDatelist
+    df['destination']=DestinationReflist
+    df['destination_name']=DestinationNamelist
+    df['SHAPE_ID']=Patternlist
+    df['STOP_ID']=CallReflist
     df['EstCallArrival']=EstArrivallist
-    df['DistFromCall']=DistFromCalllist
-    df['CallDistAlongRoute']=CallDistRoutelist
-    df['PresentableDistance']=PresentableDistlist
+    df['distance_stop']=DistFromCalllist
+    df['distance_shape']=CallDistRoutelist
+    df['status']=PresentableDistlist
     df['ResponseTimeStamp'] = a['Siri']['ServiceDelivery']['ResponseTimestamp']
     return df
 
 def extract(inpath,outfile):
     # first create empty dataframe
-    results = pd.DataFrame(columns=[u'Line', u'RecordedAtTime', u'Latitude', u'Longitude', u'Trip',u'TripDate',u'TripPattern',u'MonitoredCallRef',u'EstCallArrival',u'DistFromCall',u'CallDistAlongRoute',u'PresentableDistance',u'ResponseTimeStamp'])
-    results.index.rename('vehicleID',inplace=True)    
+    results = pd.DataFrame(columns=[u'ROUTE_ID', u'recorded_time', u'latitude', u'longitude', u'TRIP_ID',u'trip_date',u'SHAPE_ID',u'STOP_ID',u'EstCallArrival',u'distance_stop',u'distance_shape',u'status',u'ResponseTimeStamp'])
+    results.index.rename('vehicle_id',inplace=True)    
     # write initial output file with headers but no data
     results.to_csv(outfile)
     for f in os.listdir(inpath + '/'):    
