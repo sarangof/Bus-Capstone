@@ -26,9 +26,8 @@ Example: `python clean_bustime.py parsed_data.csv 2015-12-03 gtfs/` will created
 ##### [siri_parser](siri_parser.py)
 * *method* siri_parser.**json_to_df**(a)  
 
-    takes a single siri response json in *string* format as *a*.  
-	**returns** *pandas DataFrame* with the following columns: `ROUTE_ID`, `recorded_time`, `latitude`, `longitude`, `TRIP_ID`, `trip_date`, `destination`,`destination_name`,`SHAPE_ID`,`STOP_ID`,`EstCallArrival`,`distance_stop`,`distance_shape`,`status`,`ResponseTimeStamp`  
-	See [Data Schema](../Spark#data-schema) for translation of field names from SIRI standard.  
+    takes a single siri response json in *string* format as *a*.  See [Data Schema](../Spark#data-schema) for translation of field names from SIRI standard.   
+	**returns** *pandas DataFrame* with the following columns: `ROUTE_ID`, `recorded_time`, `latitude`, `longitude`, `TRIP_ID`, `trip_date`, `destination`, `destination_name`, `SHAPE_ID`, `STOP_ID`, `EstCallArrival`, `distance_stop`, `distance_shape`, `status`, `ResponseTimeStamp`  
 * *method* siri_parser.**extract**(inpath,outfile)  
 
     takes *jsons* aggregated file, where each row is a single *json* string.
