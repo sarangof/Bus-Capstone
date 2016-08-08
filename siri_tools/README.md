@@ -6,8 +6,8 @@ Example: `python siri_repeat.py 15 MYKEY` will launch the script (until interrup
 Results are saved in directory `jsons/`  
 * *method* siri_repeat.**get_bustime**(api_key)  
 
-    Method for calling Bus Time API once.  Takes key directly as **string* format.  
-    Returns **json** datatype.  
+    Method for calling Bus Time API once.  Takes key directly as *string* format.  
+    Returns *json* datatype.  
    
 ##### extract_trip_dates
 Script parses a single unsorted CSV and extracts records where the value of 7th column (`trip_date`, in this case) matches a list.  
