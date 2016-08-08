@@ -1,21 +1,19 @@
 #### Data retrieval modules
 ##### siri_repeat
-Calls the BusTime API and saves the result json  
-When executed directly, it takes two arguments: (1) what second on-the-minute it runs and (2) the name of a single-line file containing the API key  
+Calls the BusTime API and saves the result json.  When executed directly, it takes two arguments: (1) what second on-the-minute it runs and (2) the name of a single-line file containing the API key.  Results are saved in directory `jsons/`  
 Example: `python siri_repeat.py 15 MYKEY` will launch the script (until interrupted) and call the SIRI API every minute at the 15-second mark, using the API key stored in local file named MYKEY.  
-Results are saved in directory `jsons/`  
+
 * *method* siri_repeat.**get_bustime**(api_key)  
 
     Method for calling Bus Time API once.  Takes key directly as *string* format.  
     Returns *json* datatype.  
    
 ##### extract_trip_dates
-Script parses a single unsorted CSV and extracts records where the value of 7th column (`trip_date`, in this case) matches a list.  
-Edit script directly to change file path and/or column index.  
+Script parses a single unsorted CSV and extracts records where the value of 7th column (`trip_date`, in this case) matches a list.  Edit script directly to change file path and/or column index.  
 
 ##### clean_bustime
-Cleans AVL data by removing any pings that report a "next stop" that is not valid for the trip referenced.  
-Takes three arguments of path to file for cleaning, date of schedule, and path of gtfs data.  
+Cleans AVL data by removing any pings that report a "next stop" that is not associated with the reported `TRIP_ID`.  Takes three arguments: path to file for cleaning, date of schedule, and path of gtfs data.  
+Example: `python clean_bustime.py parsed_data.csv 2015-12-03 gtfs/` will created a file `parsed_data_cleaned.csv` that excludes records without valid `STOP_ID` elements.  
 * *method* clean_bustime.**valid_row**(row)  
 
     Method for checking if `STOP_ID` element is contained in `stop_id` list of valid stops  
