@@ -5,8 +5,8 @@ Example: `python siri_repeat.py 15 MYKEY` will launch the script (until interrup
 
 * *method* siri_repeat.**get_bustime**(api_key)  
 
-    Method for calling Bus Time API once.  Takes key directly as *string* format.  
-    Returns *json* datatype.  
+    for calling Bus Time API once.  Takes key directly as *string* format.  
+    **returns** *json* datatype.  
    
 ##### [extract_trip_dates](extract_trip_dates.py)
 Script parses a single unsorted CSV and extracts records where the value of 7th column (`trip_date`, in this case) matches a list.  Edit script directly to change file path and/or column index.  
@@ -16,15 +16,20 @@ Cleans AVL data by removing any pings that report a "next stop" that is not asso
 Example: `python clean_bustime.py parsed_data.csv 2015-12-03 gtfs/` will created a file `parsed_data_cleaned.csv` that excludes records without valid `STOP_ID` elements.  
 * *method* clean_bustime.**valid_row**(row)  
 
-    Method for checking if `STOP_ID` element is contained in `stop_id` list of valid stops  
+    for checking if `STOP_ID` element is contained in `stop_id` list of valid stops  
+	**returns** *bool*
 * *method* clean_bustime.**filter_invalid_stops**(avl_df,stoptime_df)  
 
-    Method takes raw Bus Time data and GTFS schedule data and filters Bus Time records preceding an invalid stop for the reported trip  
+    takes raw Bus Time data and GTFS schedule data and filters Bus Time records preceding an invalid stop for the reported trip  
+	**returns** *pandas DataFrame* of filtered records
 
 ##### [siri_parser](siri_parser.py)
 * *method* siri_parser.**json_to_df**(a)  
 
-    Single required argument *a* is a single json string received from the siri api.  
-	return a pandas dataframe with the following columns: `Line`, `RecordedAtTime`, `Latitude`, `Longitude`, `Trip`, `TripDate`, `ResponseTimeStamp`
+    takes a single siri response json in *string* format as *a*.  
+	**returns** *pandas DataFrame* with the following columns: `ROUTE_ID`, `recorded_time`, `latitude`, `longitude`, `TRIP_ID`, `trip_date`, `destination`,`destination_name`,`SHAPE_ID`,`STOP_ID`,`EstCallArrival`,`distance_stop`,`distance_shape`,`status`,`ResponseTimeStamp`  
+	See [Data Schema](../Spark#data-schema) for translation of field names from SIRI standard.  
 * *method* siri_parser.**extract**(inpath,outfile)  
-* *method* siri_parser.**extract_trip_dates**(inpath,outpath,datelist)  
+
+    takes *jsons* aggregated file, where each row is a single *json* string.
+	writes a new CSV with parsed data using **json_to_df** method.  
