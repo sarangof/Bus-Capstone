@@ -33,11 +33,9 @@ Open Interactive Map in [Carto Map](https://saf537.carto.com/viz/c21efdeb-ec45-4
   
 1. **Bus Time data** (use [siri_tools](siri_tools/))
   1. Scrape: Query the Bus Time API every 60 seconds and write each JSON response to a local file.  It is recommended to run two independent scrape processes (separated by 30 seconds) to get maximum data density.  This minimizes the interruptions from some responses taking longer than 30 seconds.  
-  
   **Requirements:**  
     * `MYKEY` file located in the OS working directory containing a single text string.  See [Bus Time documentation](http://bustime.mta.info/wiki/Developers/Index) for instructions on getting a key.
-    * `jsons/` directory exists in the OS working directory  
-	
+    * `jsons/` directory exists in the OS working directory  	
   2. Parse: Extract useful data elements from each vehicle record in each JSON response file.  Takes roughly one second to parse one JSON, so an entire day's worth data may take up to 15 minutes.  Speed is significiantly faster using the [Spark](Spark#parse-and-manipulate-bus-time-data-using-pyspark) code.  
   3. Clean: Using schedule data as the "truth" source, filter extracted and parsed Bus Time data to exclude any records where the reported "next stop" is invalid for the reported `trip_id`. 
   
