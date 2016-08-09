@@ -13,7 +13,7 @@ Script parses a single unsorted CSV and extracts records where the value of 7th 
 
 ##### [clean_bustime](clean_bustime.py)
 Cleans AVL data by removing any pings that report a "next stop" that is not associated with the reported `TRIP_ID`.  Takes three arguments: path to file for cleaning, date of schedule, and path of gtfs data.  
-Example: `python clean_bustime.py parsed_data.csv 2015-12-03 gtfs/` will created a file `parsed_data_cleaned.csv` that excludes records without valid `STOP_ID` elements.  
+Example: `python clean_bustime.py bustime_parsed.csv 2015-12-03 gtfs/` will create a file `bustime_parsed_cleaned.csv` that excludes records without valid `STOP_ID` elements.  
 * *method* clean_bustime.**valid_row**(row)  
 
     for checking if `STOP_ID` element is contained in `stop_id` list of valid stops  
@@ -24,6 +24,8 @@ Example: `python clean_bustime.py parsed_data.csv 2015-12-03 gtfs/` will created
 	**returns** *pandas DataFrame* of filtered records
 
 ##### [siri_parser](siri_parser.py)
+This module is for parsing and extracting from raw json data files.  If called directly, the first argument required is the name of the directory where the json files are located (all contents of the directory will be processed). The second argument is the name of the output CSV file.  
+Example: `python siri_parser.py jsons bustime_parsed.csv` will create a file `bustime_parsed.csv` after extracting these elements from each JSON.  
 * *method* siri_parser.**json_to_df**(a)  
 
     takes a single siri response json in *string* format as *a*.  See [Data Schema](../Spark#data-schema) for translation of field names from SIRI standard.   
