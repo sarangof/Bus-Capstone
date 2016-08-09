@@ -46,5 +46,6 @@ Open Interactive Map in [Carto Map](https://saf537.carto.com/viz/c21efdeb-ec45-4
     * All downloaded transit feed files must be in their original standard format (zip)
     * Each feed gets its own subdirectory, containing current and prior feeds  
 	
-  
 3. **Stop time estimation**
+  1. **Recommended**: Linear interpolation (see [demonstration notebook](demonstration/interpolate_stop_times.ipynb))
+  2. **Alternative**: Spatial search (see [demonstration script](demonstration/stop_times_spatial.py))

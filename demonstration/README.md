@@ -14,4 +14,5 @@ These notebooks do not require Spark/distributed computing platform.  Although p
 3. [Compare number of estimated arrivals to schedule](trip_and_stop_coverage.ipynb)
 4. [Calculate common performance metrics](common_metrics.ipynb)
 5. [Wait Assessment trend along route](wait_assessment_trend.ipynb)
+6. [Visualize performance measurement as a map](visualize_sample_performance.ipynb)
 
