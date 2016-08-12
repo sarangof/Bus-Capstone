@@ -45,21 +45,20 @@ Open Interactive Map in [Carto Map](https://saf537.carto.com/viz/c21efdeb-ec45-4
   **Requirements:**
     * All downloaded transit feed files must be in their original standard format (zip)
     * Each feed gets its own subdirectory, containing current and prior feeds  
-  
+  **Example directory structure for GTFS data**
   ```
-  gtfs/
-    80_brooklyn  
+  gtfs/  
+    80_brooklyn/  
       metadata.txt  
       gtfs_brooklyn_1383136207.zip  
       gtfs_brooklyn_1419914436.zip  
       gtfs_brooklyn_1386879331.zip  
       gtfs_brooklyn_20150402.zip  
-    82_manhattan  
-    84_staten_island  
-    81_bronx  
-    83_queens  
-    85_bus_company
-
+    82_manhattan/  
+    84_staten_island/  
+    81_bronx/  
+    83_queens/  
+    85_bus_company/
   ```
 	
 3. **Stop time estimation**
