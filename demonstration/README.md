@@ -13,7 +13,7 @@ These notebooks do not require Spark/distributed computing platform.  Although p
 2. [Distribution of speeds along shape](plot_speeds_along_shape.ipynb)
 3. [Compare number of estimated arrivals to schedule](trip_and_stop_coverage.ipynb)
 4. [Calculate common performance metrics](common_metrics.ipynb)
-5. [Calculate metrics for one entire week](common_metrics-week.ipynb)
+5. [Calculate example metric for multiple day's data](wait_assessment_multiday.ipynb)
 6. [Wait Assessment trend along route](wait_assessment_trend.ipynb)
 7. [Visualize performance measurement as a map](visualize_sample_performance.ipynb)
 

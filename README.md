@@ -5,7 +5,7 @@ Capstone project for NYC Department of Transportation.
 
 *   Documentation of data processing and Spark
     * __Python Data Processing__
-        * [Demostration](demonstration/): Ipython Notebooks that demonstrate all the processes
+        * [Demonstration](demonstration/): Ipython Notebooks that demonstrate all the processes
 
         * Core Modules
 
@@ -40,11 +40,27 @@ Open Interactive Map in [Carto Map](https://saf537.carto.com/viz/c21efdeb-ec45-4
   3. Clean: Using schedule data as the "truth" source, filter extracted and parsed Bus Time data to exclude any records where the reported "next stop" is invalid for the reported `trip_id`. 
   
 2. **Schedule data**
-  1. Download: Static feeds of the current schedule data for each borough (plus the MTA Bus Company) are available [directly from the MTA.](http://web.mta.info/developers/developer-data-terms.html#data).  Historical feeds are available through a [third-party open-source project](http://transitfeeds.com/p/mta).
+  1. Download: Static feeds of the current schedule data for each borough (plus the MTA Bus Company) are available [directly from the MTA](http://web.mta.info/developers/developer-data-terms.html#data).  Historical feeds are available through a [third-party open-source project](http://transitfeeds.com/p/mta).  Shell script to download all previous feeds in one batch can be found in the [Bus Viz github] (https://github.com/efranco63/NYU_USI_BusViz/blob/master/TransitFeeds/fetch.sh).
   2. Generate metadata (list of date ranges): Use *method* [gtfs](gtfs.py).**build_metadata**(dpath) to generate a small text file within each subdirectory of `dpath` that lists the valid date ranges of each included feed.  This is necessary since schedule data changes periodically, so any schedule-comparison analysis must use only data extracted from the corresponding concurrent feed.  
   **Requirements:**
     * All downloaded transit feed files must be in their original standard format (zip)
     * Each feed gets its own subdirectory, containing current and prior feeds  
+  
+  ```
+  gtfs/
+    80_brooklyn  
+      metadata.txt  
+      gtfs_brooklyn_1383136207.zip  
+      gtfs_brooklyn_1419914436.zip  
+      gtfs_brooklyn_1386879331.zip  
+      gtfs_brooklyn_20150402.zip  
+    82_manhattan  
+    84_staten_island  
+    81_bronx  
+    83_queens  
+    85_bus_company
+
+  ```
 	
 3. **Stop time estimation**
   1. **Recommended**: Linear interpolation (see [demonstration notebook](demonstration/interpolate_stop_times.ipynb))
