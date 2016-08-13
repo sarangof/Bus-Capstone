@@ -14,9 +14,9 @@ from StringIO import StringIO
 from pandas.io.common import ZipFile
 import pandas as pd
 
-defaultpath = '/gpfs2/projects/project-bus_capstone_2016/workspace/share/gtfs/'
+# defaultpath = '/gpfs2/projects/project-bus_capstone_2016/workspace/share/gtfs/'
 
-def build_metadata(dpath=defaultpath):        
+def build_metadata(dpath):        
     for root, dirs, files in os.walk(dpath):
         mdata = pd.DataFrame(columns=['file','min_eff','max_disc','file_date'])
         for fname in files:    
@@ -38,7 +38,7 @@ def build_metadata(dpath=defaultpath):
                 print 'Error reading from ' + fname
         mdata.to_csv(root+'/metadata.txt',index=False)
 
-def effective_files(trip_date,dpath=defaultpath):
+def effective_files(trip_date,dpath):
     file_list = []    
     for root, dirs, files in os.walk(dpath):  
         if 'metadata.txt' in files:
@@ -52,7 +52,7 @@ def effective_files(trip_date,dpath=defaultpath):
                 pass
     return file_list
     
-def load_trips(trip_date,dpath=defaultpath):
+def load_trips(trip_date,dpath):
     # dpath argument is the path to the directory containing subdirectories
     trips = pd.DataFrame()
     for fi in effective_files(trip_date,dpath=dpath):    
@@ -136,7 +136,7 @@ def load_trip_shapes(trip_date,dpath,clean=True):
 
 
 class TransitCalendar:
-    def __init__(self, trip_date, dpath=defaultpath):
+    def __init__(self, trip_date, dpath):
         service_dates = pd.DataFrame()
         for fi in effective_files(trip_date,dpath=dpath):    
             try:
