@@ -1,3 +1,13 @@
+# -*- coding: utf-8 -*-
+"""
+This module is for calculation of common performance measurements for each route, stop and date.
+If called directly, the first argument required is the path to the interpolated stop times file (CSV).
+The second argument is the path to gtfs files (directory).
+The third argument is the path to the output file (CSV).
+
+@author: mu529
+"""
+
 import os
 import pandas as pd
 import sys

@@ -12,7 +12,8 @@ Capstone project for NYC Department of Transportation.
             1. [Siri Tools](siri_tools/): Modules for Bus Time data retrieval and cleaning
             2. [Time Tools](ttools.py): Homemade Timedelta Converter
             3. [GTFS](gtfs.py): Extract the Schedule Data from GTFS Schedules(originally in ZIP)
-            4. [Arrival Time](arrivals.py):Estimated the arrival time for each stop using Scipy [KD-Tree](http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.spatial.KDTree.html) and [Interpolate](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html)
+            4. [Arrival Time](arrivals.py): Estimate the arrival time for each stop using Scipy [KD-Tree](http://docs.scipy.org/doc/scipy-0.14.0/reference/generated/scipy.spatial.KDTree.html) and [Interpolate](http://docs.scipy.org/doc/scipy/reference/generated/scipy.interpolate.interp1d.html)
+            5. [Performance Metrics](metrics.py): Calculate common performance measurements on each route, stop and date.
 
     * __[Big Data with SPARK](Spark#parse-and-manipulate-bus-time-data-using-pyspark)__
 
@@ -63,4 +64,9 @@ Open Interactive Map in [Carto Map](https://saf537.carto.com/viz/c21efdeb-ec45-4
 	
 3. **Stop time estimation**
   1. **Recommended**: Linear interpolation (see [demonstration notebook](demonstration/interpolate_stop_times.ipynb))
-  2. **Alternative**: Spatial search (see [demonstration script](demonstration/stop_times_spatial.py))
+  2. **Alternative**: Spatial search (see [demonstration script](demonstration/stop_times_spatial.py))  
+
+4. **Performance metrics**
+  1. **Recommended**: Generate a single measurement for each route at the stop with the most data (see [demonstration notebook](demonstration/common_metrics.ipynb))
+  2. **Alternative**: Batch process metrics for all stops, routes and dates before filtering and analyzing (use [metrics.py](metrics.py))  
+  Example: `python metrics.py dec2015_interpolated.csv gtfs/ dec2015_metrics.csv`
