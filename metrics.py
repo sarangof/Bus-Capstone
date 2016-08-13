@@ -58,12 +58,20 @@ def On_Time_Per(sche,inter):
     else:
         return False
 
+def calc_ewt(stop_times):
+	products = 0.5*(stop_times['hw_diff'] * stop_times['inter_headway'])
+	try:
+		excess_wait = products.sum() / stop_times['inter_headway'].sum()
+		return excess_wait
+	except:
+		return None
+
 def process_metrics(infile,gtfs_path,outfile):
 	interpolated = pd.read_csv(infile)
 	interpolated['interpolated_arrival_time'] = pd.to_timedelta(interpolated['interpolated_arrival_time'])
 	sec = ttools.datetime.timedelta(seconds=1)
-	results = pd.DataFrame(columns=['wait_ass','OnTimeP','STOP_ID'])
-	results.index.rename('ROUTE_ID',inplace=True)    
+	results = pd.DataFrame(columns=['STOP_ID','wait_ass','OnTimeP','headway_reg','sched_wait','ewt','N','trip_date'])
+	results.index.rename('ROUTE_ID',inplace=True)
 	# write initial output file with headers but no data
 	results.to_csv(outfile)
 	for td in interpolated.trip_date.unique():
@@ -80,7 +88,11 @@ def process_metrics(infile,gtfs_path,outfile):
 		merged['wait_ass'] = map(lambda x,y:wait_ass(x,y), merged['P_hour'],merged['hw_diff'])
 		merged['headway_reg']=map(lambda x,y:headway_regularity(x,y), merged['sched_headway'],merged['inter_headway'])
 		merged['OnTimeP'] = map(lambda x,y:On_Time_Per(x,y), merged['sched_headway'],merged['inter_headway'] )
-		metrics = 1.0 * merged.groupby(level=(0,1))[['wait_ass','OnTimeP']].mean()
+		gb = merged.groupby(level=(0,1))
+		metrics = 1.0 * gb[['wait_ass','OnTimeP','headway_reg']].mean()
+		metrics['sched_wait'] = 0.5*gb['sched_headway'].mean()
+		metrics['ewt'] = gb.apply(calc_ewt)
+		metrics['N'] = gb.size()
 		metrics['trip_date'] = td
 		metrics.reset_index(level=1,inplace=True)
 		metrics.to_csv(outfile,mode='a',header=False)
